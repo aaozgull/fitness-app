@@ -3,7 +3,6 @@ import { StyleSheet, View, Text } from "react-native";
 //import { GlobalStyles } from '../../constants/styles';
 //import ExpensesList from "../toDoList/expenseList";
 import ToDoList from "../toDoList/dashBoard-toDo-list";
-import ToDoSummary from "../toDoList/dashBoard-toDo-summary";
 
 const DUMMY_EXPENSES = [
   {
@@ -62,11 +61,11 @@ const DUMMY_EXPENSES = [
   },
 ];
 
-function ToDoOutput({ expenses, expensesPeriod }) {
+function ToDoOutput({ todo }) {
+  console.log(`ToDoOutput ${todo}`);
   return (
     <View style={styles.container}>
-      <ToDoList todos={DUMMY_EXPENSES} />
-      {/*  <ExpensesList expenses={DUMMY_EXPENSES} /> */}
+      <ToDoList todos={todo} />
     </View>
   );
 }

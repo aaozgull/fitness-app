@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { List, Avatar } from "react-native-paper";
 
 //import { GlobalStyles } from "../../constants/styles";
@@ -32,12 +32,18 @@ function PhotoCard() {
             />
           </View>
           <View style={styles.image}>
-            <Avatar.Image
+            {/*  <Avatar.Image
               size={50}
               source={{
                 uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6bZMOCVGXGWmAzgHwOxq-A4lUTNWke-GiixH6D-bGEbFehiPcwzukWlhnbXlqyXeejk&usqp=CAU",
               }}
               backgroundColor="#2182BD"
+            /> */}
+            <Image
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT6bZMOCVGXGWmAzgHwOxq-A4lUTNWke-GiixH6D-bGEbFehiPcwzukWlhnbXlqyXeejk&usqp=CAU",
+              }}
+              style={{ height: 50, width: 50 }}
             />
           </View>
         </View>
@@ -53,12 +59,24 @@ const styles = StyleSheet.create({
     //padding: 8,
     marginLeft: 12,
     height: 170,
-    backgroundColor: "#e4d9fd", // GlobalStyles.colors.primary50,
+    backgroundColor: "#3e04c3", // GlobalStyles.colors.primary50,
     borderRadius: 6,
     //  marginTop: 40,
     //flexDirection: "row",
     justifyContent: "center", //"space-between",
     alignItems: "center",
+
+    ///padding: 12,
+    //marginVertical: 8,
+    backgroundColor: "#3e04c3", //GlobalStyles.colors.primary500,
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    //borderRadius: 6,
+    elevation: 3,
+    shadowColor: "#39324a", // GlobalStyles.colors.gray500,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
   },
 
   imageContainer: {
@@ -70,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
   },
   image: {
-    padding: 4,
+    padding: 1,
   },
 
   headingContainer: {

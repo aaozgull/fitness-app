@@ -1,33 +1,55 @@
-//import React from "react";
+import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
-import { StatusBar, StyleSheet, SafeAreaView, Text, View } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  View,
+  Pressable,
+} from "react-native";
 
 import ToDoOutput from "../component/toDoList/dashBoard-toDo-list-comonent";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
+import BezierLineChartCard from "../component/linear-chart/bezier-line-chartCard";
 import BezierLineChart from "../component/linear-chart/bezier-line-chart";
 import PhotoCard from "../component/photos/photo-card";
 import Heading from "../component/linear-chart/heading";
 
-export const DashBoardScreen = () => (
-  <SafeAreaView style={styles.container}>
-    <View style={styles.summary}>
-      {/*  <Searchbar /> */}
-      <ToDoSummary />
-    </View>
-    <View style={styles.toDolist}>
-      <ToDoOutput expensesPeriod="Last 7 Days" />
-    </View>
-    <Heading />
-    <View style={styles.progressContainer}>
-      <View style={styles.graph}>
-        <BezierLineChart />
+export const DashBoardScreen = () => {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  function showProgressHandler() {
+    setModalIsVisible(true);
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.summary}>
+        {/*  <Searchbar /> */}
+        <ToDoSummary />
       </View>
-      <View style={styles.photo}>
-        <PhotoCard />
+      {/*  <View style={styles.toDolist}>
+      <ToDoOutput />
+    </View> */}
+      <Heading />
+      <View style={styles.progressContainer}>
+        <View style={styles.graph}>
+          <Pressable
+            android_ripple={{ color: "#210644" }}
+            onPress={showProgressHandler}
+            style={({ pressed }) => pressed && styles.pressedItem}
+          >
+            <BezierLineChartCard />
+            <BezierLineChart visible={modalIsVisible} />
+          </Pressable>
+        </View>
+        <View style={styles.photo}>
+          <PhotoCard />
+        </View>
       </View>
-    </View>
-  </SafeAreaView>
-);
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -36,18 +58,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#2d0689",
   },
   progressContainer: {
-    padding: 8,
-    // backgroundColor: "#e4d9fd", // GlobalStyles.colors.primary50,
-    // borderRadius: 6,
+    //padding: 8,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   summary: {
+    flex: 1,
     paddingTop: 32,
-    paddingRight: 32,
-    paddingLeft: 32,
-    //paddingBottom: 8,
   },
   toDolist: {
     flex: 1,
@@ -57,10 +75,13 @@ const styles = StyleSheet.create({
   },
   graph: {
     flex: 1,
-    // padding: 16,
+    padding: 16,
   },
   photo: {
     flex: 1,
-    // padding: 16,
+    padding: 16,
+  },
+  pressedItem: {
+    opacity: 0.5,
   },
 });

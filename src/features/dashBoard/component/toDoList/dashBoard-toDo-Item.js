@@ -7,8 +7,8 @@ import Checkbox from "expo-checkbox";
 
 function ToDoItem({ description, amount, date }) {
   const [isChecked, setChecked] = useState(false);
+  console.log(`description  ${description}   date  ${date}`);
   function setCheckBox() {
-    console.log(`setCheckBox ${isChecked}`);
     setChecked(!isChecked);
   }
   return (
