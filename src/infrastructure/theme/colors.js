@@ -1,0 +1,41 @@
+export const colors = {
+  brand: {
+    primary: "#2182BD",
+    secondary: "#5282BD",
+    muted: "#C6DAF7",
+  },
+  ui: {
+    /* primary: "#262626",
+    secondary: "#757575",
+    tertiary: "#F1F1F1",
+    quaternary: "#FFFFFF",
+    disabled: "#DEDEDE",
+    error: "#D0421B",
+    success: "#138000", */
+    primary50: "#e4d9fd",
+    primary100: "#c6affc",
+    primary200: "#a281f0",
+    primary400: "#5721d4",
+    primary500: "#3e04c3",
+    primary700: "#2d0689",
+    primary800: "#200364",
+    accent500: "#f7bc0c",
+    secondary: "#757575",
+    error50: "#fcc4e4",
+    error500: "#9b095c",
+    gray500: "#39324a",
+    gray700: "#221c30",
+  },
+  bg: {
+    primary: "#2d0689", /// "#FFFFFF",
+    secondary: "#F1F1F1",
+  },
+  text: {
+    primary: "#262626",
+    secondary: "#757575",
+    disabled: "#9C9C9C",
+    inverse: "#FFFFFF",
+    error: "#D0421B",
+    success: "#138000",
+  },
+};

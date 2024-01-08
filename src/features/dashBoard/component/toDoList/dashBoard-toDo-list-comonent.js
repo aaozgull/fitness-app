@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 //import { GlobalStyles } from '../../constants/styles';
 //import ExpensesList from "../toDoList/expenseList";
 import ToDoList from "../toDoList/dashBoard-toDo-list";
+import { theme } from "../../../../infrastructure/theme/index";
 
 const DUMMY_EXPENSES = [
   {
@@ -74,9 +75,9 @@ export default ToDoOutput;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingHorizontal: theme.space[4], //24,
+    paddingTop: theme.space[4], //24,
     paddingBottom: 0,
-    backgroundColor: "#2d0689", // GlobalStyles.colors.primary700,
+    backgroundColor: theme.colors.ui.primary700, //"#2d0689", // GlobalStyles.colors.primary700,
   },
 });

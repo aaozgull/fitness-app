@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { theme } from "../../../../infrastructure/theme/index";
 
 //import { GlobalStyles } from "../../constants/styles";
 import { getFormattedDate } from "../../../../utils/date";
@@ -37,20 +38,20 @@ export default ToDoItem;
 
 const styles = StyleSheet.create({
   toDoItem: {
-    padding: 12,
-    marginVertical: 8,
-    backgroundColor: "#3e04c3", //GlobalStyles.colors.primary500,
+    padding: theme.space[3], // 12,
+    marginVertical: theme.space[2], //8,
+    backgroundColor: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 6,
     elevation: 3,
-    shadowColor: "#39324a", // GlobalStyles.colors.gray500,
+    shadowColor: theme.colors.ui.gray500, // "#39324a", // GlobalStyles.colors.gray500,
     shadowRadius: 4,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
   },
   textBase: {
-    color: "#e4d9fd", //GlobalStyles.colors.primary50,
+    color: theme.colors.ui.primary50, // "#e4d9fd", //GlobalStyles.colors.primary50,
   },
   description: {
     fontSize: 16,
@@ -58,19 +59,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   amountContainer: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
+    paddingHorizontal: theme.space[2], // 12,
+    paddingVertical: theme.space[1], //4,
     // backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,
-    minWidth: 80,
+    minWidth: theme.sizes[6], //80,
   },
   amount: {
-    color: "#3e04c3", //GlobalStyles.colors.primary500,
+    color: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     fontWeight: "bold",
   },
   checkbox: {
-    margin: 8,
+    margin: theme.space[2], // 8,
   },
 });

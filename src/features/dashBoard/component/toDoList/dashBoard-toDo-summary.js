@@ -9,6 +9,7 @@ import {
 } from "../../../../utils/date";
 import { Ionicons } from "@expo/vector-icons";
 import ToDoOutput from "../toDoList/dashBoard-toDo-list-comonent";
+import { theme } from "../../../../infrastructure/theme/index";
 
 const DUMMY_EXPENSES = [
   {
@@ -207,26 +208,26 @@ export default ToDoSummary;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
-    backgroundColor: "#e4d9fd", // GlobalStyles.colors.primary50,
+    padding: theme.space[2],
+    backgroundColor: theme.colors.ui.primary50, //"#e4d9fd", // GlobalStyles.colors.primary50,
     borderRadius: 6,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 20,
+    marginHorizontal: theme.space[3],
   },
   ListContainer: {
     flex: 1,
   },
   date: {
-    fontSize: 16,
-    color: "#5721d4", //GlobalStyles.colors.primary400,
+    fontSize: theme.sizes[3],
+    color: theme.colors.ui.primary400, // "#5721d4", //GlobalStyles.colors.primary400,
   },
   buttonsContainer: {
     flexDirection: "row",
-    fontSize: 16,
+    fontSize: theme.sizes[3],
     fontWeight: "bold",
-    color: "#3e04c3", // GlobalStyles.colors.primary500,
+    color: theme.colors.ui.primary500, // "#3e04c3", // GlobalStyles.colors.primary500,
   },
   toDolist: {
     flex: 1,

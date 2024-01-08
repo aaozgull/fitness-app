@@ -8,8 +8,9 @@ import {
   View,
   Pressable,
 } from "react-native";
+//import styled from "styled-components/native";
 
-import ToDoOutput from "../component/toDoList/dashBoard-toDo-list-comonent";
+import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
 import BezierLineChartCard from "../component/linear-chart/bezier-line-chartCard";
 import BezierLineChart from "../component/linear-chart/bezier-line-chart";
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight,
-    backgroundColor: "#2d0689",
+    backgroundColor: theme.colors.bg.primary, //"#2d0689",
   },
   progressContainer: {
     //padding: 8,
@@ -65,21 +66,21 @@ const styles = StyleSheet.create({
   },
   summary: {
     flex: 1,
-    paddingTop: 32,
+    paddingTop: theme.space[4], //32,
   },
   toDolist: {
     flex: 1,
-    paddingBottom: 16,
-    paddingRight: 16,
-    paddingLeft: 16,
+    paddingBottom: theme.space[3],
+    paddingRight: theme.space[3],
+    paddingLeft: theme.space[3],
   },
   graph: {
     flex: 1,
-    padding: 16,
+    padding: theme.space[3],
   },
   photo: {
     flex: 1,
-    padding: 16,
+    padding: theme.space[3],
   },
   pressedItem: {
     opacity: 0.5,
