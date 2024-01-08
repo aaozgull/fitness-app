@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Divider } from "react-native-paper";
 //import { GlobalStyles } from "../../constants/styles";
+import { theme } from "../../../../infrastructure/theme";
 
 function Heading() {
   return (
@@ -17,9 +18,9 @@ export default Heading;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: theme.space[3], //16,
     // backgroundColor: "#e4d9fd", // GlobalStyles.colors.primary50,
-    borderRadius: 6,
+    borderRadius: theme.sizes[1], // 6,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
