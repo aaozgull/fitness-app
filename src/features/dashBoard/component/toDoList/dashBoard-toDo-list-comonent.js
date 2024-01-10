@@ -63,7 +63,7 @@ const DUMMY_EXPENSES = [
 ];
 
 function ToDoOutput({ todo }) {
-  console.log(`ToDoOutput ${todo}`);
+  // console.log(`ToDoOutput ${todo}`);
   return (
     <View style={styles.container}>
       <ToDoList todos={todo} />
