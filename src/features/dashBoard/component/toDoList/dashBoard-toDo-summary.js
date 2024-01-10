@@ -34,121 +34,135 @@ const DUMMY_EXPENSES = [
     id: "e4",
     description: "read a book",
     amount: 14.99,
-    date: new Date("2024-1-8"),
+    date: new Date("2024-1-11"),
   },
   {
     id: "e5",
     description: "read another book",
     amount: 18.59,
-    date: new Date("2024-1-8"),
+    date: new Date("2024-1-11"),
   },
   {
     id: "e6",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-8"),
+    date: new Date("2024-1-11"),
   },
   {
     id: "e7",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-8"),
+    date: new Date("2024-1-11"),
   },
   {
     id: "e8",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-7"),
+    date: new Date("2024-1-13"),
   },
   {
     id: "e9",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-7"),
+    date: new Date("2024-1-13"),
   },
   {
     id: "e10",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-7"),
+    date: new Date("2024-1-13"),
   },
   {
     id: "e11",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-6"),
+    date: new Date("2024-1-12"),
   },
   {
     id: "e12",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-6"),
+    date: new Date("2024-1-12"),
   },
   {
     id: "e13",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-6"),
+    date: new Date("2024-1-12"),
   },
   {
     id: "e14",
     description: "read a book",
     amount: 14.99,
-    date: new Date("2024-1-6"),
+    date: new Date("2024-1-12"),
   },
   {
     id: "e15",
     description: "read another book",
     amount: 18.59,
-    date: new Date("2024-1-5"),
+    date: new Date("2024-1-10"),
   },
   {
     id: "e16",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-5"),
+    date: new Date("2024-1-10"),
   },
   {
     id: "e17",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-5"),
+    date: new Date("2024-1-10"),
   },
   {
     id: "e18",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-5"),
+    date: new Date("2024-1-10"),
   },
   {
     id: "e19",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-4"),
+    date: new Date("2024-1-7"),
   },
   {
     id: "e20",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-3"),
+    date: new Date("2024-1-10"),
   },
   {
     id: "e21",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-3"),
+    date: new Date("2024-1-10"),
   },
 ];
 
 function ToDoSummary() {
-  const [previous, setPrevious] = useState(0);
-  const [next, setNext] = useState(1);
-  const [calculateDate, setCalculateDate] = useState(
-    getFormattedDate(new Date())
-  );
+  const todayDate = getFormattedDate(new Date());
+  console.log(`todateDate ${todayDate}`);
+
+  const todoDateLength = function setDateIndex() {
+    const todatArry = DUMMY_EXPENSES.filter((toDo) => {
+      const date = getFormattedDate(toDo.date);
+      return date == calculateDate;
+    });
+    //setPrevious(todatArry.length - 1);
+    // setNext(todatArry.length + 1);
+    return todatArry.length;
+  };
+  const [previous, setPrevious] = useState(previousIndex);
+  const [next, setNext] = useState(nextIndex);
+  const [previousIndex, setPreviousIndex] = useState(todoDateLength - 1);
+  const [nextIndex, setNextIndex] = useState(todoDateLength + 1);
+  const [calculateDate, setCalculateDate] = useState(todayDate);
+
   //let calculateDate = new Date();
   function previousDate() {
-    if (previous === 0) return;
+    // console.log("previousDate");
+    if (previousIndex === 0) return;
     setPrevious(previous - 1);
     setCalculateDate(
       getFormattedDate(getDateMinusDays(new Date(calculateDate), 1))
@@ -157,7 +171,8 @@ function ToDoSummary() {
     setNext(previous);
   }
   function nextDate() {
-    if (calculateDate == getFormattedDate(new Date())) return;
+    //  console.log("nextDate");
+    // if (calculateDate == todayDate) return;
     setNext(next + 1);
     setCalculateDate(
       getFormattedDate(getDatePlusDays(new Date(calculateDate), 1))
@@ -166,13 +181,10 @@ function ToDoSummary() {
     setPrevious(next);
   }
 
+  //useEffect(()=>{},[])
+
   const calculateDateToDos = DUMMY_EXPENSES.filter((toDo) => {
     const date = getFormattedDate(toDo.date);
-    // console.log(`toDo.date1 ${date}  calculateDate ${calculateDate}`);
-    if (date == calculateDate) {
-      console.log(`toDo.date ${date}  calculateDate ${calculateDate}`);
-    }
-
     return date == calculateDate;
   });
 
@@ -220,12 +232,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   date: {
-    fontSize: theme.sizes[3],
+    fontFamily: theme.fonts.heading,
+    fontSize: theme.fontSizes.title,
     color: theme.colors.ui.primary400, // "#5721d4", //GlobalStyles.colors.primary400,
+    // fontWeight: "bold",
   },
   buttonsContainer: {
     flexDirection: "row",
-    fontSize: theme.sizes[3],
+    fontSize: theme.fontSizes.body,
     fontWeight: "bold",
     color: theme.colors.ui.primary500, // "#3e04c3", // GlobalStyles.colors.primary500,
   },

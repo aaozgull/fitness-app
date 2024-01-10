@@ -1,5 +1,6 @@
 import { FlatList, Text, Dimensions, View, StyleSheet } from "react-native";
 import { LineChart } from "react-native-chart-kit";
+import { theme } from "../../../../infrastructure/theme/index";
 
 //import ExpenseItem from './ExpenseItem';
 import { getFormattedDate } from "../../../../utils/date";
@@ -67,7 +68,12 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   text: {
-    fontSize: 16,
-    color: "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
+    // fontSize: 16,
+    // color: "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
+    color: theme.colors.ui.primary50,
+    fontFamily: theme.fonts.body,
+    fontSize: theme.fontSizes.body, //16,
+    //padding: 4,
+    fontWeight: "bold",
   },
 });

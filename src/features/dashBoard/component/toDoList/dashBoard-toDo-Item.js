@@ -8,7 +8,7 @@ import Checkbox from "expo-checkbox";
 
 function ToDoItem({ description, amount, date }) {
   const [isChecked, setChecked] = useState(false);
-  console.log(`description  ${description}   date  ${date}`);
+  // console.log(`description  ${description}   date  ${date}`);
   function setCheckBox() {
     setChecked(!isChecked);
   }
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     color: theme.colors.ui.primary50, // "#e4d9fd", //GlobalStyles.colors.primary50,
   },
   description: {
-    fontSize: 16,
+    fontFamily: theme.fonts.body,
+    fontSize: theme.fontSizes.body, //16,
     padding: 4,
     fontWeight: "bold",
   },
@@ -67,10 +68,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     minWidth: theme.sizes[6], //80,
   },
-  amount: {
+  /*   amount: {
     color: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     fontWeight: "bold",
-  },
+  }, */
   checkbox: {
     margin: theme.space[2], // 8,
   },

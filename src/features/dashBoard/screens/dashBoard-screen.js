@@ -76,11 +76,17 @@ const styles = StyleSheet.create({
   },
   graph: {
     flex: 1,
-    padding: theme.space[3],
+    //padding: theme.space[3],
+    paddingBottom: theme.space[3],
+    paddingLeft: theme.space[3],
+    paddingRight: theme.space[3],
   },
   photo: {
     flex: 1,
-    padding: theme.space[3],
+    // padding: theme.space[3],
+    paddingBottom: theme.space[3],
+    paddingLeft: theme.space[3],
+    paddingRight: theme.space[3],
   },
   pressedItem: {
     opacity: 0.5,

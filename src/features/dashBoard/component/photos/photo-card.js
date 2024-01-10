@@ -99,5 +99,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: theme.fontSizes.body, // 16,
     color: theme.colors.ui.primary50, //  "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
+
+    //color: theme.colors.ui.primary50,
+    fontFamily: theme.fonts.body,
+    //fontSize: theme.fontSizes.body, //16,
+    //padding: 4,
+    fontWeight: "bold",
   },
 });
