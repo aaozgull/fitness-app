@@ -12,16 +12,16 @@ import {
 
 import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
-import BezierLineChartCard from "../component/linear-chart/bezier-line-chartCard";
-import BezierLineChart from "../component/linear-chart/bezier-line-chart";
+import BodyWeight from "../component/linear-chart/bodyWeight";
+import BodyWeightDetail from "../component/linear-chart/bodyWeightDetail";
 import PhotoCard from "../component/photos/photo-card";
 import Heading from "../component/linear-chart/heading";
 
-export const DashBoardScreen = () => {
+export const DashBoardScreen = ({ navigation }) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  function showProgressHandler() {
-    setModalIsVisible(true);
+  function showBodyWeightHandler() {
+    navigation.navigate("bodyWeightDetail");
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -37,11 +37,11 @@ export const DashBoardScreen = () => {
         <View style={styles.graph}>
           <Pressable
             android_ripple={{ color: "#210644" }}
-            onPress={showProgressHandler}
+            onPress={showBodyWeightHandler}
             style={({ pressed }) => pressed && styles.pressedItem}
           >
-            <BezierLineChartCard />
-            <BezierLineChart visible={modalIsVisible} />
+            <BodyWeight />
+            {/* <BezierLineChart visible={modalIsVisible} /> */}
           </Pressable>
         </View>
         <View style={styles.photo}>

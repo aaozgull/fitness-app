@@ -1,12 +1,12 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-
-import { DashBoardScreen } from "./src/features/dashBoard/screens/dashBoard-screen";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+
+import { Navigation } from "./src/infrastructure/navigation";
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -22,7 +22,7 @@ export default function App() {
   }
   return (
     <>
-      <DashBoardScreen />
+      <Navigation />
       <ExpoStatusBar style="auto" />
     </>
   );

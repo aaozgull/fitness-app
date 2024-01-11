@@ -5,7 +5,7 @@ import { theme } from "../../../../infrastructure/theme/index";
 //import ExpenseItem from './ExpenseItem';
 import { getFormattedDate } from "../../../../utils/date";
 
-function BezierLineChartCard() {
+function BodyWeight() {
   return (
     <View>
       <View style={styles.container}>
@@ -61,7 +61,7 @@ function BezierLineChartCard() {
   );
 }
 
-export default BezierLineChartCard;
+export default BodyWeight;
 
 const styles = StyleSheet.create({
   container: {
