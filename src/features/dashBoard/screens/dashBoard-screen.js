@@ -13,8 +13,7 @@ import {
 import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
 import BodyWeight from "../component/linear-chart/bodyWeight";
-import BodyWeightDetail from "../component/linear-chart/bodyWeightDetail";
-import PhotoCard from "../component/photos/photo-card";
+import PhotoCard from "../../photoGallery/screen/photo-card";
 import Heading from "../component/linear-chart/heading";
 
 export const DashBoardScreen = ({ navigation }) => {

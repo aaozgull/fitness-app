@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { List, Avatar } from "react-native-paper";
 
 //import { GlobalStyles } from "../../constants/styles";
-import { getFormattedDate } from "../../../../utils/date";
-import { theme } from "../../../../infrastructure/theme/index";
+import { getFormattedDate } from "../../../utils/date";
+import { theme } from "../../../infrastructure/theme/index";
 
 function PhotoCard() {
   return (
