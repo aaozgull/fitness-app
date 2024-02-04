@@ -14,6 +14,7 @@ import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
 import BodyWeight from "../component/linear-chart/bodyWeight";
 import PhotoCard from "../../photoGallery/screen/photo-card";
+import { PhotoInfoCard } from "../../photoGallery/component/photo-info-card.component";
 import Heading from "../component/linear-chart/heading";
 
 export const DashBoardScreen = ({ navigation }) => {
@@ -21,6 +22,10 @@ export const DashBoardScreen = ({ navigation }) => {
 
   function showBodyWeightHandler() {
     navigation.navigate("bodyWeightDetail");
+    //PhotoInfoCard
+  }
+  function showGalleryHandler() {
+    navigation.navigate("GalleryScreen");
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -31,7 +36,7 @@ export const DashBoardScreen = ({ navigation }) => {
       {/*  <View style={styles.toDolist}>
       <ToDoOutput />
     </View> */}
-      <Heading />
+      <Heading title="My Progress" />
       <View style={styles.progressContainer}>
         <View style={styles.graph}>
           <Pressable
@@ -40,11 +45,16 @@ export const DashBoardScreen = ({ navigation }) => {
             style={({ pressed }) => pressed && styles.pressedItem}
           >
             <BodyWeight />
-            {/* <BezierLineChart visible={modalIsVisible} /> */}
           </Pressable>
         </View>
         <View style={styles.photo}>
-          <PhotoCard />
+          <Pressable
+            android_ripple={{ color: "#210644" }}
+            onPress={showGalleryHandler}
+            style={({ pressed }) => pressed && styles.pressedItem}
+          >
+            <PhotoCard />
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
@@ -62,30 +72,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    //padding: theme.spaceInNumber[3],
   },
   summary: {
     flex: 1,
-    paddingTop: theme.space[4], //32,
-  },
-  toDolist: {
-    flex: 1,
-    paddingBottom: theme.space[3],
-    paddingRight: theme.space[3],
-    paddingLeft: theme.space[3],
+    paddingTop: theme.spaceInNumber[4], //32,
   },
   graph: {
     flex: 1,
-    //padding: theme.space[3],
-    paddingBottom: theme.space[3],
-    paddingLeft: theme.space[3],
-    paddingRight: theme.space[3],
+    // paddingBottom: theme.spaceInNumber[3],
+    //paddingRight: theme.spaceInNumber[3],
+    marginLeft: theme.spaceInNumber[2],
+    marginBottom: theme.spaceInNumber[4],
   },
   photo: {
     flex: 1,
-    // padding: theme.space[3],
-    paddingBottom: theme.space[3],
-    paddingLeft: theme.space[3],
-    paddingRight: theme.space[3],
+    // padding: theme.spaceInNumber[1],
+    marginTop: theme.spaceInNumber[3],
+    //height: 200,
+    // paddingBottom: theme.spaceInNumber[3],
+    // paddingLeft: theme.spaceInNumber[3],
+    // paddingRight: theme.spaceInNumber[3],
   },
   pressedItem: {
     opacity: 0.5,

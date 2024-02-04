@@ -75,8 +75,8 @@ export default ToDoOutput;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: theme.space[4], //24,
-    paddingTop: theme.space[4], //24,
+    paddingHorizontal: theme.spaceInNumber[4], //24,
+    paddingTop: theme.spaceInNumber[4], //24,
     paddingBottom: 0,
     backgroundColor: theme.colors.ui.primary700, //"#2d0689", // GlobalStyles.colors.primary700,
   },

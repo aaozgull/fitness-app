@@ -220,26 +220,26 @@ export default ToDoSummary;
 
 const styles = StyleSheet.create({
   container: {
-    padding: theme.space[2],
+    padding: theme.spaceInNumber[2],
     backgroundColor: theme.colors.ui.primary50, //"#e4d9fd", // GlobalStyles.colors.primary50,
     borderRadius: 6,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: theme.space[3],
+    marginHorizontal: theme.spaceInNumber[3],
   },
   ListContainer: {
     flex: 1,
   },
   date: {
     fontFamily: theme.fonts.heading,
-    fontSize: theme.fontSizes.title,
+    fontSize: theme.fontSizesInNumber.title,
     color: theme.colors.ui.primary400, // "#5721d4", //GlobalStyles.colors.primary400,
     // fontWeight: "bold",
   },
   buttonsContainer: {
     flexDirection: "row",
-    fontSize: theme.fontSizes.body,
+    fontSize: theme.fontSizesInNumber.body,
     fontWeight: "bold",
     color: theme.colors.ui.primary500, // "#3e04c3", // GlobalStyles.colors.primary500,
   },

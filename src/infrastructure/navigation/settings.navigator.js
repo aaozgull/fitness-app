@@ -1,7 +1,8 @@
 import React from "react";
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
-import { FavouritesScreen } from "../../features/settings/screens/favourites.screen";
+//import { FavouritesScreen } from "../../features/settings/screens/favourites.screen";
 import { CameraScreen } from "../../features/settings/screens/camera.screen";
+/* import ProfileScreen from "../../features/settings/screens/profile.screen"; */
 
 import {
   createStackNavigator,
@@ -13,8 +14,8 @@ const SettingsStack = createStackNavigator();
 export const SettingsNavigator = ({ route, navigation }) => {
   return (
     <SettingsStack.Navigator
-      headerMode="screen"
       screenOptions={{
+        headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}
     >
@@ -22,10 +23,10 @@ export const SettingsNavigator = ({ route, navigation }) => {
         options={{
           header: () => null,
         }}
-        name="Settings"
+        name="SettingsScreen"
         component={SettingsScreen}
       />
-      <SettingsStack.Screen name="Favourites" component={FavouritesScreen} />
+      {/*   <SettingsStack.Screen name="Profile" component={ProfileScreen} /> */}
       <SettingsStack.Screen name="Camera" component={CameraScreen} />
     </SettingsStack.Navigator>
   );

@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   text: {
     color: theme.colors.ui.primary50,
     fontFamily: theme.fonts.body,
-    fontSize: theme.fontSizes.body, //16,
+    fontSize: theme.fontSizesInNumber.body, //16,
     //padding: 4,
     fontWeight: "bold",
   },

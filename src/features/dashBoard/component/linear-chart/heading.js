@@ -3,16 +3,15 @@ import { Divider } from "react-native-paper";
 //import { GlobalStyles } from "../../constants/styles";
 import { theme } from "../../../../infrastructure/theme";
 
-function Heading() {
+function Heading({ title }) {
+  // console.log(`title ${title}`);
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.heading}>My Progress</Text>
-        <View style={styles.dividerContainer}>
-          <Divider bold="true" style={styles.divider} />
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.heading}>{title}</Text>
+      <View style={styles.dividerContainer}>
+        <Divider bold="true" style={styles.divider} />
       </View>
-    </>
+    </View>
   );
 }
 
@@ -20,31 +19,17 @@ export default Heading;
 
 const styles = StyleSheet.create({
   container: {
-    padding: theme.space[4], //16,
-    // backgroundColor: "#e4d9fd", // GlobalStyles.colors.primary50,
-    //borderRadius: theme.sizes[1], // 6,
-    //flexDirection: "row",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // backgroundColor: theme.colors.ui.gray500,
+    padding: theme.spaceInNumber[4], //16,
   },
   heading: {
-    // fontSize: 20,
-    // color: "#e4d9fd", //"#5721d4", //GlobalStyles.colors.primary400,
-
     color: theme.colors.ui.primary50,
     fontFamily: theme.fonts.heading,
-    fontSize: theme.fontSizes.title, //16,
-    //padding: 4,
-    //fontWeight: "bold",
-
-    // fontFamily: theme.fonts.heading,
-    // fontSize: theme.fontSizes.title,
-    //color: theme.colors.ui.primary400,
+    fontSize: theme.fontSizesInNumber.title, //16,
   },
   dividerContainer: {
-    paddingTop: theme.space[2],
-    // backgroundColor: theme.colors.ui.error50,
+    paddingTop: theme.spaceInNumber[3],
+    //backgroundColor: theme.colors.ui.error500,
+    backgroundColor: theme.colors.bg.primary,
   },
   divider: {
     // fontSize: 20,
@@ -53,6 +38,6 @@ const styles = StyleSheet.create({
 
     color: theme.colors.ui.primary50,
     //fontFamily: theme.fonts.heading,
-    fontSize: theme.fontSizes.title,
+    fontSize: theme.fontSizesInNumber.title,
   },
 });

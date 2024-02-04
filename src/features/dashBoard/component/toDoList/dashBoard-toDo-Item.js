@@ -19,10 +19,8 @@ function ToDoItem({ description, amount, date }) {
           <Text style={[styles.textBase, styles.description]}>
             {description}
           </Text>
-          {/*  <Text style={styles.textBase}>{getFormattedDate(date)}</Text> */}
         </View>
         <View style={styles.amountContainer}>
-          {/*  <Text style={styles.amount}>{amount.toFixed(2)}</Text> */}
           <Checkbox
             style={styles.checkbox}
             value={isChecked}
@@ -38,8 +36,8 @@ export default ToDoItem;
 
 const styles = StyleSheet.create({
   toDoItem: {
-    padding: theme.space[3], // 12,
-    marginVertical: theme.space[2], //8,
+    padding: theme.spaceInNumber[3], // 12,
+    marginVertical: theme.spaceInNumber[2], //8,
     backgroundColor: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -55,24 +53,20 @@ const styles = StyleSheet.create({
   },
   description: {
     fontFamily: theme.fonts.body,
-    fontSize: theme.fontSizes.body, //16,
+    fontSize: theme.fontSizesInNumber.body, //16,
     padding: 4,
     fontWeight: "bold",
   },
   amountContainer: {
-    paddingHorizontal: theme.space[2], // 12,
-    paddingVertical: theme.space[1], //4,
+    paddingHorizontal: theme.spaceInNumber[2], // 12,
+    paddingVertical: theme.spaceInNumber[1], //4,
     // backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,
-    minWidth: theme.sizes[6], //80,
+    minWidth: theme.sizesInNumber[6], //80,
   },
-  /*   amount: {
-    color: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
-    fontWeight: "bold",
-  }, */
   checkbox: {
-    margin: theme.space[2], // 8,
+    margin: theme.spaceInNumber[2], // 8,
   },
 });
