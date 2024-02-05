@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: theme.colors.ui.secondary,
   },
 
   calendarContainer: {

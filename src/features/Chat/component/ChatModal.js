@@ -68,17 +68,17 @@ export default ChatModal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.ui.primary100,
+    backgroundColor: theme.colors.ui.secondary,
   },
   messageItem: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: theme.colors.ui.primary50, //"#ccc",
+    borderBottomColor: theme.colors.ui.accent, //"#ccc",
   },
   messageText: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.body,
-    color: theme.colors.ui.gray700,
+    color: theme.colors.text.secondary,
   },
   messageContainer: {
     flexDirection: "row",
@@ -90,24 +90,24 @@ const styles = StyleSheet.create({
   closeButton: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.button,
-    color: theme.colors.ui.primary500, //"blue"
+    color: theme.colors.ui.accent, //"blue"
   },
   messageTextInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: theme.colors.ui.primary50, //"#ccc",
+    borderColor: theme.colors.ui.primary, //"#ccc",
     borderRadius: 5,
     marginRight: theme.sizesInNumber[2], //10,
     padding: theme.spaceInNumber[2], //8,
   },
   sendButtonContainer: {
-    backgroundColor: theme.colors.ui.primary500, //"blue",
+    backgroundColor: theme.colors.ui.primary, //"blue",
     padding: theme.spaceInNumber[2], // 10,
     borderRadius: 5,
   },
   sendButton: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.button,
-    color: theme.colors.ui.primary50,
+    color: theme.colors.ui.tertiary,
   },
 });

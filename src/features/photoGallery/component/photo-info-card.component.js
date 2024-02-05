@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
   cover: {
     flex: 1,
     margin: theme.spaceInNumber[3],
-    backgroundColor: theme.colors.ui.primary100,
+    backgroundColor: theme.colors.ui.gray500,
   }, //"white" },
   title: {
     padding: theme.spaceInNumber[3],
-    color: theme.colors.ui.primary700,
+    color: theme.colors.text.primary,
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber[2],
     fontWeight: `${theme.fontWeights.bold}`,

@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: theme.sizesInNumber[3], // 10,
-    color: theme.colors.ui.primary50,
+    color: theme.colors.ui.accent,
   },
   menuItemText: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.body, //16,
-    color: theme.colors.ui.primary50, //"#555", // Adjust the color as needed
+    color: theme.colors.text.primary, //"#555", // Adjust the color as needed
   },
 });
 

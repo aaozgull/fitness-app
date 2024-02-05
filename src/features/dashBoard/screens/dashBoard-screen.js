@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Searchbar } from "react-native-paper";
+
 import {
   StatusBar,
   StyleSheet,
@@ -14,11 +14,21 @@ import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
 import BodyWeight from "../component/linear-chart/bodyWeight";
 import PhotoCard from "../../photoGallery/screen/photo-card";
-import { PhotoInfoCard } from "../../photoGallery/component/photo-info-card.component";
-import Heading from "../component/linear-chart/heading";
+import PageTitle from "../../../components/utility/PageTitle";
 
 export const DashBoardScreen = ({ navigation }) => {
-  const [modalIsVisible, setModalIsVisible] = useState(false);
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item title="Close" onPress={() => props.navigation.goBack()} />
+          </HeaderButtons>
+        );
+      },
+      headerTitle: "DashBoard",
+    });
+  }, []);
 
   function showBodyWeightHandler() {
     navigation.navigate("bodyWeightDetail");
@@ -30,13 +40,10 @@ export const DashBoardScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.summary}>
-        {/*  <Searchbar /> */}
         <ToDoSummary />
       </View>
-      {/*  <View style={styles.toDolist}>
-      <ToDoOutput />
-    </View> */}
-      <Heading title="My Progress" />
+
+      <PageTitle title="My Progress" />
       <View style={styles.progressContainer}>
         <View style={styles.graph}>
           <Pressable

@@ -26,7 +26,7 @@ const TransparentMenu = ({ isVisible, onClose, selectedItem }) => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: theme.colors.ui.primary400, //"rgba(255, 255, 255, 0.6)",
+    backgroundColor: theme.colors.ui.secondary, //"rgba(255, 255, 255, 0.6)",
     borderRadius: 10,
     padding: theme.lineHeightsInNumber.copy, //20,
     alignItems: "flex-start",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber.title, //18,
     fontWeight: `${theme.fontWeights.bold}`,
-    color: theme.colors.ui.primary50, //"#333", // Adjust the color as needed
+    color: theme.colors.text.primary, //"#333", // Adjust the color as needed
   },
 
   closeButton: {

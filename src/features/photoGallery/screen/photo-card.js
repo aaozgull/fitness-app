@@ -50,26 +50,26 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: theme.colors.ui.primary50, //"white",
+    backgroundColor: theme.colors.ui.primary, //"white",
     marginVertical: theme.spaceInNumber[4],
     marginHorizontal: theme.spaceInNumber[2],
   },
   cover: {
     flex: 1,
     margin: theme.spaceInNumber[1],
-    backgroundColor: theme.colors.ui.primary100,
+    backgroundColor: theme.colors.ui.tertiary,
     height: 65,
   }, //"white" },
   date: {
     margin: theme.spaceInNumber[2],
-    color: theme.colors.ui.primary700,
+    color: theme.colors.text.primary,
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber[1],
     fontWeight: `${theme.fontWeights.bold}`,
   },
   text: {
     margin: theme.spaceInNumber[3],
-    color: theme.colors.ui.primary700,
+    color: theme.colors.text.primary,
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber[1],
     fontWeight: `${theme.fontWeights.bold}`,

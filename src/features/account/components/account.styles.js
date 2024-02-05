@@ -25,7 +25,7 @@ export const AccountContainer = styled.View`
 `;
 
 export const AuthButton = styled(Button).attrs({
-  buttonColor: colors.brand.primary,
+  buttonColor: colors.brand.secondary,
 })`
   padding: ${(props) => props.theme.space[2]};
 `;
@@ -36,7 +36,7 @@ export const AuthInput = styled(TextInput)`
 
 export const Title = styled(Text)`
   font-size: 30px;
-  color: ${(props) => props.theme.colors.text.primary500};
+  color: ${(props) => props.theme.colors.text.primary};
 `;
 export const ErrorContainer = styled.View`
   max-width: 300px;

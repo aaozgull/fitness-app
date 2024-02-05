@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   toDoItem: {
     padding: theme.spaceInNumber[3], // 12,
     marginVertical: theme.spaceInNumber[2], //8,
-    backgroundColor: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
+    backgroundColor: "white", //theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 6,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
   },
   textBase: {
-    color: theme.colors.ui.primary50, // "#e4d9fd", //GlobalStyles.colors.primary50,
+    color: theme.colors.text.primary, // "#e4d9fd", //GlobalStyles.colors.primary50,
   },
   description: {
     fontFamily: theme.fonts.body,

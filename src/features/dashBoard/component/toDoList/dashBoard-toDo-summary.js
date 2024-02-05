@@ -142,7 +142,7 @@ const DUMMY_EXPENSES = [
 
 function ToDoSummary() {
   const todayDate = getFormattedDate(new Date());
-  console.log(`todateDate ${todayDate}`);
+  // console.log(`todateDate ${todayDate}`);
 
   const todoDateLength = function setDateIndex() {
     const todatArry = DUMMY_EXPENSES.filter((toDo) => {
@@ -221,7 +221,7 @@ export default ToDoSummary;
 const styles = StyleSheet.create({
   container: {
     padding: theme.spaceInNumber[2],
-    backgroundColor: theme.colors.ui.primary50, //"#e4d9fd", // GlobalStyles.colors.primary50,
+    backgroundColor: theme.colors.ui.quaternary,
     borderRadius: 6,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -234,14 +234,14 @@ const styles = StyleSheet.create({
   date: {
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber.title,
-    color: theme.colors.ui.primary400, // "#5721d4", //GlobalStyles.colors.primary400,
+    color: theme.colors.text.inverse,
     // fontWeight: "bold",
   },
   buttonsContainer: {
     flexDirection: "row",
     fontSize: theme.fontSizesInNumber.body,
     fontWeight: "bold",
-    color: theme.colors.ui.primary500, // "#3e04c3", // GlobalStyles.colors.primary500,
+    color: theme.colors.ui.fiftary,
   },
   toDolist: {
     flex: 1,

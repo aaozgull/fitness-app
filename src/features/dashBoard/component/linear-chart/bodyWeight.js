@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   text: {
     // fontSize: 16,
     // color: "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
-    color: theme.colors.ui.primary50,
+    color: theme.colors.text.primary,
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.body, //16,
     //padding: 4,

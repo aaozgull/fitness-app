@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   dateContainer: {
     padding: theme.spaceInNumber[3], // 12,
     marginVertical: theme.spaceInNumber[2], //8,
-    backgroundColor: theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
+    backgroundColor: theme.colors.ui.secondary, //"#3e04c3", //GlobalStyles.colors.primary500,
 
     flexDirection: "row",
     justifyContent: "space-between",
@@ -71,19 +71,19 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber.title, //16,
     fontWeight: `${theme.fontWeights.bold}`,
-    color: theme.colors.ui.primary50,
+    color: theme.colors.text.primary,
   },
   todayText: {
     fontFamily: theme.fonts.heading,
     fontSize: theme.fontSizesInNumber.h5, //16,
     fontWeight: `${theme.fontWeights.bold}`,
-    color: theme.colors.ui.accent500,
+    color: theme.colors.text.primary,
   },
   dateText: {
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.body, //16,
     fontWeight: `${theme.fontWeights.regular}`,
-    color: theme.colors.ui.primary50,
+    color: theme.colors.text.primary,
   },
   pressedItem: {
     opacity: 0.5,

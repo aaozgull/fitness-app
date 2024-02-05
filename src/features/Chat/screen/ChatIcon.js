@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: theme.sizesInNumber[5], //16,
     right: theme.sizesInNumber[3], // 16,
-    backgroundColor: theme.colors.ui.primary400, //"#2196F3",
+    backgroundColor: theme.colors.ui.quaternary, //"#2196F3",
     padding: theme.sizesInNumber[3], //12,
     borderRadius: 30,
     elevation: 4,

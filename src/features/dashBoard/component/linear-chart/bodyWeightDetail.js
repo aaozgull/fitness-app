@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   text: {
-    color: theme.colors.ui.primary50,
+    color: theme.colors.text.primary,
     fontFamily: theme.fonts.body,
     fontSize: theme.fontSizesInNumber.body, //16,
     //padding: 4,

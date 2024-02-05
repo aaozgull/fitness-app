@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spaceInNumber[4], //24,
     paddingTop: theme.spaceInNumber[4], //24,
     paddingBottom: 0,
-    backgroundColor: theme.colors.ui.primary700, //"#2d0689", // GlobalStyles.colors.primary700,
+    backgroundColor: "white", //theme.colors.ui.primary700, //"#2d0689", // GlobalStyles.colors.primary700,
   },
 });
