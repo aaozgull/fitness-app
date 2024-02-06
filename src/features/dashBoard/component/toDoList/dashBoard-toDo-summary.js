@@ -16,127 +16,127 @@ const DUMMY_EXPENSES = [
     id: "e1",
     description: "Eat two eggs",
     amount: 59.99,
-    date: new Date("2024-1-9"),
+    date: new Date("2024-2-9"),
   },
   {
     id: "e2",
     description: "30 mins running",
     amount: 89.29,
-    date: new Date("2024-1-9"),
+    date: new Date("2024-2-9"),
   },
   {
     id: "e3",
     description: "Eat some bananas",
     amount: 5.99,
-    date: new Date("2024-1-9"),
+    date: new Date("2024-2-9"),
   },
   {
     id: "e4",
     description: "read a book",
     amount: 14.99,
-    date: new Date("2024-1-11"),
+    date: new Date("2024-2-11"),
   },
   {
     id: "e5",
     description: "read another book",
     amount: 18.59,
-    date: new Date("2024-1-11"),
+    date: new Date("2024-2-11"),
   },
   {
     id: "e6",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-11"),
+    date: new Date("2024-2-11"),
   },
   {
     id: "e7",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-11"),
+    date: new Date("2024-2-11"),
   },
   {
     id: "e8",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-13"),
+    date: new Date("2024-2-13"),
   },
   {
     id: "e9",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-13"),
+    date: new Date("2024-2-13"),
   },
   {
     id: "e10",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-13"),
+    date: new Date("2024-2-13"),
   },
   {
     id: "e11",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-12"),
+    date: new Date("2024-2-12"),
   },
   {
     id: "e12",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-12"),
+    date: new Date("2024-2-12"),
   },
   {
     id: "e13",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-12"),
+    date: new Date("2024-2-12"),
   },
   {
     id: "e14",
     description: "read a book",
     amount: 14.99,
-    date: new Date("2024-1-12"),
+    date: new Date("2024-2-12"),
   },
   {
     id: "e15",
     description: "read another book",
     amount: 18.59,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
   {
     id: "e16",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
   {
     id: "e17",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
   {
     id: "e18",
     description: "Exercise",
     amount: 14.99,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
   {
     id: "e19",
     description: "gym",
     amount: 18.59,
-    date: new Date("2024-1-7"),
+    date: new Date("2024-2-7"),
   },
   {
     id: "e20",
     description: "jogging",
     amount: 89.29,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
   {
     id: "e21",
     description: "eat some apples",
     amount: 5.99,
-    date: new Date("2024-1-10"),
+    date: new Date("2024-2-10"),
   },
 ];
 
@@ -197,14 +197,14 @@ function ToDoSummary() {
             <Ionicons
               name="caret-back-outline"
               size={24}
-              color="black"
+              color={theme.colors.ui.tertiary}
             ></Ionicons>
           </Pressable>
           <Pressable onPress={nextDate}>
             <Ionicons
               name="caret-forward-outline"
               size={24}
-              color="black"
+              color={theme.colors.ui.tertiary}
             ></Ionicons>
           </Pressable>
         </View>
@@ -221,7 +221,7 @@ export default ToDoSummary;
 const styles = StyleSheet.create({
   container: {
     padding: theme.spaceInNumber[2],
-    backgroundColor: theme.colors.ui.quaternary,
+    backgroundColor: theme.colors.ui.primary,
     borderRadius: 6,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -232,18 +232,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   date: {
-    fontFamily: theme.fonts.heading,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.title,
-    color: theme.colors.text.inverse,
+    color: theme.colors.text.primary,
     // fontWeight: "bold",
   },
   buttonsContainer: {
     flexDirection: "row",
-    fontSize: theme.fontSizesInNumber.body,
-    fontWeight: "bold",
-    color: theme.colors.ui.fiftary,
+    paddingBottom: theme.spaceInNumber[2],
+    paddingTop: theme.spaceInNumber[2],
   },
   toDolist: {
     flex: 1,
+    //backgroundColor: theme.colors.ui.fiftary,
   },
 });

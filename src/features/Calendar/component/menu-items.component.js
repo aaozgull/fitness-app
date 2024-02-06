@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     color: theme.colors.ui.accent,
   },
   menuItemText: {
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.body, //16,
     color: theme.colors.text.primary, //"#555", // Adjust the color as needed
   },

@@ -5,6 +5,7 @@ import { Card } from "react-native-paper";
 
 import { getFormattedDate } from "../../../utils/date";
 import { theme } from "../../../infrastructure/theme/index";
+import Heading from "../../../components/utility/Heading";
 
 function PhotoCard({ photo = {} }) {
   const {
@@ -17,24 +18,31 @@ function PhotoCard({ photo = {} }) {
     date = "2022-02-18",
   } = photo;
   return (
-    <Card elevation={5} style={styles.card}>
-      <Text style={styles.date}>{date}</Text>
-      <View style={styles.container}>
-        <Card.Cover key="1" style={styles.cover} source={{ uri: photos[0] }} />
+    <>
+      <Heading title="Body Photos" />
+      <Card elevation={5} style={styles.card}>
+        <Text style={styles.date}>{date}</Text>
+        <View style={styles.container}>
+          <Card.Cover
+            key="1"
+            style={styles.cover}
+            source={{ uri: photos[0] }}
+          />
 
-        <Card.Cover
-          key="2" //{description}
-          style={styles.cover}
-          source={{ uri: photos[1] }}
-        />
-        <Card.Cover
-          key="3" //{description}
-          style={styles.cover}
-          source={{ uri: photos[2] }}
-        />
-      </View>
-      <Text style={styles.text}>{description}</Text>
-    </Card>
+          <Card.Cover
+            key="2" //{description}
+            style={styles.cover}
+            source={{ uri: photos[1] }}
+          />
+          <Card.Cover
+            key="3" //{description}
+            style={styles.cover}
+            source={{ uri: photos[2] }}
+          />
+        </View>
+        <Text style={styles.text}>{description}</Text>
+      </Card>
+    </>
   );
 }
 
@@ -51,7 +59,7 @@ const styles = StyleSheet.create({
 
   card: {
     backgroundColor: theme.colors.ui.primary, //"white",
-    marginVertical: theme.spaceInNumber[4],
+    marginVertical: theme.spaceInNumber[2],
     marginHorizontal: theme.spaceInNumber[2],
   },
   cover: {
@@ -63,14 +71,16 @@ const styles = StyleSheet.create({
   date: {
     margin: theme.spaceInNumber[2],
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber[1],
     fontWeight: `${theme.fontWeights.bold}`,
   },
   text: {
     margin: theme.spaceInNumber[3],
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.heading,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber[1],
     fontWeight: `${theme.fontWeights.bold}`,
   },

@@ -11,15 +11,13 @@ import { LineChart } from "react-native-chart-kit";
 //import ExpenseItem from './ExpenseItem';
 import { getFormattedDate } from "../../../../utils/date";
 import { theme } from "../../../../infrastructure/theme/index";
+import Heading from "../../../../components/utility/Heading";
 
 function BodyWeightDetail(props) {
   return (
     /*  <Modal visible={props.visible} animationType="slide" style={{ flex: 1 }}> */
     <View style={styles.container}>
-      <View style={styles.headingContainer}>
-        <Text style={styles.text}>Body Weight</Text>
-        <Text style={styles.text}>{getFormattedDate(new Date())}</Text>
-      </View>
+      <Heading title="Body Weight" style={styles.headingContainer} />
       <View style={styles.chartContainer}>
         <LineChart
           data={{
@@ -95,7 +93,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.body, //16,
     //padding: 4,
     fontWeight: "bold",

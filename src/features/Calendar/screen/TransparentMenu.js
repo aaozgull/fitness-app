@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     //
   },
   menuHeaderText: {
-    fontFamily: theme.fonts.heading,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.title, //18,
     fontWeight: `${theme.fontWeights.bold}`,
     color: theme.colors.text.primary, //"#333", // Adjust the color as needed

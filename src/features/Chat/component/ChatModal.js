@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.colors.ui.accent, //"#ccc",
   },
   messageText: {
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.body,
     color: theme.colors.text.secondary,
   },
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
   },
   closeButtonContainer: { padding: 10 },
   closeButton: {
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.button,
     color: theme.colors.ui.accent, //"blue"
   },
@@ -106,7 +108,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sendButton: {
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.button,
     color: theme.colors.ui.tertiary,
   },

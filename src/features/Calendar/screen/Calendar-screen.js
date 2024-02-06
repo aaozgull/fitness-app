@@ -10,7 +10,7 @@ import { startOfMonth, eachDayOfInterval, addMonths, format } from "date-fns";
 
 import { CalendarItem } from "../../Calendar/component/calendar-Item.component";
 import { theme } from "../../../infrastructure/theme";
-import Heading from "../../dashBoard/component/linear-chart/heading";
+import PageTitle from "../../../components/utility/PageTitle";
 import { getFormattedDate } from "../../../utils/date";
 import TransparentMenu from "./TransparentMenu";
 
@@ -58,7 +58,7 @@ const CalendarScreen = () => {
   return (
     <View style={styles.container}>
       {/*  <View style={styles.calendarContainer}> */}
-      <Heading title="Calendar" />
+      <PageTitle title="Calendar" />
       <FlatList
         data={dates}
         renderItem={({ item }) => {

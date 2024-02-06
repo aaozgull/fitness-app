@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import {
   StatusBar,
@@ -8,6 +8,7 @@ import {
   View,
   Pressable,
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 //import styled from "styled-components/native";
 
 import { theme } from "../../../infrastructure/theme/index";
@@ -15,6 +16,8 @@ import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
 import BodyWeight from "../component/linear-chart/bodyWeight";
 import PhotoCard from "../../photoGallery/screen/photo-card";
 import PageTitle from "../../../components/utility/PageTitle";
+import PageContainer from "../../../components/utility/PageContainer";
+import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 
 export const DashBoardScreen = ({ navigation }) => {
   useEffect(() => {
@@ -38,68 +41,100 @@ export const DashBoardScreen = ({ navigation }) => {
     navigation.navigate("GalleryScreen");
   }
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.summary}>
-        <ToDoSummary />
-      </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <PageContainer style={styles.container}>
+        <Text style={styles.userNameText}>Hi! Aaoz</Text>
+        <View style={styles.summary}>
+          <ToDoSummary />
+        </View>
 
-      <PageTitle title="My Progress" />
-      <View style={styles.progressContainer}>
-        <View style={styles.graph}>
-          <Pressable
-            android_ripple={{ color: "#210644" }}
-            onPress={showBodyWeightHandler}
-            style={({ pressed }) => pressed && styles.pressedItem}
-          >
-            <BodyWeight />
-          </Pressable>
+        <PageTitle
+          title="My Progress"
+          style={styles.pageTitle}
+          textStyle={styles.pageTitleColor}
+        />
+        <View style={styles.divider}></View>
+
+        <View style={styles.progressContainer}>
+          <View style={styles.graph}>
+            <Pressable
+              android_ripple={{ color: "#210644" }}
+              onPress={showBodyWeightHandler}
+              style={({ pressed }) => pressed && styles.pressedItem}
+            >
+              <BodyWeight />
+            </Pressable>
+          </View>
+          <View style={styles.photo}>
+            <Pressable
+              android_ripple={{ color: "#210644" }}
+              onPress={showGalleryHandler}
+              style={({ pressed }) => pressed && styles.pressedItem}
+            >
+              <PhotoCard />
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.photo}>
-          <Pressable
-            android_ripple={{ color: "#210644" }}
-            onPress={showGalleryHandler}
-            style={({ pressed }) => pressed && styles.pressedItem}
-          >
-            <PhotoCard />
-          </Pressable>
-        </View>
-      </View>
+      </PageContainer>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     marginTop: StatusBar.currentHeight,
-    backgroundColor: theme.colors.bg.primary, //"#2d0689",
+    backgroundColor: theme.colors.bg.secondary, //"#2d0689",
   },
+  pageTitle: {
+    backgroundColor: theme.colors.ui.quaternary,
+  },
+  pageTitleColor: {
+    color: theme.colors.text.fiftary,
+  },
+  userNameText: {
+    padding: theme.spaceInNumber[3],
+    fontSize: 28,
+    fontFamily: "boldItalic",
+    letterSpacing: 0.3,
+    color: theme.colors.text.quaternary,
+    // fontWeight: "bold",
+    letterSpacing: 0.3,
+  },
+  divider: {
+    backgroundColor: theme.colors.ui.accent2,
+    padding: 8,
+    //borderRadius: 6,
+    borderBottomEndRadius: 8,
+    borderBottomStartRadius: 8,
+    elevation: 3,
+    shadowColor: theme.colors.ui.quaternary, // "#39324a", // GlobalStyles.colors.gray500,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+  },
+
   progressContainer: {
     //padding: 8,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    // backgroundColor: theme.colors.bg.secondary,
     //padding: theme.spaceInNumber[3],
   },
   summary: {
     flex: 1,
-    paddingTop: theme.spaceInNumber[4], //32,
+    // paddingTop: theme.spaceInNumber[4],
+    paddingBottom: theme.spaceInNumber[4],
   },
   graph: {
     flex: 1,
-    // paddingBottom: theme.spaceInNumber[3],
-    //paddingRight: theme.spaceInNumber[3],
     marginLeft: theme.spaceInNumber[2],
-    marginBottom: theme.spaceInNumber[4],
+    //marginBottom: theme.spaceInNumber[4],
   },
   photo: {
     flex: 1,
-    // padding: theme.spaceInNumber[1],
-    marginTop: theme.spaceInNumber[3],
-    //height: 200,
-    // paddingBottom: theme.spaceInNumber[3],
-    // paddingLeft: theme.spaceInNumber[3],
-    // paddingRight: theme.spaceInNumber[3],
+    //marginTop: theme.spaceInNumber[3],
   },
   pressedItem: {
     opacity: 0.5,

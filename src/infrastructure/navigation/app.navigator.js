@@ -33,8 +33,8 @@ export const AppNavigator = () => (
   <>
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: theme.colors.ui.tertiary,
+        tabBarInactiveTintColor: theme.colors.ui.gray500,
         headerShown: false,
         tabBarIcon: ({ size, color }) => {
           const iconName = TAB_ICON[route.name];

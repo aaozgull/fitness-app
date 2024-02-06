@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   title: {
     padding: theme.spaceInNumber[3],
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.heading,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber[2],
     fontWeight: `${theme.fontWeights.bold}`,
   },

@@ -36,14 +36,14 @@ export default ToDoItem;
 
 const styles = StyleSheet.create({
   toDoItem: {
-    padding: theme.spaceInNumber[3], // 12,
-    marginVertical: theme.spaceInNumber[2], //8,
+    padding: theme.spaceInNumber[2], // 12,
+    marginVertical: theme.spaceInNumber[1], //8,
     backgroundColor: "white", //theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 6,
     elevation: 3,
-    shadowColor: theme.colors.ui.gray500, // "#39324a", // GlobalStyles.colors.gray500,
+    shadowColor: theme.colors.ui.gray700, // "#39324a", // GlobalStyles.colors.gray500,
     shadowRadius: 4,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
@@ -52,10 +52,11 @@ const styles = StyleSheet.create({
     color: theme.colors.text.primary, // "#e4d9fd", //GlobalStyles.colors.primary50,
   },
   description: {
-    fontFamily: theme.fonts.body,
+    fontFamily: "regular",
+    letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.body, //16,
     padding: 4,
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   amountContainer: {
     paddingHorizontal: theme.spaceInNumber[2], // 12,

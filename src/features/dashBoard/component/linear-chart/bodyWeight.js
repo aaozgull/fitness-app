@@ -1,17 +1,15 @@
-import { FlatList, Text, Dimensions, View, StyleSheet } from "react-native";
+import { Text, Dimensions, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
-import { theme } from "../../../../infrastructure/theme/index";
+
+import Heading from "../../../../components/utility/Heading";
+import { theme } from "../../../../infrastructure/theme";
 
 //import ExpenseItem from './ExpenseItem';
-import { getFormattedDate } from "../../../../utils/date";
 
 function BodyWeight() {
   return (
     <View>
-      <View style={styles.container}>
-        <Text style={styles.text}>Body Weight</Text>
-        <Text style={styles.text}>{getFormattedDate(new Date())}</Text>
-      </View>
+      <Heading title="Body Weight" />
       <LineChart
         data={{
           labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
@@ -34,9 +32,9 @@ function BodyWeight() {
         yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
-          backgroundColor: "#2d0689", //"#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#a281f0", // "#ffa726",
+          backgroundColor: theme.colors.ui.primary, //"#2d0689", //"#e26a00",
+          backgroundGradientFrom: theme.colors.ui.accent, //"#fb8c00",
+          backgroundGradientTo: theme.colors.ui.accent2, //"#a281f0", // "#ffa726",
           decimalPlaces: 2, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
@@ -44,9 +42,9 @@ function BodyWeight() {
             borderRadius: 16,
           },
           propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#2d0689", // "#ffa726",
+            r: "2",
+            strokeWidth: "1",
+            stroke: theme.colors.ui.quaternary, //"#2d0689", // "#ffa726",
           },
         }}
         bezier
@@ -62,18 +60,3 @@ function BodyWeight() {
 }
 
 export default BodyWeight;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-  },
-  text: {
-    // fontSize: 16,
-    // color: "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
-    color: theme.colors.text.primary,
-    fontFamily: theme.fonts.body,
-    fontSize: theme.fontSizesInNumber.body, //16,
-    //padding: 4,
-    fontWeight: "bold",
-  },
-});
