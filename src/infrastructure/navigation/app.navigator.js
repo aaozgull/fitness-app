@@ -14,7 +14,7 @@ import ChatIcon from "../../features/Chat/screen/ChatIcon";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
-  DashBoardNavigator: "md-restaurant",
+  DashBoard: "fitness", //"md-restaurant",
   // Chat: "chatbox-outline",
   Calendar: "calendar-outline",
   Settings: "md-settings",
@@ -36,13 +36,18 @@ export const AppNavigator = () => (
         tabBarActiveTintColor: theme.colors.ui.tertiary,
         tabBarInactiveTintColor: theme.colors.ui.gray500,
         headerShown: false,
+        tabBarStyle: {
+          fontFamily: "thinItalic",
+          letterSpacing: 0.3,
+          fontSize: 16,
+        },
         tabBarIcon: ({ size, color }) => {
           const iconName = TAB_ICON[route.name];
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
     >
-      <Tab.Screen name="DashBoardNavigator" component={DashBoardNavigator} />
+      <Tab.Screen name="DashBoard" component={DashBoardNavigator} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Settings" component={ProfileScreen} />
     </Tab.Navigator>

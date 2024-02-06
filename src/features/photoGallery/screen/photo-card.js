@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: theme.colors.ui.primary, //"white",
+    backgroundColor: theme.colors.ui.accent2, //theme.colors.ui.primary, //"white",
     marginVertical: theme.spaceInNumber[2],
     marginHorizontal: theme.spaceInNumber[2],
   },

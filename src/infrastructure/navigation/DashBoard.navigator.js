@@ -20,7 +20,10 @@ export const DashBoardNavigator = () => {
         ...TransitionPresets.ModalPresentationIOS,
       }}
     >
-      <DashBoardStack.Screen name="DashBoard" component={DashBoardScreen} />
+      <DashBoardStack.Screen
+        name="DashBoardScreen"
+        component={DashBoardScreen}
+      />
       <DashBoardStack.Screen
         name="bodyWeightDetail"
         component={BodyWeightDetail}
