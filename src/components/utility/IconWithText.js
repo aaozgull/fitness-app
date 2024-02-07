@@ -4,9 +4,9 @@ import { FontAwesome5 } from "@expo/vector-icons"; // You can use a different ic
 import { theme } from "../../infrastructure/theme";
 
 const IconWithText = (props) => {
-  console.log(
+  /* console.log(
     `props.index ${props.index} icon  Text ${props.text} icon ${props.icon}`
-  );
+  ); */
   return (
     <View>
       <TouchableOpacity
