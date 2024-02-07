@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  StatusBar,
 } from "react-native";
 import { startOfMonth, eachDayOfInterval, addMonths, format } from "date-fns";
 
@@ -13,10 +14,12 @@ import { theme } from "../../../infrastructure/theme";
 import PageTitle from "../../../components/utility/PageTitle";
 import { getFormattedDate } from "../../../utils/date";
 import TransparentMenu from "./TransparentMenu";
+import PageContainer from "../../../components/utility/PageContainer";
 
 const CalendarScreen = () => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
   const handleItemPress = (item) => {
     setSelectedItem(item);
@@ -25,6 +28,12 @@ const CalendarScreen = () => {
 
   const handleCloseMenu = () => {
     setMenuVisible(false);
+  };
+
+  const handleSelectMenuItem = (menuItem) => {
+    console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
+    setMenuVisible(false);
+    setSelectedMenuItem(menuItem);
   };
 
   const currentDate = new Date();
@@ -56,15 +65,24 @@ const CalendarScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <PageContainer style={styles.container}>
       {/*  <View style={styles.calendarContainer}> */}
-      <PageTitle title="Calendar" />
+      <PageTitle
+        title="Calendar"
+        style={styles.pageTitle}
+        textStyle={styles.pageTitleColor}
+      />
+      <View style={styles.divider}></View>
       <FlatList
         data={dates}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => handleItemPress(item)}>
-              <CalendarItem date={item} />
+              <CalendarItem
+                date={item}
+                selectedMenuItem={selectedMenuItem}
+                selectedDate={selectedItem}
+              />
             </TouchableOpacity>
           );
         }}
@@ -81,22 +99,40 @@ const CalendarScreen = () => {
         isVisible={isMenuVisible}
         onClose={handleCloseMenu}
         selectedItem={selectedItem}
+        onSelectedMenuItem={handleSelectMenuItem}
       />
-    </View>
+    </PageContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: theme.colors.ui.secondary,
+    marginTop: StatusBar.currentHeight + 16,
+    backgroundColor: theme.colors.ui.primary,
   },
 
   calendarContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+  pageTitle: {
+    backgroundColor: theme.colors.ui.quaternary,
+  },
+  pageTitleColor: {
+    color: theme.colors.text.fiftary,
+  },
+  divider: {
+    backgroundColor: theme.colors.ui.accent2,
+    padding: 8,
+    borderBottomEndRadius: 8,
+    borderBottomStartRadius: 8,
+    elevation: 3,
+    shadowColor: theme.colors.ui.quaternary, // "#39324a", // GlobalStyles.colors.gray500,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
   },
 });
 

@@ -1,44 +1,52 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { theme } from "../../../../infrastructure/theme/index";
-
-//import { GlobalStyles } from "../../constants/styles";
-import { getFormattedDate } from "../../../../utils/date";
 import Checkbox from "expo-checkbox";
 
-function ToDoItem({ description, amount, date }) {
+import { theme } from "../../../../infrastructure/theme/index";
+//import { GlobalStyles } from "../../constants/styles";
+import { getFormattedDate } from "../../../../utils/date";
+import IconWithText from "../../../../components/utility/IconWithText";
+
+function ToDoItem({ description, amount, date, icon, style }) {
   const [isChecked, setChecked] = useState(false);
-  // console.log(`description  ${description}   date  ${date}`);
+  console.log(`description  ${description}   date  ${date} icon ${icon}`);
   function setCheckBox() {
     setChecked(!isChecked);
   }
   return (
-    <Pressable>
-      <View style={styles.toDoItem}>
-        <View>
+    <View style={style}>
+      {/* <View>
           <Text style={[styles.textBase, styles.description]}>
             {description}
-          </Text>
-        </View>
+          </Text> */}
+      <IconWithText
+        text={description}
+        icon={icon}
+        iconStyle={styles.menuItemIcon}
+        textStyle={styles.menuItemText}
+      />
+      {/* </View> */}
+      <Pressable>
         <View style={styles.amountContainer}>
           <Checkbox
             style={styles.checkbox}
             value={isChecked}
+            color={theme.colors.text.primary}
             onValueChange={setCheckBox}
           />
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 }
 
 export default ToDoItem;
 
 const styles = StyleSheet.create({
-  toDoItem: {
+  /* toDoItem: {
     padding: theme.spaceInNumber[2], // 12,
     marginVertical: theme.spaceInNumber[1], //8,
-    backgroundColor: "white", //theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
+    //backgroundColor: "white", //theme.colors.ui.primary500, //"#3e04c3", //GlobalStyles.colors.primary500,
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 6,
@@ -47,17 +55,30 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
-  },
+  }, */
   textBase: {
     color: theme.colors.text.primary, // "#e4d9fd", //GlobalStyles.colors.primary50,
   },
-  description: {
+  menuItemIcon: {
+    width: 24,
+    height: 24,
+    marginRight: theme.sizesInNumber[2], // 10,
+    color: theme.colors.ui.tertiary,
+  },
+  menuItemText: {
+    fontFamily: "regular",
+    letterSpacing: 0.3,
+    fontSize: theme.fontSizesInNumber.body, //16,
+    padding: 4,
+    color: theme.colors.text.primary, //"#555", // Adjust the color as needed
+  },
+  /* description: {
     fontFamily: "regular",
     letterSpacing: 0.3,
     fontSize: theme.fontSizesInNumber.body, //16,
     padding: 4,
     // fontWeight: "bold",
-  },
+  }, */
   amountContainer: {
     paddingHorizontal: theme.spaceInNumber[2], // 12,
     paddingVertical: theme.spaceInNumber[1], //4,

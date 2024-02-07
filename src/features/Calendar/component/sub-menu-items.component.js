@@ -1,12 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons"; // You can use a different icon library
-
 import { theme } from "../../../infrastructure/theme";
-import IconWithText from "../../../components/utility/IconWithText";
 
-const MenuItems = ({ onSelectedMenuItem }) => {
-  const menuItems = [
+const SubMenuItems = ({ onSelectedMenuItem }) => {
+  const sabMenuItems = [
     { icon: "dumbbell", text: "Workout" },
     { icon: "running", text: "Activity" },
     { icon: "utensils", text: "Meal" },
@@ -16,15 +14,20 @@ const MenuItems = ({ onSelectedMenuItem }) => {
   ];
   return (
     <View style={styles.menuContent}>
-      {menuItems.map((item, index) => (
-        <IconWithText
-          text={item.text}
-          icon={item.icon}
+      {sabMenuItems.map((item, index) => (
+        <TouchableOpacity
           key={index}
-          onPressed={() => onSelectedMenuItem(item)}
-          iconStyle={styles.menuItemIcon}
-          textStyle={styles.menuItemText}
-        />
+          style={styles.menuItem}
+          onPress={() => onSelectedMenuItem(item)}
+        >
+          <FontAwesome5
+            name={item.icon}
+            size={24}
+            //color="black"
+            style={styles.menuItemIcon}
+          />
+          <Text style={styles.menuItemText}>{item.text}</Text>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -35,16 +38,16 @@ const styles = StyleSheet.create({
     marginBottom: theme.sizesInNumber[3], //20,
   },
   menuItem: {
-    /* flexDirection: "row",
+    flexDirection: "row",
     //alignContent: "space-between",
     alignItems: "center",
     marginVertical: theme.sizesInNumber[2], // 10,
-    padding: 5, */
+    padding: 5,
   },
   menuItemIcon: {
     width: 24,
     height: 24,
-    marginRight: theme.sizesInNumber[4], // 10,
+    marginRight: theme.sizesInNumber[3], // 10,
     color: theme.colors.ui.quaternary,
   },
   menuItemText: {
