@@ -22,17 +22,7 @@ const styles = StyleSheet.create({
     fontFamily: "bold",
     letterSpacing: 0.3,
     color: theme.colors.text.primary,
-    // letterSpacing: 0.3,
   },
-  /*  text: {
-    // fontSize: 16,
-    // color: "#ffff", //"#5721d4", //GlobalStyles.colors.primary400,
-    color: theme.colors.text.primary,
-    fontFamily: "regular",
-    fontSize: theme.fontSizesInNumber.body, //16,
-    //padding: 4,
-    fontWeight: "bold",
-  }, */
   date: {
     color: theme.colors.text.secondary,
     fontFamily: "regular",

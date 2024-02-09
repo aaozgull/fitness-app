@@ -9,7 +9,7 @@ import IconWithText from "../../../../components/utility/IconWithText";
 
 function ToDoItem({ description, amount, date, icon, style }) {
   const [isChecked, setChecked] = useState(false);
-  console.log(`description  ${description}   date  ${date} icon ${icon}`);
+  //console.log(`description  ${description}   date  ${date} icon ${icon}`);
   function setCheckBox() {
     setChecked(!isChecked);
   }

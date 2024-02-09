@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: theme.colors.ui.primary50, //"white",
-    marginVertical: theme.spaceInNumber[4],
+    backgroundColor: theme.colors.ui.accent2, //"white",
+    marginVertical: theme.spaceInNumber[3],
     marginHorizontal: theme.spaceInNumber[3],
   },
   cover: {
     flex: 1,
     margin: theme.spaceInNumber[3],
-    backgroundColor: theme.colors.ui.gray500,
+    backgroundColor: theme.colors.ui.tertiary,
   }, //"white" },
   title: {
     padding: theme.spaceInNumber[3],

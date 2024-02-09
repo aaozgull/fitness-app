@@ -41,19 +41,19 @@ function BodyWeightDetail(props) {
           yAxisSuffix="k"
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
-            backgroundColor: "#2d0689", //"#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#a281f0", // "#ffa726",
+            backgroundColor: theme.colors.ui.primary, //"#2d0689", //"#e26a00",
+            backgroundGradientFrom: theme.colors.ui.accent, //"#fb8c00",
+            backgroundGradientTo: theme.colors.ui.accent2, //"#a281f0", // "#ffa726",
             decimalPlaces: 2, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(0, 32, 53, ${opacity})`,
             style: {
               borderRadius: 16,
             },
             propsForDots: {
               r: "6",
               strokeWidth: "2",
-              stroke: "#2d0689", // "#ffa726",
+              stroke: theme.colors.ui.quaternary, //"#2d0689", // "#ffa726",
             },
           }}
           bezier
@@ -66,7 +66,6 @@ function BodyWeightDetail(props) {
         />
       </View>
     </View>
-    /*  </Modal> */
   );
 }
 
@@ -75,28 +74,22 @@ export default BodyWeightDetail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
-    backgroundColor: "#2d0689",
+    // padding: 8,
+    backgroundColor: theme.colors.ui.secondary, // "#2d0689",
   },
   headingContainer: {
     // flex: 1,
+    backgroundColor: theme.colors.ui.primary,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
     padding: 16,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     borderBottomColor: "#cccccc",
   },
   chartContainer: {
     //flex: 1,
     marginTop: 32,
-  },
-  text: {
-    color: theme.colors.text.primary,
-    fontFamily: "regular",
-    letterSpacing: 0.3,
-    fontSize: theme.fontSizesInNumber.body, //16,
-    //padding: 4,
-    fontWeight: "bold",
+    //marginHorizontal: 8,
   },
 });

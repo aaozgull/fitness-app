@@ -37,7 +37,7 @@ function BodyWeight() {
           backgroundGradientTo: theme.colors.ui.accent2, //"#a281f0", // "#ffa726",
           decimalPlaces: 2, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(228, 217, 253, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(0, 32, 53, ${opacity})`,
           style: {
             borderRadius: 16,
           },

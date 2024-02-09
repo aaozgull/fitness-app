@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { DashBoardNavigator } from "../navigation/DashBoard.navigator";
 //import { SettingsNavigator } from "./settings.navigator";
 import ProfileScreen from "../../features/settings/screens/profile.screen";
-import { SettingsScreen } from "../../features/settings/screens/settings.screen";
+import SettingsScreen from "../../features/settings/screens/SettingsScreen";
 import { theme } from "../theme";
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
 import ChatIcon from "../../features/Chat/screen/ChatIcon";
@@ -35,7 +35,7 @@ export const AppNavigator = () => (
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: theme.colors.ui.tertiary,
         tabBarInactiveTintColor: theme.colors.ui.gray500,
-        headerShown: false,
+        /*  headerShown: false, */
         tabBarStyle: {
           fontFamily: "thinItalic",
           letterSpacing: 0.3,
@@ -49,7 +49,7 @@ export const AppNavigator = () => (
     >
       <Tab.Screen name="DashBoard" component={DashBoardNavigator} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
-      <Tab.Screen name="Settings" component={ProfileScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
     <ChatIcon />
   </>

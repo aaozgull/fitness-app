@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
-
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 //import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { PhotoInfoCard } from "../component/photo-info-card.component";
 import { theme } from "../../../infrastructure/theme/index";
+import Heading from "../../../components/utility/Heading";
+import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 
 const photos = [
   {
@@ -99,15 +101,29 @@ const photos = [
   },
 ];
 
-export const GalleryScreen = () => {
+export const GalleryScreen = ({ navigation }) => {
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <CustomHeaderButton
+          title="create-outline"
+          iconName="create-outline" // You can specify the correct icon name
+          onPress={() => navigation.goBack()}
+        />
+      ),
+      headerTitle: "Body Photos",
+    });
+    // console.log(`useEffect ${{ ...navigation }}`);
+  }, []);
   return (
     <View style={styles.container}>
+      <Heading title="Body Photos" style={styles.headingContainer} />
       <FlatList
         data={photos}
         renderItem={({ item }) => {
           return <PhotoInfoCard photo={item} />;
         }}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item.id}
       />
     </View>
   );
@@ -116,9 +132,16 @@ export const GalleryScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.bg.primary, //"#2d0689",
+    backgroundColor: theme.colors.bg.secondary, //"#2d0689",
   },
-  spacer: {
-    //margin: theme.spaceInNumber[1],
+  headingContainer: {
+    // flex: 1,
+    backgroundColor: theme.colors.ui.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
+    padding: 16,
+    borderBottomWidth: 2,
+    borderBottomColor: "#cccccc",
   },
 });

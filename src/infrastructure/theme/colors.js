@@ -16,7 +16,11 @@ export const colors = {
     error50: "#fcc4e4",
     error500: "#9b095c",
     success: "#138000",
-    gray500: "#7d8f98",
+
+    grey10: "#F4F8F7",
+    grey100: "#ededed",
+    grey300: "#bdc3c7",
+    gray500: "#7f8c8d",
     gray700: "#221c30",
   },
   bg: {
@@ -36,5 +40,10 @@ export const colors = {
     inverse: "#FFFFFF",
     error: "#D0421B",
     success: "#138000",
+    grey10: "#F4F8F7",
+    grey100: "#ededed",
+    grey300: "#bdc3c7",
+    gray500: "#7f8c8d",
+    gray700: "#221c30",
   },
 };

@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 //import { CustomText } from "../../../components/typography/text.component";
 import { Text } from "../../../components/typography/text.component";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+//import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 //import styled from "../../../infrastructure/theme";
 
 const ProfileCamera = styled(Camera)`

@@ -25,7 +25,7 @@ export const DashBoardScreen = ({ navigation }) => {
       headerLeft: () => {
         return (
           <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title="Close" onPress={() => props.navigation.goBack()} />
+            <Item title="Close" onPress={() => navigation.goBack()} />
           </HeaderButtons>
         );
       },

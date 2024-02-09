@@ -8,7 +8,7 @@ import { theme } from "../../../infrastructure/theme";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+//import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import MyPickerSelect from "../component/myPickerSelect-component";
 
 const placeholder = {
