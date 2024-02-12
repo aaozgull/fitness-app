@@ -5,6 +5,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen } from "../../features/account/screens/login.screen";
 import { RegisterScreen } from "../../features/account/screens/register.screen"; */
 
+import GoalScreen from "../../features/account/screens/GoalScreen";
+import EquipmentScreen from "../../features/account/screens/EquipmentScreen";
+import FitnessLevelScreen from "../../features/account/screens/FitnessLevelScreen";
+
 const Stack = createStackNavigator();
 
 export const AccountNavigator = () => (
@@ -13,8 +17,8 @@ export const AccountNavigator = () => (
       headerShown: false,
     }}
   >
-    {/* <Stack.Screen name="Main" component={AccountScreen} />
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="Register" component={RegisterScreen} /> */}
+    <Stack.Screen name="Goal" component={GoalScreen} />
+    <Stack.Screen name="FitnessLevel" component={FitnessLevelScreen} />
+    <Stack.Screen name="Equipment" component={EquipmentScreen} />
   </Stack.Navigator>
 );

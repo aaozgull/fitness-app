@@ -31,7 +31,9 @@ export const signUp = (firstName, lastName, email, password) => {
 
       const userData = await createUser(firstName, lastName, email, uid);
 
-      dispatch(authenticate({ token: accessToken, userData }));
+      dispatch(
+        authenticate({ token: accessToken, userData, newRegistration: true })
+      );
       saveDataToStorage(accessToken, uid, expiryDate);
 
       timer = setTimeout(() => {
@@ -70,7 +72,9 @@ export const signIn = (email, password) => {
 
       // console.log(`signIn userData ${userData}`);
 
-      dispatch(authenticate({ token: accessToken, userData }));
+      dispatch(
+        authenticate({ token: accessToken, userData, newRegistration: false })
+      );
       saveDataToStorage(accessToken, uid, expiryDate);
 
       timer = setTimeout(() => {
