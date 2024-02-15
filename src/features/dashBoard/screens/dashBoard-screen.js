@@ -18,6 +18,7 @@ import PhotoCard from "../../photoGallery/screen/photo-card";
 import PageTitle from "../../../components/utility/PageTitle";
 import PageContainer from "../../../components/utility/PageContainer";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const DashBoardScreen = ({ navigation }) => {
   useEffect(() => {

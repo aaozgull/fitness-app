@@ -26,16 +26,16 @@ function ToDoItem({ description, amount, date, icon, style }) {
         textStyle={styles.menuItemText}
       />
       {/* </View> */}
-      <Pressable>
-        <View style={styles.amountContainer}>
-          <Checkbox
-            style={styles.checkbox}
-            value={isChecked}
-            color={theme.colors.text.primary}
-            onValueChange={setCheckBox}
-          />
-        </View>
-      </Pressable>
+      {/*  <Pressable> */}
+      <View style={styles.amountContainer}>
+        <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          color={theme.colors.text.primary}
+          onValueChange={setCheckBox}
+        />
+      </View>
+      {/* </Pressable> */}
     </View>
   );
 }
