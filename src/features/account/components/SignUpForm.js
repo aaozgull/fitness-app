@@ -8,7 +8,6 @@ import SubmitButton from "../../../components/utility/SubmitButton";
 import { validateInput } from "../../../utils/actions/formActions";
 import { reducer } from "../../../utils/reducers/formReducer";
 import { signUp } from "../../../utils/actions/authActions";
-//import colors from "../../../constants/colors";
 import { colors } from "../../../infrastructure/theme/colors";
 
 const initialState = {
