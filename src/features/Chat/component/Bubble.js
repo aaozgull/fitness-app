@@ -59,12 +59,12 @@ const Bubble = (props) => {
   switch (type) {
     case "system":
       textStyle.color = "#65644A";
-      bubbleStyle.backgroundColor = colors.beige;
+      bubbleStyle.backgroundColor = colors.ui.grey10;
       bubbleStyle.alignItems = "center";
       bubbleStyle.marginTop = 10;
       break;
     case "error":
-      bubbleStyle.backgroundColor = colors.red;
+      bubbleStyle.backgroundColor = colors.ui.error500;
       textStyle.color = "white";
       bubbleStyle.marginTop = 10;
       break;
@@ -110,7 +110,7 @@ const Bubble = (props) => {
                 <FontAwesome
                   name="star"
                   size={14}
-                  color={colors.textColor}
+                  color={colors.text.primary}
                   style={{ marginRight: 5 }}
                 />
               )}
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   time: {
     fontFamily: "regular",
     letterSpacing: 0.3,
-    color: colors.grey,
+    color: colors.ui.gray500,
     fontSize: 12,
   },
 });
