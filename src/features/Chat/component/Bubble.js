@@ -1,5 +1,11 @@
 import React, { useRef } from "react";
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import {
   Menu,
   MenuTrigger,
@@ -49,6 +55,7 @@ const Bubble = (props) => {
     setReply,
     replyingTo,
     name,
+    imageUrl,
   } = props;
 
   const starredMessages = useSelector(
@@ -128,7 +135,11 @@ const Bubble = (props) => {
             />
           )}
 
-          <Text style={textStyle}>{text}</Text>
+          {!imageUrl && <Text style={textStyle}>{text}</Text>}
+
+          {imageUrl && (
+            <Image source={{ uri: imageUrl }} style={styles.image} />
+          )}
           {dateString && (
             <View style={styles.timeContainer}>
               {isStarred && (
@@ -210,6 +221,11 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: "medium",
     letterSpacing: 0.3,
+  },
+  image: {
+    width: 300,
+    height: 300,
+    marginBottom: 5,
   },
 });
 
