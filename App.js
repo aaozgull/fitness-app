@@ -10,6 +10,7 @@ import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
 import { Provider } from "react-redux";
 import { store } from "./src/store/store";
+import { MenuProvider } from "react-native-popup-menu";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -56,7 +57,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider style={styles.container} onLayout={onLayout}>
-        <Navigation />
+        <MenuProvider>
+          <Navigation />
+        </MenuProvider>
       </SafeAreaProvider>
     </Provider>
   );
