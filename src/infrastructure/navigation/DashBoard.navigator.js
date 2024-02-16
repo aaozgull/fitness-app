@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BodyWeightDetail from "../../features/dashBoard/component/linear-chart/bodyWeightDetail";
 import { DashBoardScreen } from "../../features/dashBoard/screens/dashBoard-screen";
 import { GalleryScreen } from "../../features/photoGallery/screen/gallery-screen";
+import { setChatMessages, setStarredMessages } from "../store/messagesSlice";
 
 const DashBoardStack = createNativeStackNavigator();
 
@@ -108,6 +109,15 @@ const DashBoardNavigator = (props) => {
       }
     });
 
+    const userStarredMessagesRef = child(
+      dbRef,
+      `userStarredMessages/${userData.userId}`
+    );
+    refs.push(userStarredMessagesRef);
+    onValue(userStarredMessagesRef, (querySnapshot) => {
+      const starredMessages = querySnapshot.val() ?? {};
+      dispatch(setStarredMessages({ starredMessages }));
+    });
     return () => {
       console.log("Unsubscribing firebase listeners");
       refs.forEach((ref) => off(ref));
