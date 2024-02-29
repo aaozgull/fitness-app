@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -13,12 +13,14 @@ import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 import PageContainer from "../../../components/utility/PageContainer";
 import { FontAwesome } from "@expo/vector-icons";
 //import colors from "../constants/colors";
-import { colors } from "../../../infrastructure/theme/colors";
+//import { colors } from "../../../infrastructure/theme/colors";
+import chatColors from "../../../constants/chatColors";
 import commonStyles from "../../../constants/commonStyles";
 import { searchUsers } from "../../../utils/actions/userActions";
 import DataItem from "../../../components/utility/DataItem";
 import { useDispatch, useSelector } from "react-redux";
 import { setStoredUsers } from "../../../store/userSlice";
+import ProfileImage from "../../../components/utility/ProfileImage";
 
 const NewChatScreen = (props) => {
   const dispatch = useDispatch();
@@ -27,8 +29,16 @@ const NewChatScreen = (props) => {
   const [users, setUsers] = useState();
   const [noResultsFound, setNoResultsFound] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [chatName, setChatName] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const userData = useSelector((state) => state.auth.userData);
+  const storedUsers = useSelector((state) => state.users.storedUsers);
+
+  const selectedUsersFlatList = useRef();
+
+  const isGroupChat = props.route.params && props.route.params.isGroupChat;
+  const isGroupChatDisabled = selectedUsers.length === 0 || chatName === "";
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -39,9 +49,29 @@ const NewChatScreen = (props) => {
           </HeaderButtons>
         );
       },
-      headerTitle: "New chat",
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            {isGroupChat && (
+              <Item
+                title="Create"
+                disabled={isGroupChatDisabled}
+                color={isGroupChatDisabled ? chatColors.lightGrey : undefined}
+                onPress={() => {
+                  console.log(` create navigation chatName ${chatName}`);
+                  props.navigation.navigate("ChatList", {
+                    selectedUsers,
+                    chatName,
+                  });
+                }}
+              />
+            )}
+          </HeaderButtons>
+        );
+      },
+      headerTitle: isGroupChat ? "Add participants" : "New chat",
     });
-  }, []);
+  }, [chatName, selectedUsers]);
 
   useEffect(() => {
     const delaySearch = setTimeout(async () => {
@@ -72,15 +102,65 @@ const NewChatScreen = (props) => {
   }, [searchTerm]);
 
   const userPressed = (userId) => {
-    props.navigation.navigate("ChatList", {
-      selectedUserId: userId,
-    });
+    if (isGroupChat) {
+      const newSelectedUsers = selectedUsers.includes(userId)
+        ? selectedUsers.filter((id) => id !== userId)
+        : selectedUsers.concat(userId);
+
+      setSelectedUsers(newSelectedUsers);
+    } else {
+      props.navigation.navigate("ChatList", {
+        selectedUserId: userId,
+      });
+    }
   };
 
   return (
     <PageContainer>
+      {isGroupChat && (
+        <>
+          <View style={styles.chatNameContainer}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.textbox}
+                placeholder="Enter a name for your chat"
+                autoCorrect={false}
+                onChangeText={(text) => setChatName(text)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.selectedUsersContainer}>
+            <FlatList
+              style={styles.selectedUsersList}
+              data={selectedUsers}
+              horizontal={true}
+              keyExtractor={(item) => item}
+              contentContainerStyle={{ alignItems: "center" }}
+              ref={(ref) => (selectedUsersFlatList.current = ref)}
+              onContentSizeChange={() =>
+                selectedUsersFlatList.current.scrollToEnd()
+              }
+              renderItem={(itemData) => {
+                const userId = itemData.item;
+                const userData = storedUsers[userId];
+                return (
+                  <ProfileImage
+                    style={styles.selectedUserStyle}
+                    size={40}
+                    uri={userData.profilePicture}
+                    onPress={() => userPressed(userId)}
+                    showRemoveButton={true}
+                  />
+                );
+              }}
+            />
+          </View>
+        </>
+      )}
+
       <View style={styles.searchContainer}>
-        <FontAwesome name="search" size={15} color={colors.ui.grey300} />
+        <FontAwesome name="search" size={15} color={chatColors.lightGrey} />
 
         <TextInput
           placeholder="Search"
@@ -91,7 +171,7 @@ const NewChatScreen = (props) => {
 
       {isLoading && (
         <View style={commonStyles.center}>
-          <ActivityIndicator size={"large"} color={colors.ui.tertiary} />
+          <ActivityIndicator size={"large"} color={chatColors.primary} />
         </View>
       )}
 
@@ -108,6 +188,8 @@ const NewChatScreen = (props) => {
                 subTitle={userData.about}
                 image={userData.profilePicture}
                 onPress={() => userPressed(userId)}
+                type={isGroupChat ? "checkbox" : ""}
+                isChecked={selectedUsers.includes(userId)}
               />
             );
           }}
@@ -119,7 +201,7 @@ const NewChatScreen = (props) => {
           <FontAwesome
             name="question"
             size={55}
-            color={colors.ui.grey300}
+            color={chatColors.lightGrey}
             style={styles.noResultsIcon}
           />
           <Text style={styles.noResultsText}>No users found!</Text>
@@ -131,7 +213,7 @@ const NewChatScreen = (props) => {
           <FontAwesome
             name="users"
             size={55}
-            color={colors.ui.grey300}
+            color={chatColors.lightGrey}
             style={styles.noResultsIcon}
           />
           <Text style={styles.noResultsText}>
@@ -147,7 +229,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.ui.grey100,
+    backgroundColor: chatColors.extraLightGrey,
     height: 30,
     marginVertical: 8,
     paddingHorizontal: 8,
@@ -163,9 +245,38 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   noResultsText: {
-    color: colors.text.primary,
+    color: chatColors.textColor,
     fontFamily: "regular",
     letterSpacing: 0.3,
+  },
+  chatNameContainer: {
+    paddingVertical: 10,
+  },
+  inputContainer: {
+    width: "100%",
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    backgroundColor: chatColors.nearlyWhite,
+    flexDirection: "row",
+    borderRadius: 2,
+  },
+  textbox: {
+    color: chatColors.textColor,
+    width: "100%",
+    fontFamily: "regular",
+    letterSpacing: 0.3,
+  },
+  selectedUsersContainer: {
+    height: 50,
+    justifyContent: "center",
+  },
+  selectedUsersList: {
+    height: "100%",
+    paddingTop: 10,
+  },
+  selectedUserStyle: {
+    marginRight: 10,
+    marginBottom: 10,
   },
 });
 

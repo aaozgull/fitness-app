@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 
 import { colors } from "../../../infrastructure/theme/colors";
 //import colors from '../constants/colors';
-import { starMessage } from "../utils/actions/chatActions";
+import { starMessage } from "../../../utils/actions/chatActions";
 
 function formatAmPm(dateString) {
   const date = new Date(dateString);

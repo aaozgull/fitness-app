@@ -19,6 +19,8 @@ import { Feather } from "@expo/vector-icons";
 import backgroundImage from "../../../../assets/images/droplet.jpeg";
 //import colors from "../constants/colors";
 import { colors } from "../../../infrastructure/theme/colors";
+import chatColors from "../../../constants/chatColors";
+
 import { useSelector } from "react-redux";
 import PageContainer from "../../../components/utility/PageContainer";
 import Bubble from "../component/Bubble";
@@ -26,8 +28,8 @@ import {
   createChat,
   sendImage,
   sendTextMessage,
-} from "../utils/actions/chatActions";
-import ReplyTo from "../components/ReplyTo";
+} from "../../../utils/actions/chatActions";
+import ReplyTo from "../component/ReplyTo"; //"../components/ReplyTo";
 import {
   launchImagePicker,
   openCamera,
@@ -80,10 +82,13 @@ const ChatScreen = (props) => {
       otherUserData && `${otherUserData.firstName} ${otherUserData.lastName}`
     );
   };
-
+  const title = chatData.chatName ?? getChatTitleFromName();
+  console.log(
+    `=================== chatData.chatName ${chatData.chatName}  Object.values ${Object.values(props.route?.params?.newChatData)}`
+  );
   useEffect(() => {
     props.navigation.setOptions({
-      headerTitle: getChatTitleFromName(),
+      headerTitle: title,
     });
     setChatUsers(chatData.users);
   }, [chatUsers]);
@@ -97,7 +102,7 @@ const ChatScreen = (props) => {
         setChatId(id);
       }
       await sendTextMessage(
-        chatId,
+        id,
         userData.userId,
         messageText,
         replyingTo && replyingTo.key
@@ -106,7 +111,7 @@ const ChatScreen = (props) => {
       setMessageText("");
       setReplyingTo(null);
     } catch (error) {
-      console.log(error);
+      console.log(`=================== error ${error}`);
       setErrorBannerText("Message failed to send");
       setTimeout(() => setErrorBannerText(""), 5000);
     }
@@ -201,6 +206,9 @@ const ChatScreen = (props) => {
                   const messageType = isOwnMessage
                     ? "myMessage"
                     : "theirMessage";
+                  const sender = message.sentBy && storedUsers[message.sentBy];
+                  const name =
+                    sender && `${sender.firstName} ${sender.lastName}`;
 
                   return (
                     <Bubble
@@ -210,6 +218,9 @@ const ChatScreen = (props) => {
                       userId={userData.userId}
                       chatId={chatId}
                       date={message.sentAt}
+                      name={
+                        !chatData.isGroupChat || isOwnMessage ? undefined : name
+                      }
                       setReply={() => setReplyingTo(message)}
                       replyingTo={
                         message.replyTo &&
@@ -266,8 +277,8 @@ const ChatScreen = (props) => {
             showConfirmButton={true}
             cancelText="Cancel"
             confirmText="Send image"
-            confirmButtonColor={colors.primary}
-            cancelButtonColor={colors.red}
+            confirmButtonColor={chatColors.primary}
+            cancelButtonColor={chatColors.red}
             titleStyle={styles.popupTitleStyle}
             onCancelPressed={() => setTempImageUri("")}
             onConfirmPressed={uploadImage}
@@ -275,7 +286,7 @@ const ChatScreen = (props) => {
             customView={
               <View>
                 {isLoading && (
-                  <ActivityIndicator size="small" color={colors.primary} />
+                  <ActivityIndicator size="small" color={chatColors.primary} />
                 )}
                 {!isLoading && tempImageUri !== "" && (
                   <Image

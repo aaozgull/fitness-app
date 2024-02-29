@@ -1,12 +1,9 @@
 import React from "react";
-import { SafeAreaView, StatusBar, View, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { DashBoardNavigator } from "../navigation/DashBoard.navigator";
+import DashBoardNavigator from "../navigation/DashBoard.navigator";
 import { ChatNavigator } from "../navigation/Chat.navigator";
-//import { SettingsNavigator } from "./settings.navigator";
-import ProfileScreen from "../../features/settings/screens/profile.screen";
 import SettingsScreen from "../../features/settings/screens/SettingsScreen";
 //import CheckOutScreen from "../../features/checkOut/screen/CheckOutScreen";
 
@@ -65,6 +62,6 @@ export const AppNavigator = () => (
       />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
-    <ChatIcon />
+    {/*  <ChatIcon /> */}
   </>
 );

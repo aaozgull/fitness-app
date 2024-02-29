@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { child, getDatabase, off, onValue, ref } from "firebase/database";
+import { child, get, getDatabase, off, onValue, ref } from "firebase/database";
 
 import { getFirebaseApp } from "../../utils/firebaseHelper";
-import { setChatsData } from "../store/chatSlice";
+import { setChatsData } from "../../store/chatSlice";
 import { colors } from "../theme/colors";
 import commonStyles from "../../constants/commonStyles";
 
@@ -12,27 +12,29 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BodyWeightDetail from "../../features/dashBoard/component/linear-chart/bodyWeightDetail";
 import { DashBoardScreen } from "../../features/dashBoard/screens/dashBoard-screen";
 import { GalleryScreen } from "../../features/photoGallery/screen/gallery-screen";
-import { setChatMessages, setStarredMessages } from "../store/messagesSlice";
+import { setChatMessages, setStarredMessages } from "../../store/messagesSlice";
+
+import { setStoredUsers } from "../../store/userSlice";
 
 const DashBoardStack = createNativeStackNavigator();
 
 const StackNavigator = () => {
   return (
     <DashBoardStack.Navigator>
-      <Stack.Group>
+      <DashBoardStack.Group>
         <DashBoardStack.Screen
           name="DashBoardScreen"
           component={DashBoardScreen}
         />
-      </Stack.Group>
+      </DashBoardStack.Group>
 
-      <Stack.Group screenOptions={{ presentation: "containedModal" }}>
+      <DashBoardStack.Group screenOptions={{ presentation: "containedModal" }}>
         <DashBoardStack.Screen
           name="bodyWeightDetail"
           component={BodyWeightDetail}
         />
         <DashBoardStack.Screen name="GalleryScreen" component={GalleryScreen} />
-      </Stack.Group>
+      </DashBoardStack.Group>
     </DashBoardStack.Navigator>
   );
 };
@@ -56,7 +58,7 @@ const DashBoardNavigator = (props) => {
     onValue(userChatsRef, (querySnapshot) => {
       const chatIdsData = querySnapshot.val() || {};
       const chatIds = Object.values(chatIdsData);
-
+      console.log(`chatIds ${chatIds}`);
       const chatsData = {};
       let chatsFoundCount = 0;
 
@@ -91,6 +93,7 @@ const DashBoardNavigator = (props) => {
 
           if (chatsFoundCount >= chatIds.length) {
             dispatch(setChatsData({ chatsData }));
+            console.log(`dispatch(setChatsData) ${chatsData}`);
             setIsLoading(false);
           }
         });
