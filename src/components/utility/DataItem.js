@@ -1,26 +1,45 @@
 import React from "react";
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
-//import colors from "../../constants/colors";
+//import chatColors from "../../constants/chatColors";
 import { colors } from "../../infrastructure/theme/colors";
 import ProfileImage from "./ProfileImage";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+
+const imageSize = 40;
 
 const DataItem = (props) => {
-  const { title, subTitle, image, type, isChecked } = props;
+  const { title, subTitle, image, type, isChecked, icon } = props;
+  const hideImage = props.hideImage && props.hideImage === true;
 
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
       <View style={styles.container}>
-        <ProfileImage uri={image} size={40} />
+        {!icon && !hideImage && <ProfileImage uri={image} size={imageSize} />}
+
+        {icon && (
+          <View style={styles.leftIconContainer}>
+            <AntDesign name={icon} size={20} color={colors.ui.tertiary} />
+          </View>
+        )}
 
         <View style={styles.textContainer}>
-          <Text numberOfLines={1} style={styles.title}>
+          <Text
+            numberOfLines={1}
+            style={{
+              ...styles.title,
+              ...{
+                color:
+                  type === "button" ? colors.ui.tertiary : colors.text.primary,
+              },
+            }}
+          >
             {title}
           </Text>
-
-          <Text numberOfLines={1} style={styles.subTitle}>
-            {subTitle}
-          </Text>
+          {subTitle && (
+            <Text numberOfLines={1} style={styles.subTitle}>
+              {subTitle}
+            </Text>
+          )}
         </View>
 
         {type === "checkbox" && (
@@ -33,6 +52,15 @@ const DataItem = (props) => {
             <Ionicons name="checkmark" size={18} color="white" />
           </View>
         )}
+        {type === "link" && (
+          <View>
+            <Ionicons
+              name="chevron-forward-outline"
+              size={18}
+              color={colors.ui.gray500}
+            />
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -42,7 +70,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     paddingVertical: 7,
-    borderBottomColor: colors.extraLightGrey,
+    borderBottomColor: colors.ui.grey10,
     borderBottomWidth: 1,
     alignItems: "center",
     minHeight: 50,
@@ -58,18 +86,26 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontFamily: "regular",
-    color: colors.grey,
+    color: colors.ui.gray500,
     letterSpacing: 0.3,
   },
   iconContainer: {
     borderWidth: 1,
     borderRadius: 50,
-    borderColor: colors.lightGrey,
+    borderColor: colors.ui.grey300,
     backgroundColor: "white",
   },
   checkedStyle: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.ui.tertiary,
     borderColor: "transparent",
+  },
+  leftIconContainer: {
+    backgroundColor: colors.ui.grey100,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    width: imageSize,
+    height: imageSize,
   },
 });
 

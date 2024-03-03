@@ -12,7 +12,7 @@ import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 import DataItem from "../../../components/utility/DataItem";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
-import chatColors from "../../../constants/chatColors";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const ChatListScreen = (props) => {
   const selectedUser = props.route?.params?.selectedUserId;
@@ -107,6 +107,7 @@ const ChatListScreen = (props) => {
 
           if (isGroupChat) {
             title = chatData.chatName;
+            image = chatData.chatImage;
           } else {
             const otherUserId = chatData.users.find(
               (uid) => uid !== userData.userId
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   newGroupText: {
-    color: chatColors.blue,
+    color: colors.ui.tertiary,
     fontSize: 17,
     marginBottom: 5,
   },

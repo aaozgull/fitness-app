@@ -26,6 +26,7 @@ const messagesSlice = createSlice({
     },
     setStarredMessages: (state, action) => {
       const { starredMessages } = action.payload;
+      console.log(`{ starredMessages } ${starredMessages}`);
       state.starredMessages = { ...starredMessages };
     },
   },

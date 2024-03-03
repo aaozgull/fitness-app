@@ -4,6 +4,8 @@ import ChatSettingsScreen from "../../features/Chat/screen/ChatSettingsScreen";
 import ChatScreen from "../../features/Chat/screen/ChatScreen";
 //import ChatListScreen from "../../features/Chat/screen/ChatListScreen";
 import NewChatScreen from "../../features/Chat/screen/NewChatScreen";
+import ContactScreen from "../../features/Chat/screen/ContactScreen";
+import DataListScreen from "../../features/Chat/screen/DataListScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -33,6 +35,23 @@ export const ChatNavigator = () => {
           component={ChatSettingsScreen}
           options={{
             headerTitle: "Settings",
+            headerBackTitle: "Back",
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={ContactScreen}
+          options={{
+            headerTitle: "Contact info",
+            headerBackTitle: "Back",
+          }}
+        />
+        <Stack.Screen
+          name="DataList"
+          component={DataListScreen}
+          options={{
+            headerTitle: "",
             headerBackTitle: "Back",
           }}
         />

@@ -13,8 +13,8 @@ import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 import PageContainer from "../../../components/utility/PageContainer";
 import { FontAwesome } from "@expo/vector-icons";
 //import colors from "../constants/colors";
-//import { colors } from "../../../infrastructure/theme/colors";
-import chatColors from "../../../constants/chatColors";
+import { colors } from "../../../infrastructure/theme/colors";
+//import chatColors from "../../../constants/chatColors";
 import commonStyles from "../../../constants/commonStyles";
 import { searchUsers } from "../../../utils/actions/userActions";
 import DataItem from "../../../components/utility/DataItem";
@@ -37,8 +37,13 @@ const NewChatScreen = (props) => {
 
   const selectedUsersFlatList = useRef();
 
+  const chatId = props.route.params && props.route.params.chatId;
+  const existingUsers = props.route.params && props.route.params.existingUsers;
   const isGroupChat = props.route.params && props.route.params.isGroupChat;
-  const isGroupChatDisabled = selectedUsers.length === 0 || chatName === "";
+  const isGroupChatDisabled =
+    selectedUsers.length === 0 || (isNewChat && chatName === "");
+
+  const isNewChat = !chatId;
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -54,14 +59,15 @@ const NewChatScreen = (props) => {
           <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             {isGroupChat && (
               <Item
-                title="Create"
+                title={isNewChat ? "Create" : "Add"}
                 disabled={isGroupChatDisabled}
-                color={isGroupChatDisabled ? chatColors.lightGrey : undefined}
+                color={isGroupChatDisabled ? colors.ui.grey300 : undefined}
                 onPress={() => {
-                  console.log(` create navigation chatName ${chatName}`);
-                  props.navigation.navigate("ChatList", {
+                  const screenName = isNewChat ? "ChatList" : "ChatSettings";
+                  props.navigation.navigate(screenName, {
                     selectedUsers,
                     chatName,
+                    chatId,
                   });
                 }}
               />
@@ -117,50 +123,49 @@ const NewChatScreen = (props) => {
 
   return (
     <PageContainer>
-      {isGroupChat && (
-        <>
-          <View style={styles.chatNameContainer}>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.textbox}
-                placeholder="Enter a name for your chat"
-                autoCorrect={false}
-                onChangeText={(text) => setChatName(text)}
-              />
-            </View>
-          </View>
-
-          <View style={styles.selectedUsersContainer}>
-            <FlatList
-              style={styles.selectedUsersList}
-              data={selectedUsers}
-              horizontal={true}
-              keyExtractor={(item) => item}
-              contentContainerStyle={{ alignItems: "center" }}
-              ref={(ref) => (selectedUsersFlatList.current = ref)}
-              onContentSizeChange={() =>
-                selectedUsersFlatList.current.scrollToEnd()
-              }
-              renderItem={(itemData) => {
-                const userId = itemData.item;
-                const userData = storedUsers[userId];
-                return (
-                  <ProfileImage
-                    style={styles.selectedUserStyle}
-                    size={40}
-                    uri={userData.profilePicture}
-                    onPress={() => userPressed(userId)}
-                    showRemoveButton={true}
-                  />
-                );
-              }}
+      {isNewChat && isGroupChat && (
+        <View style={styles.chatNameContainer}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textbox}
+              placeholder="Enter a name for your chat"
+              autoCorrect={false}
+              onChangeText={(text) => setChatName(text)}
             />
           </View>
-        </>
+        </View>
+      )}
+      {isGroupChat && (
+        <View style={styles.selectedUsersContainer}>
+          <FlatList
+            style={styles.selectedUsersList}
+            data={selectedUsers}
+            horizontal={true}
+            keyExtractor={(item) => item}
+            contentContainerStyle={{ alignItems: "center" }}
+            ref={(ref) => (selectedUsersFlatList.current = ref)}
+            onContentSizeChange={() =>
+              selectedUsersFlatList.current.scrollToEnd()
+            }
+            renderItem={(itemData) => {
+              const userId = itemData.item;
+              const userData = storedUsers[userId];
+              return (
+                <ProfileImage
+                  style={styles.selectedUserStyle}
+                  size={40}
+                  uri={userData.profilePicture}
+                  onPress={() => userPressed(userId)}
+                  showRemoveButton={true}
+                />
+              );
+            }}
+          />
+        </View>
       )}
 
       <View style={styles.searchContainer}>
-        <FontAwesome name="search" size={15} color={chatColors.lightGrey} />
+        <FontAwesome name="search" size={15} color={colors.ui.grey300} />
 
         <TextInput
           placeholder="Search"
@@ -171,7 +176,7 @@ const NewChatScreen = (props) => {
 
       {isLoading && (
         <View style={commonStyles.center}>
-          <ActivityIndicator size={"large"} color={chatColors.primary} />
+          <ActivityIndicator size={"large"} color={colors.ui.tertiary} />
         </View>
       )}
 
@@ -181,6 +186,9 @@ const NewChatScreen = (props) => {
           renderItem={(itemData) => {
             const userId = itemData.item;
             const userData = users[userId];
+            if (existingUsers && existingUsers.includes(userId)) {
+              return;
+            }
 
             return (
               <DataItem
@@ -201,7 +209,7 @@ const NewChatScreen = (props) => {
           <FontAwesome
             name="question"
             size={55}
-            color={chatColors.lightGrey}
+            color={colors.ui.grey300}
             style={styles.noResultsIcon}
           />
           <Text style={styles.noResultsText}>No users found!</Text>
@@ -213,7 +221,7 @@ const NewChatScreen = (props) => {
           <FontAwesome
             name="users"
             size={55}
-            color={chatColors.lightGrey}
+            color={colors.ui.grey300}
             style={styles.noResultsIcon}
           />
           <Text style={styles.noResultsText}>
@@ -229,7 +237,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: chatColors.extraLightGrey,
+    backgroundColor: colors.ui.grey100,
     height: 30,
     marginVertical: 8,
     paddingHorizontal: 8,
@@ -245,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   noResultsText: {
-    color: chatColors.textColor,
+    color: colors.text.primary,
     fontFamily: "regular",
     letterSpacing: 0.3,
   },
@@ -256,12 +264,12 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 10,
     paddingVertical: 15,
-    backgroundColor: chatColors.nearlyWhite,
+    backgroundColor: colors.ui.grey10,
     flexDirection: "row",
     borderRadius: 2,
   },
   textbox: {
-    color: chatColors.textColor,
+    color: colors.text.primary,
     width: "100%",
     fontFamily: "regular",
     letterSpacing: 0.3,
