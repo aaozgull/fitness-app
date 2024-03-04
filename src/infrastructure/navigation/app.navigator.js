@@ -4,9 +4,10 @@ import { StyleSheet, Image, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import DashBoardNavigator from "./DashBoard.navigator";
-import { ChatNavigator } from "./Chat.navigator";
+import ChatNavigator from "./Chat.navigator";
 import SettingsScreen from "../../features/settings/screens/SettingsScreen";
-import { CheckoutNavigator } from "./checkout.navigator";
+import CheckoutNavigator from "./checkout.navigator";
+import WorkoutNavigator from "./Workout.navigator";
 
 import { theme } from "../theme";
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
@@ -19,6 +20,7 @@ const TAB_ICON = {
   DashBoard: "fitness", //"md-restaurant",
   Chat: "chatbubble-outline",
   Checkout: "md-cart",
+  Workout: "dumbbell",
   Calendar: "calendar-outline",
   Settings: "md-settings",
 };
@@ -67,6 +69,7 @@ export const AppNavigator = () => (
         }}
       />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="Workout" component={WorkoutNavigator} />
       <Tab.Screen name="Checkout" component={CheckoutNavigator} />
       <Tab.Screen
         name="Chat"

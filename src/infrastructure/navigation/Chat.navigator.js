@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
-export const ChatNavigator = () => {
+const ChatNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Group>
@@ -63,3 +63,5 @@ export const ChatNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+export default ChatNavigator;
