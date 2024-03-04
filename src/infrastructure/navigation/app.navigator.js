@@ -1,14 +1,16 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { StyleSheet, Image, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import DashBoardNavigator from "../navigation/DashBoard.navigator";
-import { ChatNavigator } from "../navigation/Chat.navigator";
+import DashBoardNavigator from "./DashBoard.navigator";
+import { ChatNavigator } from "./Chat.navigator";
 import SettingsScreen from "../../features/settings/screens/SettingsScreen";
-//import CheckOutScreen from "../../features/checkOut/screen/CheckOutScreen";
+import { CheckoutNavigator } from "./checkout.navigator";
 
 import { theme } from "../theme";
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
+
 import ChatIcon from "../../features/Chat/screen/ChatIcon";
 
 const Tab = createBottomTabNavigator();
@@ -38,11 +40,17 @@ export const AppNavigator = () => (
         tabBarInactiveTintColor: theme.colors.ui.gray500,
         headerTitle: "",
         headerShadowVisible: false,
-        /*  headerShown: false, */
-        tabBarStyle: {
-          fontFamily: "thinItalic",
+        tabBarHideOnKeyboard: true,
+        tabBarLabelStyle: {
+          fontFamily: "mediumItalic",
           letterSpacing: 0.3,
           fontSize: 16,
+          paddingBottom: 10,
+        },
+        //headerShown: false,
+
+        tabBarStyle: {
+          height: 70,
         },
         tabBarIcon: ({ size, color }) => {
           const iconName = TAB_ICON[route.name];
@@ -50,9 +58,16 @@ export const AppNavigator = () => (
         },
       })}
     >
-      <Tab.Screen name="DashBoard" component={DashBoardNavigator} />
+      <Tab.Screen
+        name="DashBoard"
+        component={DashBoardNavigator}
+        options={{
+          headerShown: false,
+          //headerTitle: "",
+        }}
+      />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
-      {/*  <Tab.Screen name="Checkout" component={CheckOutScreen} /> */}
+      <Tab.Screen name="Checkout" component={CheckoutNavigator} />
       <Tab.Screen
         name="Chat"
         component={ChatNavigator}
@@ -65,3 +80,10 @@ export const AppNavigator = () => (
     {/*  <ChatIcon /> */}
   </>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.bg.primary,
+  },
+});
