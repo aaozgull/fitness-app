@@ -52,7 +52,7 @@ const ContactScreen = (props) => {
   }, [props.navigation, isLoading]);
 
   return (
-    <PageContainer>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       <View style={styles.topContainer}>
         <ProfileImage
           uri={currentUser.profilePicture}

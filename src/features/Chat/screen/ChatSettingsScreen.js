@@ -110,7 +110,7 @@ const ChatSettingsScreen = (props) => {
 
   if (!chatData.users) return null;
   return (
-    <PageContainer>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       <PageTitle text="Chat Settings" />
 
       <ScrollView contentContainerStyle={styles.scrollView}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,8 +15,9 @@ import PageTitle from "../../../components/utility/PageTitle";
 import { getFormattedDate } from "../../../utils/date";
 import TransparentMenu from "./TransparentMenu";
 import PageContainer from "../../../components/utility/PageContainer";
+import HeaderLogo from "../../../components/utility/HeaderLogo";
 
-const CalendarScreen = () => {
+const CalendarScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
@@ -64,6 +65,19 @@ const CalendarScreen = () => {
     });
   }
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <HeaderLogo
+          style={{
+            marginLeft: 150,
+            marginTop: StatusBar.currentHeight,
+          }}
+        />
+      ),
+    });
+  }, []);
+
   return (
     <PageContainer style={styles.container}>
       {/*  <View style={styles.calendarContainer}> */}
@@ -89,9 +103,9 @@ const CalendarScreen = () => {
         keyExtractor={(item) => item}
         initialScrollIndex={startIndex}
         getItemLayout={(data, index) => ({
-          length: theme.spaceInNumber[3] + theme.spaceInNumber[2] + 50, // Adjust this based on your item height
+          length: theme.spaceInNumber[3] + theme.spaceInNumber[1] + 50, // Adjust this based on your item height
           offset:
-            (theme.spaceInNumber[3] + theme.spaceInNumber[2] + 50) * index,
+            (theme.spaceInNumber[3] + theme.spaceInNumber[1] + 50) * index,
           index,
         })}
       />
@@ -108,7 +122,7 @@ const CalendarScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight + 16,
+    marginTop: 10,
     backgroundColor: theme.colors.ui.primary,
   },
 

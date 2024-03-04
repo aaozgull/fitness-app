@@ -122,7 +122,7 @@ const NewChatScreen = (props) => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       {isNewChat && isGroupChat && (
         <View style={styles.chatNameContainer}>
           <View style={styles.inputContainer}>

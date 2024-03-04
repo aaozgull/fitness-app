@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, Text, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 //import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { PhotoInfoCard } from "../component/photo-info-card.component";
 import { theme } from "../../../infrastructure/theme/index";
 import Heading from "../../../components/utility/Heading";
+import HeaderLogo from "../../../components/utility/HeaderLogo";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 
 const photos = [
@@ -104,27 +105,46 @@ const photos = [
 export const GalleryScreen = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <CustomHeaderButton
-          title="create-outline"
-          iconName="create-outline" // You can specify the correct icon name
-          onPress={() => navigation.goBack()}
-        />
-      ),
-      headerTitle: "Body Photos",
+      headerTitle: () => <HeaderLogo style={{ marginRight: 150 }} />,
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+              title="Close"
+              iconName="camera-sharp"
+              size={34}
+              onPress={() => props.navigation.goBack()}
+            />
+          </HeaderButtons>
+        );
+      },
     });
-    // console.log(`useEffect ${{ ...navigation }}`);
   }, []);
   return (
     <View style={styles.container}>
-      <Heading title="Body Photos" style={styles.headingContainer} />
-      <FlatList
-        data={photos}
-        renderItem={({ item }) => {
-          return <PhotoInfoCard photo={item} />;
-        }}
-        keyExtractor={(item) => item.id}
+      <Heading title="My Photos" style={styles.headingContainer} />
+      <Text style={styles.title}>
+        Track your progress here, take regular snaps ans mark each photo with
+        your current weight.
+      </Text>
+
+      <Heading
+        title="Progress Photos"
+        style={{ marginBottom: 20 }}
+        dateShow={false}
       />
+      {photos.length === 0 && (
+        <Text style={styles.title}>No progress photos have been uploaded</Text>
+      )}
+      {photos.length > 0 && (
+        <FlatList
+          data={photos}
+          renderItem={({ item }) => {
+            return <PhotoInfoCard photo={item} />;
+          }}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 };
@@ -140,8 +160,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
-    padding: 16,
+    // padding: 16,
     borderBottomWidth: 2,
     borderBottomColor: "#cccccc",
+  },
+  title: {
+    margin: 10,
+    fontFamily: "medium",
+    fontSize: 16,
+    letterSpacing: 0.3,
   },
 });

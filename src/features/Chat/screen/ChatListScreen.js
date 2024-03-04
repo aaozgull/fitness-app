@@ -81,7 +81,7 @@ const ChatListScreen = (props) => {
   }, [props.route?.params]);
 
   return (
-    <PageContainer>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       <PageTitle text="Chats" />
 
       <View>

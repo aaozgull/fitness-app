@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   FlatList,
   Text,
@@ -12,8 +13,15 @@ import { LineChart } from "react-native-chart-kit";
 import { getFormattedDate } from "../../../../utils/date";
 import { theme } from "../../../../infrastructure/theme/index";
 import Heading from "../../../../components/utility/Heading";
+import HeaderLogo from "../../../../components/utility/HeaderLogo";
 
 function BodyWeightDetail(props) {
+  //const navigation = useNavigation();
+  useEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: () => <HeaderLogo style={{ marginRight: 150 }} />,
+    });
+  }, []);
   return (
     /*  <Modal visible={props.visible} animationType="slide" style={{ flex: 1 }}> */
     <View style={styles.container}>
@@ -59,7 +67,7 @@ function BodyWeightDetail(props) {
           bezier
           style={{
             marginVertical: 8,
-            marginRight: 8,
+            // marginRight: 8,
 
             borderRadius: 16,
           }}

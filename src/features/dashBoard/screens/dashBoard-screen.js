@@ -18,19 +18,12 @@ import PhotoCard from "../../photoGallery/screen/photo-card";
 import PageTitle from "../../../components/utility/PageTitle";
 import PageContainer from "../../../components/utility/PageContainer";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
-import { colors } from "../../../infrastructure/theme/colors";
+import HeaderLogo from "../../../components/utility/HeaderLogo";
 
 export const DashBoardScreen = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: () => {
-        return (
-          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title="Close" onPress={() => navigation.goBack()} />
-          </HeaderButtons>
-        );
-      },
-      headerTitle: "DashBoard",
+      headerTitle: () => <HeaderLogo />,
     });
   }, []);
 

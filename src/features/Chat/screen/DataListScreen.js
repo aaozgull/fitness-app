@@ -16,7 +16,7 @@ const DataListScreen = (props) => {
   }, [title]);
 
   return (
-    <PageContainer>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       <FlatList
         data={data}
         keyExtractor={(item) => item.messageId || item}

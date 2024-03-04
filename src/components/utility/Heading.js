@@ -3,10 +3,13 @@ import { theme } from "../../infrastructure/theme/index";
 import { getFormattedDate } from "../../utils/date";
 
 export default Heading = (props) => {
+  console.log(props.dateShow);
   return (
     <View style={{ ...styles.container, ...props.style }}>
       <Text style={{ ...styles.text, ...props.textStyle }}>{props.title}</Text>
-      <Text style={styles.date}>{getFormattedDate(new Date())}</Text>
+      {props.dateShow === undefined && (
+        <Text style={styles.date}>{getFormattedDate(new Date())}</Text>
+      )}
     </View>
   );
 };

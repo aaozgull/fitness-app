@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
+import { View } from "react-native";
 import Input from "../../../components/utility/Input";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { Feather } from "@expo/vector-icons";
@@ -62,7 +63,13 @@ const SignInForm = (props) => {
   }, [dispatch, formState]);
 
   return (
-    <>
+    <View
+      style={{
+        // flex: 1,
+        //  backgroundColor: colors.ui.accent,
+        paddingHorizontal: 20,
+      }}
+    >
       <Input
         id="email"
         label="Email"
@@ -101,7 +108,7 @@ const SignInForm = (props) => {
           disabled={!formState.formIsValid}
         />
       )}
-    </>
+    </View>
   );
 };
 

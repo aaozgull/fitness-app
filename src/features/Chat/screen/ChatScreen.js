@@ -16,7 +16,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 
-import backgroundImage from "../../../../assets/images/droplet.jpeg";
+import backgroundImage from "../../../../assets/images/backgroud.jpg";
 //import colors from "../constants/colors";
 import { colors } from "../../../infrastructure/theme/colors";
 //import chatColors from "../../../constants/chatColors";
@@ -96,7 +96,7 @@ const ChatScreen = (props) => {
             {chatId && (
               <Item
                 title="Chat settings"
-                iconName="settings-outline"
+                iconName="settings"
                 onPress={() =>
                   chatData.isGroupChat
                     ? props.navigation.navigate("ChatSettings", { chatId })
@@ -200,7 +200,9 @@ const ChatScreen = (props) => {
           source={backgroundImage}
           style={styles.backgroundImage}
         >
-          <PageContainer style={{ backgroundColor: "transparent" }}>
+          <PageContainer
+            style={{ backgroundColor: "transparent", paddingHorizontal: 20 }}
+          >
             {!chatId && (
               <Bubble text="This is a new chat. Say hi!" type="system" />
             )}

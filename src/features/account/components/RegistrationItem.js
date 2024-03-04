@@ -42,7 +42,7 @@ const RegistrationItem = ({
 
 const styles = StyleSheet.create({
   ItemContainer: {
-    paddingVertical: 28,
+    paddingVertical: 18,
     paddingHorizontal: 8,
     flexDirection: "row",
     justifyContent: "space-between",

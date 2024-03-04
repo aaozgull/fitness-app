@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    marginTop: 100,
-    marginBottom: 50,
+    //marginTop: 100,
+    //marginBottom: 50,
     width: "50%",
   },
   keyboardAvoidingView: {
