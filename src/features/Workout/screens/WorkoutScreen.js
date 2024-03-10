@@ -1,91 +1,169 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
-  FlatList,
-  Pressable,
-  TouchableOpacity,
+  Text,
+  Image,
   StyleSheet,
+  TouchableOpacity,
+  FlatList,
   StatusBar,
-  SafeAreaView,
 } from "react-native";
+///import { ActivityIndicator, Alert } from "react-native";
 
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { theme } from "../../../infrastructure/theme";
+import PageTitle from "../../../components/utility/PageTitle";
+import PageContainer from "../../../components/utility/PageContainer";
+import HeaderLogo from "../../../components/utility/HeaderLogo";
+import ImageSlider from "../../../components/workout/ImageSlider";
+import { bodyParts } from "../../../constants/index";
+import DataItem from "../../../components/utility/DataItem";
+import { colors } from "../../../infrastructure/theme/colors";
 
-import { WorkoutInfoCard } from "../components/WorkoutInfoCard";
-
-//import { Search } from "../components/search.component";
-import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import { FavouritesContext } from "../../../services/favourites/favourites.context";
-import { FavouritesBar } from "../../../components/favourites/FavouritesBar";
-import { FadeInView } from "../../../components/animations/fade.animation";
+//might be change this file name. as it is only for order workoutPlan
 
 const WorkoutScreen = ({ navigation }) => {
-  const { isLoading, error, workouts } = useContext(RestaurantsContext);
-  const { favourites } = useContext(FavouritesContext);
-  const [isToggled, setIsToggled] = useState(false);
-  console.log(error);
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      {isLoading && (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator
-            style={{ marginLeft: -25 }}
-            size={50}
-            animating={true}
-            color={MD2Colors.blue300}
-          />
-        </View>
-      )}
+  const [isLoading, setIsLoading] = useState(false);
+  // console.log(bodyParts);
+  const workoutPlanHandler = () => {
+    try {
+      setIsLoading(true);
+      dispatch(
+        addToCart(
+          { item: "workout category", price: 1299 },
+          { workout: "workout object" }
+        )
+      ); //  this need to work
+      navigation.navigate("checkoutScreen");
+    } catch (error) {
+      //setError(error.message);
+      setIsLoading(false);
+    }
+  };
+  const handleItemPress = (item) => {
+    /// setSelectedItem(item);
+    //setMenuVisible(true);
+    navigation.navigate("Exercises", { item: item });
+  };
 
-      {/*   <Search
-        isFavouritesToggled={isToggled}
-        onFavouritesToggle={() => setIsToggled(!isToggled)}
-      />
-      {isToggled && (
-        <FavouritesBar
-          favourites={favourites}
-          onNavigate={navigation.navigate}
+  const handleCloseMenu = () => {
+    setMenuVisible(false);
+  };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <HeaderLogo
+          style={
+            {
+              // marginLeft: 50,
+              // marginTop: StatusBar.currentHeight,
+            }
+          }
         />
-      )} */}
-      <FlatList
-        style={{ padding: 16 }}
-        data={workouts}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("WorkoutDetail", {
-                  workout: item,
-                })
-              }
-            >
-              {/*  <Spacer position="bottom" size="large"> */}
-              <View style={styles.spaceBottom}>
-                <FadeInView>
-                  <WorkoutInfoCard workout={item} />
-                </FadeInView>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-        keyExtractor={(item) => item.name}
+      ),
+    });
+  }, []);
+
+  return (
+    <PageContainer style={styles.container}>
+      {/*  <View style={styles.calendarContainer}>*/}
+      <PageTitle
+        title="Workouts"
+        style={styles.pageTitle}
+        textStyle={styles.pageTitleColor}
       />
-    </SafeAreaView>
+      {/*  <View style={styles.divider}></View> */}
+      <View style={styles.ImageContainer}>
+        <ImageSlider />
+      </View>
+      <View style={styles.bodyPartsContainer}>
+        <PageTitle text="Boby Part" textStyle={{ color: "red" }} />
+        <FlatList
+          data={bodyParts}
+          renderItem={({ item }) => {
+            console.log(item.image);
+            return (
+              <DataItem
+                type={"link"}
+                size={80}
+                title={item.name}
+                image={item.image}
+                onPress={() => handleItemPress(item)}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => item.name + index}
+        />
+      </View>
+    </PageContainer>
   );
 };
-export default WorkoutScreen;
+
 const styles = StyleSheet.create({
-  loadingContainer: {
-    position: absolute,
-    top: "50%",
-    left: "50%",
-  },
-  safeArea: {
+  container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
-    backgroundColor: colors.bg.primary,
+    //marginTop: 10,
+    backgroundColor: theme.colors.ui.primary,
   },
-  spaceBottom: {
-    marginBottom: 16,
+
+  bodyPartsContainer: {
+    flex: 1,
+    marginHorizontal: 20,
+    // backgroundColor: "green",
+    //marginTop: 20,
+  },
+  ImageContainer: {
+    flex: 1,
+    // marginHorizontal: 20,
+    backgroundColor: colors.ui.quaternary,
+    //marginTop: 20,
+  },
+  pageTitle: {
+    backgroundColor: theme.colors.ui.quaternary,
+    padding: 20,
+  },
+  pageTitleColor: {
+    color: theme.colors.text.fiftary,
+  },
+  divider: {
+    backgroundColor: theme.colors.ui.accent2,
+    padding: 8,
+    borderBottomEndRadius: 8,
+    borderBottomStartRadius: 8,
+    elevation: 3,
+    shadowColor: theme.colors.ui.quaternary, // "#39324a", // GlobalStyles.colors.gray500,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+  },
+  exerciseContainer: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 10,
+    gap: 5,
+    marginHorizontal: 2,
+
+    // shadow
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  },
+  exerciseName: {
+    fontSize: 20,
+    fontWeight: "500",
+  },
+  exerciseSubtitle: {
+    color: "dimgray",
+  },
+  subValue: {
+    textTransform: "capitalize",
   },
 });
+
+export default WorkoutScreen;

@@ -2,12 +2,14 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Image, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import DashBoardNavigator from "./DashBoard.navigator";
 import ChatNavigator from "./Chat.navigator";
 import SettingsScreen from "../../features/settings/screens/SettingsScreen";
-import CheckoutNavigator from "./checkout.navigator";
+import CheckoutNavigator from "./Checkout.navigator";
 import WorkoutNavigator from "./Workout.navigator";
+//import Workout from "../../features/Workout/screens/WorkoutScreen";
 
 import { theme } from "../theme";
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
@@ -56,7 +58,14 @@ export const AppNavigator = () => (
         },
         tabBarIcon: ({ size, color }) => {
           const iconName = TAB_ICON[route.name];
-          return <Ionicons name={iconName} size={size} color={color} />;
+          let iconValue = (
+            <Ionicons name={iconName} size={size} color={color} />
+          );
+          if (iconName === "dumbbell")
+            iconValue = (
+              <FontAwesome5 name="dumbbell" size={size} color={color} />
+            );
+          return iconValue;
         },
       })}
     >
@@ -69,7 +78,14 @@ export const AppNavigator = () => (
         }}
       />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
-      <Tab.Screen name="Workout" component={WorkoutNavigator} />
+      <Tab.Screen
+        name="Workout"
+        component={WorkoutNavigator}
+        options={{
+          headerShown: false,
+          //headerTitle: "",
+        }}
+      />
       <Tab.Screen name="Checkout" component={CheckoutNavigator} />
       <Tab.Screen
         name="Chat"

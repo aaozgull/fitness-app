@@ -20,12 +20,19 @@ import { updateSignedInUserData } from "../../utils/actions/authActions";
 import { useDispatch } from "react-redux";
 import { updateLoggedInUserData } from "../../store/authSlice";
 import { updateChatData } from "../../utils/actions/chatActions";
+import { isNumber } from "validate.js";
 
 const ProfileImage = (props) => {
   const dispatch = useDispatch();
 
-  const source = props.uri ? { uri: props.uri } : userImage;
+  let source = userImage;
+  if (props.uri && isNumber(props.uri)) {
+    source = props.uri;
+  } else {
+    source = props.uri ? { uri: props.uri } : userImage;
+  }
 
+  console.log(source);
   const [image, setImage] = useState(source);
   const [isLoading, setIsLoading] = useState(false);
 
