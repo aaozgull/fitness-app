@@ -84,7 +84,7 @@ const WorkoutScreen = ({ navigation }) => {
             console.log(item.image);
             return (
               <DataItem
-                type={"link"}
+                type={"workout"}
                 size={80}
                 title={item.name}
                 image={item.image}

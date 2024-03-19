@@ -215,7 +215,7 @@ const ChatSettingsScreen = (props) => {
       {
         <SubmitButton
           title="Leave chat"
-          color={colors.ui.error500}
+          color={colors.ui.accent}
           onPress={() => leaveChat()}
           style={{ marginBottom: 20 }}
         />

@@ -13,6 +13,7 @@ import DataItem from "../../../components/utility/DataItem";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
 import { colors } from "../../../infrastructure/theme/colors";
+import HeaderLogo from "../../../components/utility/HeaderLogo";
 
 const ChatListScreen = (props) => {
   const selectedUser = props.route?.params?.selectedUserId;
@@ -41,6 +42,7 @@ const ChatListScreen = (props) => {
           </HeaderButtons>
         );
       },
+      headerTitle: () => <HeaderLogo />,
     });
   }, []);
 

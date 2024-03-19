@@ -90,7 +90,7 @@ const ProfileImage = (props) => {
       ) : (
         <Image
           style={{
-            ...styles.image,
+            ...(props.size === "60%" ? styles.fullImage : styles.image),
             ...{ width: props.size, height: props.size },
           }}
           source={image}
@@ -115,6 +115,10 @@ const ProfileImage = (props) => {
 const styles = StyleSheet.create({
   image: {
     borderRadius: 50,
+    borderColor: colors.grey,
+    borderWidth: 1,
+  },
+  fullImage: {
     borderColor: colors.grey,
     borderWidth: 1,
   },

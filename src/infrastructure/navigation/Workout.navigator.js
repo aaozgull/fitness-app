@@ -4,7 +4,7 @@ import ExerciseDetailScreen from "../../features/Workout/screens/ExerciseDetailS
 
 import WorkoutScreen from "../../features/Workout/screens/WorkoutScreen";
 import ExercisesScreen from "../../features/Workout/screens/ExercisesScreen";
-import ChatScreen from "../../features/Chat/screen/ChatScreen";
+import RestScreen from "../../features/Workout/screens/RestScreen";
 
 //import TimerScreen from "../../../";
 
@@ -15,7 +15,7 @@ const WorkoutNavigator = () => {
     <WorkoutStack.Navigator headerMode="none">
       <WorkoutStack.Screen name="WorkoutScreen" component={WorkoutScreen} />
       <WorkoutStack.Screen name="Exercises" component={ExercisesScreen} />
-      <WorkoutStack.Screen name="Chat" component={ChatScreen} />
+      <WorkoutStack.Screen name="Rest" component={RestScreen} />
 
       <WorkoutStack.Screen
         name="ExerciseDetail"

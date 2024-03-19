@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { colors } from "../../infrastructure/theme/colors";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const SubmitButton = (props) => {
   const enabledBgColor = props.color || colors.ui.accent2;
@@ -17,9 +18,17 @@ const SubmitButton = (props) => {
         ...{ backgroundColor: bgColor },
       }}
     >
-      <Text style={{ ...styles.text, ...{ color: textColor } }}>
-        {props.title}
-      </Text>
+      <View style={props.icon && styles.IconContainer}>
+        {props.dollarIcon && (
+          <Feather name="dollar-sign" size={24} color={textColor} />
+        )}
+        {props.CartIcon && (
+          <MaterialCommunityIcons name="cart-off" size={24} color={textColor} />
+        )}
+        <Text style={{ ...styles.text, ...{ color: textColor } }}>
+          {props.title}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -31,6 +40,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
+  },
+  IconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   text: {
     // color: "white",

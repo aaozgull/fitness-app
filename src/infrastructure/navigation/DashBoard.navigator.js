@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BodyWeightDetail from "../../features/dashBoard/component/linear-chart/bodyWeightDetail";
 import { DashBoardScreen } from "../../features/dashBoard/screens/dashBoard-screen";
 import { GalleryScreen } from "../../features/photoGallery/screen/gallery-screen";
+import LogProgressScreen from "../../features/photoGallery/screen/LogProgressScreen";
 import { setChatMessages, setStarredMessages } from "../../store/messagesSlice";
 
 import { setStoredUsers } from "../../store/userSlice";
@@ -25,6 +26,10 @@ const StackNavigator = () => {
         <DashBoardStack.Screen
           name="DashBoardScreen"
           component={DashBoardScreen}
+        />
+        <DashBoardStack.Screen
+          name="LogProgressScreen"
+          component={LogProgressScreen}
         />
       </DashBoardStack.Group>
 

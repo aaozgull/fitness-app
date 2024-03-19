@@ -8,37 +8,165 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { List, Divider } from "react-native-paper";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useSelector } from "react-redux";
+import { Audio } from "expo-av";
 import Anticons from "react-native-vector-icons/AntDesign";
+import { useDispatch } from "react-redux";
 import { colors } from "../../../infrastructure/theme/colors";
 //import { ExerciseInfoCard } from "../components/ExerciseInfoCard";
 import SubmitButton from "../../../components/utility/SubmitButton";
-import { addToCart } from "../../../store/cartSlice";
+import { addToCart, selectCart } from "../../../store/cartSlice";
+import { HeaderButtons } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
+const countDownAudio = require("../../../../assets/audio/countdownaudio.mp3");
 
 const ExerciseDetailScreen = ({ navigation, route }) => {
   const { exercise } = route.params;
   const [instructionExpanded, setInstructionExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const cartData = useSelector((state) => state.cart.cartData);
+  //////// timer////
+
+  const initialTime = 5;
+  const minTime = 5;
+
+  const [gifUrl, setGifUrl] = useState(null);
+  const [time, setTime] = useState(initialTime);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  const [countDownSound, setCountDownSound] = useState();
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(countDownAudio);
+    setCountDownSound(sound);
+    sound.setOnPlaybackStatusUpdate((status) => {
+      if (status.didJustFinish) {
+        setIsAudioPlaying(false);
+      }
+    });
+    await sound.playAsync();
+    setIsAudioPlaying(true);
+  }
+
+  /*  const fetchGifUrl = async () => {
+    try {
+      const storageRef = ref(storage, `AllExercises/${item.gif_url}`);
+      const url = await getDownloadURL(storageRef);
+      setGifUrl(url);
+    } catch (error) {
+      console.log("error = ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGifUrl();
+  }, []); */
+
+  const handleDecreaseTime = () => {
+    if (!isRunning && time > minTime) {
+      setTime((prevTime) => prevTime - 10);
+    }
+  };
+  const handleIncreaseTime = () => {
+    if (!isRunning) {
+      setTime((prevTime) => prevTime + 10);
+    }
+  };
+
+  const handleReset = () => {
+    setIsRunning(false);
+    setIsFirstTime(true);
+    setTime(initialTime);
+
+    if (countDownSound && isAudioPlaying) {
+      countDownSound.stopAsync();
+      setIsAudioPlaying(false);
+    }
+  };
+
+  useEffect(() => {
+    let countDownInterval;
+    // console.log("inside time decrease useeffect ");
+    if (isRunning && time > 0) {
+      countDownInterval = setInterval(() => {
+        setTime((prevTime) => prevTime - 1);
+
+        if (time === 4) {
+          // console.log("time is 4");
+          playSound();
+        }
+      }, 1000);
+    } else {
+      setIsRunning(false);
+      clearInterval(countDownInterval);
+    }
+
+    return () => {
+      clearInterval(countDownInterval);
+    };
+  }, [isRunning, time]);
+
+  const handleStart = () => {
+    if (!isRunning && isFirstTime) {
+      setIsFirstTime(false);
+      setIsRunning(true);
+    } else {
+      setIsRunning(true);
+    }
+  };
+
+  const handlePause = () => {
+    if (isRunning) {
+      setIsRunning(false);
+    }
+  };
+
+  ////////end timer//////////////
+
   const workoutPlanHandler = () => {
     try {
       setIsLoading(true);
+      console.log("workoutPlanHandler");
       dispatch(
-        addToCart(
-          { item: "workout category", price: 1299 },
-          { workout: "workout object" }
-        )
+        addToCart({ item: "workout", price: 1299 }, { exercise: exercise })
       ); //  this need to work
-      navigation.navigate("checkoutScreen");
+
+      // Now you can access cartData.cartData and cartData.workout
+      console.log("Current Cart Data:", cartData);
+
+      navigation.navigate("Checkout");
     } catch (error) {
-      //setError(error.message);
+      console.log("Current Cart error:", error.message);
       setIsLoading(false);
     }
   };
+  ///////add rest screen/////
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+              //title="Chat settings"
+              iconName="glass-water"
+              iconType="FontAwesome6"
+              onPress={() => navigation.navigate("Rest")}
+            />
+          </HeaderButtons>
+        );
+      },
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -104,6 +232,92 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
             </View>
           ))}
         </List.Accordion>
+        <View
+          style={{
+            marginTop: 16,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingHorizontal: 8,
+          }}
+        >
+          <TouchableOpacity
+            onPress={handleDecreaseTime}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: 56,
+              height: 56,
+              backgroundColor: "red",
+              borderRadius: 28,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 24 }}>-</Text>
+          </TouchableOpacity>
+          <Text
+            style={{ fontSize: 20, fontWeight: "bold", marginHorizontal: 16 }}
+          >
+            {time} secs
+          </Text>
+          <TouchableOpacity
+            onPress={handleIncreaseTime}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: 56,
+              height: 56,
+              backgroundColor: "green",
+              borderRadius: 28,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 20 }}>+</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            marginTop: 16,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: 40,
+            paddingHorizontal: 8,
+          }}
+        >
+          <TouchableOpacity
+            onPress={isRunning ? handlePause : handleStart}
+            disabled={time === 0}
+          >
+            <Text
+              style={{
+                color: "blue",
+                fontSize: 20,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderWidth: 1,
+                borderRadius: 8,
+                borderColor: "blue",
+                opacity: time === 0 ? 0.5 : 1,
+              }}
+            >
+              {isRunning ? "PAUSE" : "START"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleReset}>
+            <Text
+              style={{
+                color: "gray",
+                fontSize: 20,
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderWidth: 1,
+                borderRadius: 8,
+                borderColor: "gray",
+              }}
+            >
+              RESET
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={{ marginTop: 16 }}>
           {isLoading ? (
@@ -116,7 +330,8 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
             //add icone cash-usd
             <SubmitButton
               title="order workout plan"
-              onPress={workoutPlanHandler}
+              dollarIcon={true}
+              onPress={() => workoutPlanHandler()}
               style={{ marginTop: 20 }}
             />
           )}

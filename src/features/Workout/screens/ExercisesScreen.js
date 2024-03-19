@@ -126,8 +126,8 @@ const ExercisesScreen = ({ navigation, route }) => {
 export default ExercisesScreen;
 
 const ExerciseInfoCard = ({ exercise }) => {
-  console.log("infoCard " + exercise.name);
-  console.log("InfoCard " + exercise.gifUrl);
+  //console.log("infoCard " + exercise.name);
+  //console.log("InfoCard " + exercise.gifUrl);
 
   return (
     <View style={styles.container}>

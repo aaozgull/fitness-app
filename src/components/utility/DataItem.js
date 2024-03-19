@@ -5,12 +5,14 @@ import { colors } from "../../infrastructure/theme/colors";
 import ProfileImage from "./ProfileImage";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 
-const imageSize = 40;
+let imageSize = 40;
 
 const DataItem = (props) => {
   const { title, subTitle, image, type, isChecked, icon } = props;
   const hideImage = props.hideImage && props.hideImage === true;
-
+  if (type === "workout") {
+    imageSize = 80;
+  }
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
       <View style={styles.container}>
@@ -57,6 +59,15 @@ const DataItem = (props) => {
             <Ionicons
               name="chevron-forward-outline"
               size={18}
+              color={colors.ui.gray500}
+            />
+          </View>
+        )}
+        {type === "workout" && (
+          <View>
+            <Ionicons
+              name="chevron-forward-outline"
+              size={24}
               color={colors.ui.gray500}
             />
           </View>

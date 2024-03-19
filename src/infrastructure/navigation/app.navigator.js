@@ -91,7 +91,8 @@ export const AppNavigator = () => (
         name="Chat"
         component={ChatNavigator}
         options={{
-          tabBarLabel: "Chats",
+          // tabBarLabel: "Chats",
+          headerShown: false,
         }}
       />
       <Tab.Screen name="Settings" component={SettingsScreen} />
