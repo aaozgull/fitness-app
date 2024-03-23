@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const TimerScreen = () => {
   const [roundDuration, setRoundDuration] = useState(3);
@@ -163,22 +163,26 @@ const TimerScreen = () => {
     </View>
   );
 };
-
+export default TimerScreen;
 const styles = StyleSheet.create({
   container: {
     paddingTop: "30%",
     alignItems: "center",
     minHeight: "100%",
-    backgroundColor: "#E5E7EB",
+    backgroundColor: colors.ui.quaternary,
   },
   title: {
-    fontSize: 24,
+    fontSize: 34,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
     marginBottom: 12,
-    color: "#000",
+    color: colors.text.tertiary,
   },
   timer: {
     fontSize: 24,
-    color: "#000",
+    fontFamily: "bold",
+    letterSpacing: 0.3,
+    color: colors.text.tertiary,
   },
   buttonsContainer: {
     flexDirection: "row",
@@ -191,24 +195,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   buttonText: {
-    fontSize: 16,
-    color: "#fff",
+    fontSize: 20,
+    color: colors.text.fiftary,
   },
   inputContainer: {
     marginTop: 32,
   },
   inputLabel: {
-    fontSize: 16,
-    color: "#333",
+    fontSize: 18,
+    color: colors.text.tertiary,
     marginBottom: 4,
   },
   input: {
-    fontSize: 20,
-    borderWidth: 1,
-    borderColor: "#ddd",
+    fontSize: 24,
+    borderWidth: 2,
+    fontFamily: "bold",
+    letterSpacing: 0.3,
+    borderColor: colors.text.tertiary,
     borderRadius: 8,
-    paddingHorizontal: 12,
-    marginBottom: 8,
-    width: 200,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+    width: 250,
+    color: colors.text.secondary,
   },
 });

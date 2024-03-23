@@ -39,7 +39,7 @@ const CalculationScreen = () => {
   };
 
   const getBmiMeaning = () => {
-    console.log(`getBMI ${bmi}`);
+    // console.log(`getBMI ${bmi}`);
     if (bmi !== null) {
       if (bmi < 18.5) {
         return {
