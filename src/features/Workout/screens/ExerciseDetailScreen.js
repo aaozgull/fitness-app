@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StatusBar,
   Image,
@@ -23,8 +23,9 @@ import { colors } from "../../../infrastructure/theme/colors";
 //import { ExerciseInfoCard } from "../components/ExerciseInfoCard";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { addToCart, selectCart } from "../../../store/cartSlice";
-import { HeaderButtons } from "react-navigation-header-buttons";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
+import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
 const countDownAudio = require("../../../../assets/audio/countdownaudio.mp3");
 
 const ExerciseDetailScreen = ({ navigation, route }) => {
@@ -157,8 +158,10 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
           <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
             <Item
               //title="Chat settings"
-              iconName="glass-water"
-              iconType="FontAwesome6"
+              iconName="water"
+              //iconType="FontAwesome6"
+              color={colors.ui.accent2}
+              size={34}
               onPress={() => navigation.navigate("Rest")}
             />
           </HeaderButtons>
@@ -232,71 +235,40 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
             </View>
           ))}
         </List.Accordion>
-        <View
-          style={{
-            marginTop: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingHorizontal: 8,
-          }}
-        >
+        <View style={styles.controllerButtonsContainer}>
           <TouchableOpacity
             onPress={handleDecreaseTime}
             style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: 56,
-              height: 56,
-              backgroundColor: "red",
-              borderRadius: 28,
+              ...styles.timeControllerButton,
+              backgroundColor: colors.ui.accent,
             }}
           >
-            <Text style={{ color: "white", fontSize: 24 }}>-</Text>
+            <Text style={styles.signs}>-</Text>
           </TouchableOpacity>
-          <Text
-            style={{ fontSize: 20, fontWeight: "bold", marginHorizontal: 16 }}
-          >
-            {time} secs
-          </Text>
+          <Text style={styles.timeText}>{time} secs</Text>
           <TouchableOpacity
             onPress={handleIncreaseTime}
             style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: 56,
-              height: 56,
-              backgroundColor: "green",
-              borderRadius: 28,
+              ...styles.timeControllerButton,
+              backgroundColor: colors.ui.accent2,
             }}
           >
-            <Text style={{ color: "white", fontSize: 20 }}>+</Text>
+            <Text style={styles.signs}>+</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            marginTop: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 40,
-            paddingHorizontal: 8,
-          }}
-        >
+        <View style={styles.controllerButtonsContainer}>
           <TouchableOpacity
             onPress={isRunning ? handlePause : handleStart}
             disabled={time === 0}
           >
             <Text
               style={{
-                color: "blue",
-                fontSize: 20,
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                borderWidth: 1,
-                borderRadius: 8,
-                borderColor: "blue",
-                opacity: time === 0 ? 0.5 : 1,
+                ...styles.setButtons,
+                ...{
+                  color: colors.ui.tertiary,
+                  borderColor: colors.ui.tertiary,
+                  opacity: time === 0 ? 0.5 : 1,
+                },
               }}
             >
               {isRunning ? "PAUSE" : "START"}
@@ -305,13 +277,11 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
           <TouchableOpacity onPress={handleReset}>
             <Text
               style={{
-                color: "gray",
-                fontSize: 20,
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                borderWidth: 1,
-                borderRadius: 8,
-                borderColor: "gray",
+                ...styles.setButtons,
+                ...{
+                  color: colors.ui.gray500,
+                  borderColor: colors.ui.gray500,
+                },
               }}
             >
               RESET
@@ -332,7 +302,7 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
               title="order workout plan"
               dollarIcon={true}
               onPress={() => workoutPlanHandler()}
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 120 }}
             />
           )}
         </View>
@@ -394,4 +364,39 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
     textTransform: "capitalize",
   },
+  timeControllerButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+  },
+  controllerButtonsContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 8,
+  },
+
+  setButtons: {
+    //color: "gray",
+    fontFamily: "medium",
+    fontSize: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderWidth: 2,
+    borderRadius: 8,
+    letterSpacing: 0.3,
+    marginRight: 2,
+    // borderColor: "gray",
+  },
+  timeText: {
+    fontFamily: "bold",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginHorizontal: 16,
+    letterSpacing: 0.3,
+  },
+  signs: { color: "white", fontSize: 24 },
 });

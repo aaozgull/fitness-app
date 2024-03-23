@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
-import PageContainer from "../../../components/utility/PageContainer";
-import PageTitle from "../../../components/utility/PageTitle";
+import restImage from "../../../../assets/images/rest.jpg";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const RestScreen = ({ navigation }) => {
   let timer = 0;
   const [timeLeft, setTimeLeft] = useState(2);
-
   const startTime = () => {
     setTimeout(() => {
       if (timeLeft <= 0) {
@@ -16,7 +15,7 @@ const RestScreen = ({ navigation }) => {
         clearTimeout(timer);
       }
       setTimeLeft(timeLeft - 1);
-    }, 1000);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -27,39 +26,38 @@ const RestScreen = ({ navigation }) => {
   });
 
   return (
-    <SafeAreaView>
-      <PageContainer style={{ paddingHorizontal: 20 }}>
-        <PageTitle text="Rest" />
-        <Image
-          // resizeMode="contain"
-          source={{
-            uri: "https://www.freepik.com/free-photo/men-women-stand-drink-water-after-exercise_8351940.htm#fromView=search&page=1&position=0&uuid=f7c06a8b-4dc8-43b7-bd3d-89755fb73ed6",
-          }}
-          style={styles.image}
-        />
-
-        <Text style={styles.text}>TAKE A BREAK!</Text>
-
-        <Text style={styles.text}>
-          <MaterialIcons name="timer" size={26} color="black" /> {timeLeft}
-        </Text>
-      </PageContainer>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.ui.quaternary }}>
+      <Image resizeMode="contain" source={restImage} style={styles.image} />
+      <Text style={{ ...styles.text, marginTop: 20 }}>TAKE A BREAK!</Text>
+      <View style={styles.iconContainer}>
+        <MaterialIcons name="timer" size={44} color={colors.text.tertiary} />
+        <Text style={styles.text}> {timeLeft}</Text>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   text: {
+    color: colors.text.tertiary,
+    fontFamily: "black",
     fontSize: 35,
-    fontWeight: "900",
-    marginTop: 50,
     textAlign: "center",
+    letterSpacing: 0.5,
   },
   image: {
     width: "100%",
     height: 420,
+    marginTop: 30,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  iconContainer: {
+    marginTop: 50,
+    flexDirection: "row",
+    alignItems: "center", // Align items vertically
+    justifyContent: "center",
+    // paddingHorizontal: 8,
   },
 });
 

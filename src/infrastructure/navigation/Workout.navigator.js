@@ -15,7 +15,11 @@ const WorkoutNavigator = () => {
     <WorkoutStack.Navigator headerMode="none">
       <WorkoutStack.Screen name="WorkoutScreen" component={WorkoutScreen} />
       <WorkoutStack.Screen name="Exercises" component={ExercisesScreen} />
-      <WorkoutStack.Screen name="Rest" component={RestScreen} />
+      <WorkoutStack.Screen
+        name="Rest"
+        component={RestScreen}
+        options={{ headerShown: false }}
+      />
 
       <WorkoutStack.Screen
         name="ExerciseDetail"
