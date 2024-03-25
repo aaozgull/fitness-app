@@ -1,36 +1,30 @@
 import React from "react";
-import { SettingsScreen } from "../../features/settings/screens/SettingsScreen";
-import { ProfileInfoScreen } from "../../features/settings/screens/ProfileInfoScreen";
+import SettingsScreen from "../../features/settings/screens/SettingsScreen";
+import ProfileInfoScreen from "../../features/settings/screens/ProfileInfoScreen";
 //import { FavouritesScreen } from "../../features/settings/screens/favourites.screen";
-import { CameraScreen } from "../../features/settings/screens/camera.screen";
+//import { CameraScreen } from "../../features/settings/screens/camera.screen";
 /* import ProfileScreen from "../../features/settings/screens/profile.screen"; */
 import BMICalculation from "../../features/settings/screens/CalculationScreen";
+import TimerScreen from "../../features/settings/screens/TimerScreen";
 
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const SettingsStack = createStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
-export const SettingsNavigator = ({ route, navigation }) => {
+export const SettingsNavigator = () => {
   return (
-    <SettingsStack.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-      }}
-    >
+    <SettingsStack.Navigator headerMode="none">
       <SettingsStack.Screen
-        options={{
-          header: () => null,
-        }}
         name="SettingsScreen"
         component={SettingsScreen}
+        options={{
+          headerShown: false,
+        }}
       />
       <SettingsStack.Screen name="ProfileInfo" component={ProfileInfoScreen} />
-      <SettingsStack.Screen name="Camera" component={CameraScreen} />
+      {/*   <SettingsStack.Screen name="Camera" component={CameraScreen} /> */}
       <SettingsStack.Screen name="BMICalculation" component={BMICalculation} />
+      <SettingsStack.Screen name="TimerScreen" component={TimerScreen} />
     </SettingsStack.Navigator>
   );
 };

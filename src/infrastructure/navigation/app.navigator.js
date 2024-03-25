@@ -6,7 +6,8 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import DashBoardNavigator from "./DashBoard.navigator";
 import ChatNavigator from "./Chat.navigator";
-import SettingsScreen from "../../features/settings/screens/SettingsScreen";
+//import SettingsScreen from "../../features/settings/screens/SettingsScreen";
+import { SettingsNavigator } from "./settings.navigator";
 import CheckoutNavigator from "./Checkout.navigator";
 import WorkoutNavigator from "./Workout.navigator";
 //import Workout from "../../features/Workout/screens/WorkoutScreen";
@@ -95,7 +96,13 @@ export const AppNavigator = () => (
           headerShown: false,
         }}
       />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
     {/*  <ChatIcon /> */}
   </>

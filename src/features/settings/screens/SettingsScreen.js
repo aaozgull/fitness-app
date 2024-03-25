@@ -119,7 +119,6 @@ const SettingsScreen = (props) => {
           uri={userData.profilePicture}
           showEditButton={true}
         />
-
         <Input
           id="firstName"
           label="First name"
@@ -130,7 +129,6 @@ const SettingsScreen = (props) => {
           errorText={formState.inputValidities["firstName"]}
           initialValue={userData.firstName}
         />
-
         <Input
           id="lastName"
           label="Last name"
@@ -141,7 +139,6 @@ const SettingsScreen = (props) => {
           errorText={formState.inputValidities["lastName"]}
           initialValue={userData.lastName}
         />
-
         <Input
           id="email"
           label="Email"
@@ -153,7 +150,6 @@ const SettingsScreen = (props) => {
           errorText={formState.inputValidities["email"]}
           initialValue={userData.email}
         />
-
         <Input
           id="about"
           label="About"
@@ -164,7 +160,6 @@ const SettingsScreen = (props) => {
           errorText={formState.inputValidities["about"]}
           initialValue={userData.about}
         />
-
         <View style={{ marginTop: 20 }}>
           {showSuccessMessage && <Text>Saved!</Text>}
 
@@ -185,6 +180,13 @@ const SettingsScreen = (props) => {
             )
           )}
         </View>
+
+        <DataItem
+          type={"link"}
+          title="Edit Profile Info"
+          hideImage={true}
+          onPress={() => props.navigation.navigate("ProfileInfo")}
+        />
         <DataItem
           type={"link"}
           title="Starred messages"
@@ -196,6 +198,18 @@ const SettingsScreen = (props) => {
               type: "messages",
             })
           }
+        />
+        <DataItem
+          type={"link"}
+          title="BMI Calculation"
+          hideImage={true}
+          onPress={() => props.navigation.navigate("BMICalculation")}
+        />
+        <DataItem
+          type={"link"}
+          title="Timer Screen"
+          hideImage={true}
+          onPress={() => props.navigation.navigate("TimerScreen")}
         />
 
         <SubmitButton
