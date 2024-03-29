@@ -96,13 +96,7 @@ export const AppNavigator = () => (
           headerShown: false,
         }}
       />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Tab.Screen name="Settings" component={SettingsNavigator} />
     </Tab.Navigator>
     {/*  <ChatIcon /> */}
   </>

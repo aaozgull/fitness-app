@@ -9,7 +9,7 @@ import Heading from "../../../components/utility/Heading";
 import HeaderLogo from "../../../components/utility/HeaderLogo";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 
-const photos = [
+const photosData = [
   {
     id: "e1",
     description: "Some photo",
@@ -113,7 +113,7 @@ export const GalleryScreen = ({ navigation }) => {
               title="Close"
               iconName="camera-sharp"
               size={34}
-              onPress={() => props.navigation.goBack()}
+              onPress={() => navigation.navigate("LogProgressScreen")}
             />
           </HeaderButtons>
         );
@@ -133,12 +133,12 @@ export const GalleryScreen = ({ navigation }) => {
         style={{ marginBottom: 20 }}
         dateShow={false}
       />
-      {photos.length === 0 && (
+      {photosData.length === 0 && (
         <Text style={styles.title}>No progress photos have been uploaded</Text>
       )}
-      {photos.length > 0 && (
+      {photosData.length > 0 && (
         <FlatList
-          data={photos}
+          data={photosData}
           renderItem={({ item }) => {
             return <PhotoInfoCard photo={item} />;
           }}
