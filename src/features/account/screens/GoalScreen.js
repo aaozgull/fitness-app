@@ -25,7 +25,9 @@ const GoalScreen = ({ navigation }) => {
 
   function continueHandler() {
     //console.log("continueHandler");
-    navigation.navigate("FitnessLevel");
+    navigation.navigate("FitnessLevel", {
+      Goal: selectedGoal,
+    });
   }
   //<MaterialCommunityIcons name="bullseye-arrow" size={24} color="black" />
   return (

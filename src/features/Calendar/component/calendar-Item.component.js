@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, Pressable } from "react-native";
+import React from "react";
+import { Text, StyleSheet, View } from "react-native";
 import { format } from "date-fns";
 
 import { theme } from "../../../infrastructure/theme/index";
@@ -10,14 +10,10 @@ import {
 } from "../../../utils/date";
 import ToDoItem from "../../dashBoard/component/toDoList/dashBoard-toDo-Item";
 
-export const CalendarItem = ({ date, selectedMenuItem, selectedDate }) => {
+export const CalendarItem = ({ date, selectedMenuItems, selectedDate }) => {
   let displayDate = format(date, "MMM dd");
   const formattedDate = getFormattedDate(date);
-  //console.log(`selectedDate ${selectedDate}`);
   const formattedSelectedDate = selectedDate && getFormattedDate(selectedDate);
-  /* console.log(
-    `formattedSelectedDate  ${selectedDate} ${formattedSelectedDate}`
-  ); */
   const currentDate = new Date();
   const formattedCurrentDate = getFormattedDate(currentDate);
   const formattedCurrentDatePrevious = getFormattedDate(
@@ -26,6 +22,16 @@ export const CalendarItem = ({ date, selectedMenuItem, selectedDate }) => {
   const formattedCurrentDateTomorrow = getFormattedDate(
     getDatePlusDays(currentDate, 1)
   );
+  if (formattedDate === formattedSelectedDate) {
+    console.log(
+      `formattedSelectedDate  ${formattedDate} ${formattedSelectedDate}`
+    );
+    if (selectedMenuItems) {
+      selectedMenuItems.map((menuItem, index) =>
+        console.log(`menuItem ${menuItem} index ${index}`)
+      );
+    }
+  }
 
   // console.log(`${formattedCurrentDate} ee  date  ${formattedDate}`);
   if (formattedDate === formattedCurrentDate) {
@@ -38,8 +44,6 @@ export const CalendarItem = ({ date, selectedMenuItem, selectedDate }) => {
     displayDate = "Tomorrow";
   }
 
-  function pressCalendarItemHandler() {}
-  // console.log(`day ${date}`);
   let selectedStyle =
     date.toString().includes("Mon") || displayDate.includes("Tom")
       ? styles.boldText
@@ -53,13 +57,16 @@ export const CalendarItem = ({ date, selectedMenuItem, selectedDate }) => {
 
         <Text style={selectedStyle}>{displayDate}</Text>
       </View>
-      {selectedMenuItem && formattedDate === formattedSelectedDate && (
-        <ToDoItem
-          description={selectedMenuItem.text}
-          icon={selectedMenuItem.icon}
-          style={styles.toDoItem}
-        />
-      )}
+      {selectedMenuItems &&
+        formattedDate === formattedSelectedDate &&
+        selectedMenuItems.map((menuItem, index) => (
+          <ToDoItem
+            key={index}
+            description={menuItem.text}
+            icon={menuItem.icon}
+            style={styles.toDoItem}
+          />
+        ))}
     </View>
   );
 };

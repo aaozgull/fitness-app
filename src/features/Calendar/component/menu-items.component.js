@@ -13,6 +13,7 @@ const MenuItems = ({ onSelectedMenuItem }) => {
     { icon: "camera", text: "Photos" },
     { icon: "bed", text: "Sleep" },
     { icon: "user", text: "Body Stats" },
+    { icon: "books", text: "read before sleep" },
   ];
   return (
     <View style={styles.menuContent}>

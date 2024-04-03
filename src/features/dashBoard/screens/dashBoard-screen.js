@@ -23,6 +23,17 @@ import HeaderLogo from "../../../components/utility/HeaderLogo";
 export const DashBoardScreen = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
+      headerRight: () => {
+        return (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+              iconName="user-edit"
+              iconType={FontAwesome5}
+              onPress={() => props.navigation.navigate("Settings")}
+            />
+          </HeaderButtons>
+        );
+      },
       headerTitle: () => <HeaderLogo />,
     });
   }, []);

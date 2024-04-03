@@ -81,10 +81,15 @@ export const signIn = (email, password) => {
         dispatch(userLogout());
       }, millisecondsUntilExpiry);
     } catch (error) {
-      // console.log(error);
+      console.log("----------------------------");
+      console.log(error.code);
+      console.log(error);
       const errorCode = error.code;
 
       let message = "Something went wrong.";
+      if (errorCode === "auth/network-request-failed") {
+        message = "There is no network connectivity.";
+      }
 
       if (
         errorCode === "auth/wrong-password" ||

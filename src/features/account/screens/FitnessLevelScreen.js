@@ -8,7 +8,7 @@ import { colors } from "../../../infrastructure/theme/colors";
 import RegistrationItem from "../components/RegistrationItem";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
-const FitnessLevelScreen = ({ navigation }) => {
+const FitnessLevelScreen = ({ navigation, Goal }) => {
   const fitnessLevels = [
     { text: "Beginner", subText: "Just Started my Journey" },
     { text: "Intermediate", subText: "Comfortable with most Equipment" },
@@ -24,7 +24,10 @@ const FitnessLevelScreen = ({ navigation }) => {
 
   function continueHandler() {
     // console.log("continueHandler");
-    navigation.navigate("Equipment");
+    navigation.navigate("Equipment", {
+      Goal,
+      FitnessLevel: selectedFitnessLevel,
+    });
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>

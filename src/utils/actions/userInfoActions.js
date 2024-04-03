@@ -20,29 +20,9 @@ export const updateSignedInUserInfoData = async (userId, newInfoData) => {
   await update(childRef, newInfoData);
 };
 
-const createUserInfo = async (
-  name,
-  gender,
-  age,
-  weight,
-  height,
-  goal,
-  fitnessLevel,
-  userId
-) => {
-  const userInfoData = {
-    userId,
-    name,
-    gender,
-    age,
-    weight,
-    height,
-    goal,
-    fitnessLevel,
-  };
-
+const createUserInfo = async (userId, newUserInfoData) => {
   const dbRef = ref(getDatabase());
   const childRef = child(dbRef, `userInfo/${userId}`);
-  await set(childRef, userInfoData);
-  return userInfoData;
+  await set(childRef, newUserInfoData);
+  return newUserInfoData;
 };

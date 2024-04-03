@@ -7,7 +7,10 @@ const SubmitButton = (props) => {
   const enabledBgColor = props.color || colors.ui.accent2;
   const disabledBgColor = colors.ui.grey300;
   const bgColor = props.disabled ? disabledBgColor : enabledBgColor;
-  const textColor = props.disabled ? colors.ui.grey100 : "white";
+  let textColor = props.disabled ? colors.ui.grey100 : "white";
+  if (props.textColor) {
+    textColor = props.textColor;
+  }
 
   return (
     <TouchableOpacity

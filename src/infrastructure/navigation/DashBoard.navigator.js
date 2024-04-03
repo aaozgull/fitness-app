@@ -5,18 +5,21 @@ import { child, get, getDatabase, off, onValue, ref } from "firebase/database";
 
 import { getFirebaseApp } from "../../utils/firebaseHelper";
 import { setChatsData } from "../../store/chatSlice";
+import { setProgressData } from "../../store/progressSlice";
 import { colors } from "../theme/colors";
 import commonStyles from "../../constants/commonStyles";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BodyWeightDetail from "../../features/dashBoard/component/linear-chart/bodyWeightDetail";
+import { SettingsNavigator } from "./settings.navigator";
 import { DashBoardScreen } from "../../features/dashBoard/screens/dashBoard-screen";
 import { GalleryScreen } from "../../features/photoGallery/screen/gallery-screen";
 import LogProgressScreen from "../../features/photoGallery/screen/LogProgressScreen";
 import { setChatMessages, setStarredMessages } from "../../store/messagesSlice";
 
 import { setStoredUsers } from "../../store/userSlice";
-
+import { setCalendarData } from "../../store/calendarSlice";
+import { setCalendarActivitiesData } from "../../store/calendarActivitiesSlice";
 const DashBoardStack = createNativeStackNavigator();
 
 const StackNavigator = () => {
@@ -31,6 +34,7 @@ const StackNavigator = () => {
           name="LogProgressScreen"
           component={LogProgressScreen}
         />
+        <DashBoardStack.Screen name="Settings" component={SettingsNavigator} />
       </DashBoardStack.Group>
 
       <DashBoardStack.Group screenOptions={{ presentation: "containedModal" }}>
@@ -57,8 +61,100 @@ const DashBoardNavigator = (props) => {
 
     const app = getFirebaseApp();
     const dbRef = ref(getDatabase(app));
+
+    /////////////Get user Calendar/////////////////////
+    const userCalendarRef = child(dbRef, `userCalendar/${userData.userId}`);
+    const refs = [userCalendarRef];
+
+    onValue(userCalendarRef, (querySnapshot) => {
+      const calendarIdsData = querySnapshot.val() || {};
+      const calendarIds = Object.values(calendarIdsData);
+      console.log(`calendarIds ${calendarIds}`);
+      const calendarData = {};
+      let calendarFoundCount = 0;
+
+      for (let i = 0; i < calendarIds.length; i++) {
+        const calendarId = calendarIds[i];
+        const calendarRef = child(dbRef, `calendar/${calendarId}`);
+        refs.push(calendarRef);
+
+        onValue(calendarRef, (calendarSnapshot) => {
+          calendarFoundCount++;
+
+          const caldata = calendarSnapshot.val();
+
+          if (caldata) {
+            caldata.key = calendarSnapshot.key;
+            calendarData[calendarSnapshot.key] = caldata;
+          }
+
+          if (calendarFoundCount >= calendarIds.length) {
+            dispatch(setCalendarData({ calendarData: calendarData }));
+            console.log(`dispatch(setCalendarData) ${calendarData}`);
+            setIsLoading(false);
+          }
+        });
+
+        const activitiesRef = child(dbRef, `activities/${calendarId}`);
+        refs.push(activitiesRef);
+
+        onValue(activitiesRef, (activitiesSnapshot) => {
+          const calendarActivitiesData = activitiesSnapshot.val();
+          dispatch(
+            setCalendarActivitiesData({
+              calendarId,
+              calendarActivitiesData: calendarActivitiesData,
+            })
+          );
+        });
+      }
+    });
+    ///////////////end User Calendar ///////////////////
+
+    //////get User ProgressLog //////
+
+    const userProgressRef = child(dbRef, `userProgress/${userData.userId}`);
+    refs.push(userProgressRef);
+
+    onValue(userProgressRef, (querySnapshot) => {
+      const progressIdsData = querySnapshot.val() || {};
+      const progressIds = Object.values(progressIdsData);
+      console.log(`progressIds ${progressIds}`);
+      const progressData = {};
+      let progressFoundCount = 0;
+
+      for (let i = 0; i < progressIds.length; i++) {
+        const progressId = progressIds[i];
+        const progressRef = child(dbRef, `progress/${progressId}`);
+        refs.push(progressRef);
+
+        onValue(progressRef, (progressSnapshot) => {
+          progressFoundCount++;
+
+          const pdata = progressSnapshot.val();
+
+          if (pdata) {
+            /* if (!data.users.includes(userData.userId)) {
+              return;
+            } */
+            pdata.key = progressSnapshot.key;
+
+            progressData[progressSnapshot.key] = pdata;
+          }
+
+          if (progressFoundCount >= progressIds.length) {
+            dispatch(setProgressData({ progressData }));
+            console.log(`dispatch(setProgressData) ${progressData}`);
+            //setIsLoading(false);
+          }
+        });
+      }
+    });
+
+    //////end get User ProgressLog //////
+
     const userChatsRef = child(dbRef, `userChats/${userData.userId}`);
-    const refs = [userChatsRef];
+    refs.push(userChatsRef);
 
     onValue(userChatsRef, (querySnapshot) => {
       const chatIdsData = querySnapshot.val() || {};
@@ -114,7 +210,11 @@ const DashBoardNavigator = (props) => {
           dispatch(setChatMessages({ chatId, messagesData }));
         });
 
-        if (chatsFoundCount == 0) {
+        if (
+          calendarFoundCount == 0 ||
+          progressFoundCount == 0 ||
+          calendarFoundCount == 0
+        ) {
           setIsLoading(false);
         }
       }

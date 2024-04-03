@@ -13,13 +13,13 @@ const TransparentImageSelector = ({
   onTakePhoto,
   onPickImage,
 }) => {
-  let headerTitle = "";
+  let headerTitle = "Add Progress ";
   if (selectedImageAngle === "1") {
-    headerTitle = "Front Image";
+    headerTitle += "Front Image";
   } else if (selectedImageAngle === "2") {
-    headerTitle = "Back Image";
+    headerTitle += "Back Image";
   } else if (selectedImageAngle === "3") {
-    headerTitle = "Side Image";
+    headerTitle += "Side Image";
   }
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>

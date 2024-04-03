@@ -14,7 +14,9 @@ import Input from "../../../components/utility/Input";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
 import { colors } from "../../../infrastructure/theme/colors";
-import userImage from "../../../../assets/images/userImage.jpeg";
+import front from "../../../../assets/images/front.jpg";
+import back from "../../../../assets/images/back.jpg";
+import side from "../../../../assets/images/side.jpg";
 import { Divider, Card } from "react-native-paper";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import {
@@ -50,29 +52,17 @@ const LogProgress = ({ navigation }) => {
       day: "numeric",
     })
   );
-  // const [backImage, setBackImage] = useState(userImage);
-  // const [sideImage, setSideImage] = useState(userImage);
-  //const [currentImage, setcurrentImage] = useState("");
-
   ////////
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [imageSliderVisible, setImageSliderVisible] = useState(false);
   const [selectedImageAngle, setSelectedImageAngle] = useState(null);
-  const [images, setImages] = useState([userImage, userImage, userImage]);
+  const [images, setImages] = useState([front, back, side]);
 
-  //const [selectedMenuItem, setSelectedMenuItem] = useState(null);
-  console.log(`errorText ${weightErrorText}`);
   const handleItemPress = (item) => {
     setSelectedImageAngle(item);
     setMenuVisible(true);
   };
   const handleExpandImagesPress = () => {
-    //const newImages = [];
-    //newImages.push(frontImage);
-    // newImages.push(backImage);
-    //newImages.push(sideImage);
-
-    //setImages(newImages);
     setImageSliderVisible(true);
   };
 
@@ -84,7 +74,6 @@ const LogProgress = ({ navigation }) => {
   ////////
 
   const note = progressData.note || "";
-  //const weightUnit = userData.weightUnit || "";
 
   const initialState = {
     inputValues: {
@@ -210,12 +199,12 @@ const LogProgress = ({ navigation }) => {
     try {
       const tempUri = await openCamera();
       if (!tempUri) return;
-      console.log(`tempUri ${tempUri}`);
+      //console.log(`tempUri ${tempUri}`);
       setTempImageUri(tempUri); // Set temporary image URI
       setIsLoading(true);
 
       const imageFolder = setImageFolderName(); // Determine image folder (e.g., "FrontPicture")
-      console.log(`imageFolder ${imageFolder}`);
+      //console.log(`imageFolder ${imageFolder}`);
 
       // Perform image processing or uploading (if any)
       // For example:
@@ -234,7 +223,7 @@ const LogProgress = ({ navigation }) => {
   }, [tempImageUri]);
 
   return (
-    <PageContainer style={{ paddingHorizontal: 20, marginTop: 10 }}>
+    <PageContainer style={{ paddingHorizontal: 20 }}>
       <Card elevation={5} style={styles.card}>
         <TouchableOpacity
           style={{ flex: 1, marginBottom: 40 }}
@@ -298,17 +287,12 @@ const LogProgress = ({ navigation }) => {
 
           <View>
             <Divider />
-            {/*   <TextInput
-            style={styles.textbox}
-            value={note}
-            onChangeText={(text) => setNote(text)}
-            onSubmitEditing={() => null}
-          /> */}
+
             <Input
               id="note"
               label="note"
-              icon="note-add"
-              iconPack={MaterialIcons}
+              icon="pen"
+              iconPack={FontAwesome5}
               onInputChanged={inputChangedHandler}
               autoCapitalize="none"
               errorText={formState.inputValidities["note"]}

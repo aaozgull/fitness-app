@@ -32,7 +32,7 @@ const ProfileImage = (props) => {
     source = props.uri ? { uri: props.uri } : userImage;
   }
 
-  console.log(source);
+  //console.log(source);
   const [image, setImage] = useState(source);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -98,8 +98,19 @@ const ProfileImage = (props) => {
       )}
 
       {showEditButton && !isLoading && (
-        <View style={styles.editIconContainer}>
-          <FontAwesome name="pencil" size={15} color="black" />
+        <View
+          style={{
+            ...styles.editIconContainer,
+            ...(props.editIconContainerStyle
+              ? props.editIconContainerStyle
+              : { backgroundColor: colors.lightGrey }),
+          }}
+        >
+          <FontAwesome
+            name="pencil"
+            size={props.editSize ? props.editSize : 15}
+            color="black"
+          />
         </View>
       )}
 
@@ -126,7 +137,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    backgroundColor: colors.lightGrey,
+    //backgroundColor: colors.lightGrey,
     borderRadius: 20,
     padding: 8,
   },

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useReducer, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-
 import { Picker } from "@react-native-picker/picker";
 import { Button } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,36 +13,31 @@ import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { colors } from "../../../infrastructure/theme/colors";
-import { updateLoggedInUserInfoData } from "../../../store/userInfoSlice"; //"../store/authSlice";
-import { updateSignedInUserInfoData } from "../../../utils/actions/userInfoActions";
-import { validateInput } from "../../../utils/actions/formActions";
-import { reducer } from "../../../utils/reducers/formReducer";
-import { updateLoggedInUserData } from "../../../store/authSlice";
-
+import { setUserInfoData } from "../../../store/userInfoSlice"; //"../store/authSlice";
+import { createUserInfo } from "../../../utils/actions/userInfoActions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { getFormattedDate } from "../../../utils/date";
-const ProfileInfoScreen = (props) => {
+const AddProfileInfoScreen = (props) => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [weight, setWeight] = useState(userInfoData.weight);
-  const [height, setHeight] = useState(userInfoData.height);
+  const [weight, setWeight] = useState(null);
+  const [height, setHeight] = useState(null);
   const [birthdayErrorText, setBirthdayErrorText] = useState("");
   const [weightErrorText, setWeightErrorText] = useState("");
   const [heighterrorText, setHeightErrorText] = useState("");
-  const [gender, setGender] = useState(userInfoData.gender);
+  const [gender, setGender] = useState("Male");
 
-  const userInfoData = useSelector((state) => state.userInfo.userInfoData);
-  const [date, setDate] = useState(userInfoData.age);
+  const userData = useSelector((state) => state.auth.userData);
+  const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
     setShowPicker(false);
-    setDate(currentDate);
-    const todayDate = new Date();
-    if (todayDate.getFullYear() - currentDate.getFullYear() < 16) {
+    setDate(selectedDate);
+    const currentDate = new Date();
+    if (currentDate.getFullYear() - selectedDate.getFullYear() < 16) {
       setBirthdayErrorText("^You need to be at least 16 years old");
     } else {
       setBirthdayErrorText("");
@@ -55,23 +49,30 @@ const ProfileInfoScreen = (props) => {
   };
 
   const saveHandler = async () => {
-    const userInfoValues = {
+    const newUserInfoData = {
+      userId: userData.userId,
       gender: gender,
       age: date,
       weight: weight,
       height: height,
+      goal: props.Goal,
+      fitnessLevel: props.FitnessLevel,
+      equipment: props.Equipment,
     };
 
     try {
       setIsLoading(true);
-      await updateSignedInUserInfoData(userInfoData.userId, userInfoValues);
-      dispatch(updateLoggedInUserInfoData({ newInfoData: userInfoValues }));
-
+      const userInfoData = await createUserInfo(
+        userData.userId,
+        newUserInfoData
+      );
+      dispatch(setUserInfoData({ userInfoData }));
       setShowSuccessMessage(true);
 
       setTimeout(() => {
         setShowSuccessMessage(false);
       }, 3000);
+      props.navigation.navigate("ProfilePicture");
     } catch (error) {
       console.log(error);
     } finally {
@@ -81,7 +82,7 @@ const ProfileInfoScreen = (props) => {
 
   return (
     <PageContainer style={styles.container}>
-      <PageTitle title="User Info Settings" />
+      <PageTitle title="Add User Info" />
       <View style={styles.formContainer}>
         <Text style={styles.text}>Birthday</Text>
         <View
@@ -107,7 +108,7 @@ const ProfileInfoScreen = (props) => {
               value={date}
               mode="date"
               is24Hour={true}
-              // display="default"
+              display="default"
               onChange={onChange}
             />
           )}
@@ -184,7 +185,7 @@ const ProfileInfoScreen = (props) => {
             />
           ) : (
             <SubmitButton
-              title="Save"
+              title="SAVE"
               onPress={saveHandler}
               style={{ marginTop: 20 }}
               disabled={
@@ -255,4 +256,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileInfoScreen;
+export default AddProfileInfoScreen;

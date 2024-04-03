@@ -7,13 +7,11 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import DashBoardNavigator from "./DashBoard.navigator";
 import ChatNavigator from "./Chat.navigator";
 //import SettingsScreen from "../../features/settings/screens/SettingsScreen";
-import { SettingsNavigator } from "./settings.navigator";
+
 import CheckoutNavigator from "./Checkout.navigator";
-import WorkoutNavigator from "./Workout.navigator";
-//import Workout from "../../features/Workout/screens/WorkoutScreen";
+import CalendarNavigator from "./Calendar.navigator";
 
 import { theme } from "../theme";
-import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
 
 import ChatIcon from "../../features/Chat/screen/ChatIcon";
 
@@ -25,7 +23,7 @@ const TAB_ICON = {
   Checkout: "md-cart",
   Workout: "dumbbell",
   Calendar: "calendar-outline",
-  Settings: "md-settings",
+  //Settings: "md-settings",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -78,15 +76,22 @@ export const AppNavigator = () => (
           //headerTitle: "",
         }}
       />
-      <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen
+        name="Calendar"
+        component={CalendarNavigator}
+        options={{
+          // tabBarLabel: "Chats",
+          headerShown: false,
+        }}
+      />
+      {/* <Tab.Screen
         name="Workout"
         component={WorkoutNavigator}
         options={{
           headerShown: false,
           //headerTitle: "",
         }}
-      />
+      /> */}
       <Tab.Screen name="Checkout" component={CheckoutNavigator} />
       <Tab.Screen
         name="Chat"
@@ -96,7 +101,6 @@ export const AppNavigator = () => (
           headerShown: false,
         }}
       />
-      <Tab.Screen name="Settings" component={SettingsNavigator} />
     </Tab.Navigator>
     {/*  <ChatIcon /> */}
   </>

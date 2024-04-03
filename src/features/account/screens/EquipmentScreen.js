@@ -8,12 +8,8 @@ import { colors } from "../../../infrastructure/theme/colors";
 import RegistrationItem from "../components/RegistrationItem";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
-import { useDispatch } from "react-redux";
-import { setIsNewRegistration } from "../../../store/authSlice";
-
-const EquipmentScreen = () => {
+const EquipmentScreen = (props) => {
   const [selectedEquipment, setSelectedEquipment] = useState(null);
-  const dispatch = useDispatch();
 
   const handlePress = (equipment) => {
     console.log("handleEquipmentPress " + equipment);
@@ -33,8 +29,19 @@ const EquipmentScreen = () => {
   ];
 
   function continueHandler() {
-    console.log("continueHandler");
-    dispatch(setIsNewRegistration());
+    console.log(
+      "continueHandler" +
+        props.Goal +
+        " " +
+        props.FitnessLevel +
+        " " +
+        selectedEquipment
+    );
+    props.navigation.navigate("AddUserInfo", {
+      Goal: props.Goal,
+      FitnessLevel: props.FitnessLevel,
+      Equipment: selectedEquipment,
+    });
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>

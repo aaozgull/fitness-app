@@ -59,7 +59,7 @@ const DataItem = (props) => {
             <Ionicons
               name="chevron-forward-outline"
               size={18}
-              color={colors.ui.gray500}
+              color={colors.ui.fiftary}
             />
           </View>
         )}
@@ -68,7 +68,7 @@ const DataItem = (props) => {
             <Ionicons
               name="chevron-forward-outline"
               size={24}
-              color={colors.ui.gray500}
+              color={colors.ui.fiftary}
             />
           </View>
         )}

@@ -7,7 +7,14 @@ import {
   FlatList,
   StatusBar,
 } from "react-native";
-import { startOfMonth, eachDayOfInterval, addMonths, format } from "date-fns";
+import {
+  startOfMonth,
+  eachDayOfInterval,
+  endOfMonth,
+  addMonths,
+  format,
+} from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
 
 import { CalendarItem } from "../../Calendar/component/calendar-Item.component";
 import { theme } from "../../../infrastructure/theme";
@@ -16,11 +23,18 @@ import { getFormattedDate } from "../../../utils/date";
 import TransparentMenu from "./TransparentMenu";
 import PageContainer from "../../../components/utility/PageContainer";
 import HeaderLogo from "../../../components/utility/HeaderLogo";
+import { createCalendar } from "../../../utils/actions/calendarActions";
 
 const CalendarScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+  const [selectedMenuItems, setSelectedMenuItems] = useState([]);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.auth.userData);
+  const calendarData = useSelector((state) => state.calendar.calendarData);
+  // console.log(`--------------- create Calendar`);
+  //createCalendar(userData.userId);
+  // console.log(`-------------end-- create Calendar`);
 
   const handleItemPress = (item) => {
     setSelectedItem(item);
@@ -31,52 +45,59 @@ const CalendarScreen = ({ navigation }) => {
     setMenuVisible(false);
   };
 
-  const handleSelectMenuItem = (menuItem) => {
-    console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
-    setMenuVisible(false);
-    setSelectedMenuItem(menuItem);
-  };
+  // Display calendarData values
+  // console.log("CalendarData:", calendarData);
 
+  /* Object.entries(calendarData).map(([key, value]) =>
+    console.log(`CalendarData ${key}:  ${value.date}`)
+  ); */
   const currentDate = new Date();
   const dates = [];
   let indexFound = 0;
   let startIndex = 0;
-
-  // Generate dates for one year before and after the current date
-  for (let i = -1; i <= 2; i++) {
-    const currentMonth = addMonths(currentDate, i);
-    // console.log(`currentMonth ${currentMonth}`);
-    // months.push(months);
-    const daysInMonth = eachDayOfInterval({
-      start: startOfMonth(currentMonth),
-      end: new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0),
-    });
-    daysInMonth.map((day) => {
+  Object.entries(calendarData).map(([key, value]) => {
+    const day = new Date(value.date);
+    if (day instanceof Date && !isNaN(day)) {
+      //console.log(` day ${day}`);
       dates.push(day);
       const formattedDate = getFormattedDate(day);
       const formattedCurrentDate = getFormattedDate(currentDate);
-      // console.log(`${formattedCurrentDate} ee  date  ${formattedDate}`);
+      //  console.log(`${formattedCurrentDate1} ee  date  ${formattedDate1}`);
       if (formattedDate === formattedCurrentDate) {
         console.log(`startIndex${startIndex} indexFound  ${indexFound}`);
         indexFound = 1;
       } else if (indexFound === 0) {
         startIndex++;
       }
+    }
+  });
+
+  //console.log(`CalendarData ${Object.values(calendarData)}`);
+  /*  useEffect(() => {
+    calendarData.forEach((date, index) => {
+      console.log(`Calendar Data index ${index} Pressed ${date}`);
     });
-  }
+  }, [calendarData, selectedItem]); */
+
+  const handleSelectMenuItem = (menuItem) => {
+    console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
+    setMenuVisible(false);
+    //setSelectedMenuItems(menuItem);
+    setSelectedMenuItems((prevItems) => [...prevItems, menuItem]);
+  };
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: () => (
-        <HeaderLogo
-          style={{
-            marginLeft: 150,
-            marginTop: StatusBar.currentHeight,
-          }}
-        />
-      ),
+      headerTitle: () => <HeaderLogo />,
     });
   }, []);
+
+  const itemHeight =
+    2 * theme.spaceInNumber[1] + // Vertical margin
+    theme.spaceInNumber[3] + // Padding for dateContainer
+    2 * theme.fontSizesInNumber.body + // Height of two Text components
+    3 * theme.spaceInNumber[3] + // Padding for ToDoItem
+    2 * theme.fontSizesInNumber.body; // Height of two Text components in ToDoItem
 
   return (
     <PageContainer style={styles.container}>
@@ -94,14 +115,14 @@ const CalendarScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => handleItemPress(item)}>
               <CalendarItem
                 date={item}
-                selectedMenuItem={selectedMenuItem}
+                selectedMenuItems={selectedMenuItems}
                 selectedDate={selectedItem}
               />
             </TouchableOpacity>
           );
         }}
         keyExtractor={(item) => item}
-        initialScrollIndex={startIndex}
+        initialScrollIndex={startIndex > 10 ? startIndex - 10 : startIndex}
         getItemLayout={(data, index) => ({
           length: theme.spaceInNumber[3] + theme.spaceInNumber[1] + 50, // Adjust this based on your item height
           offset:
@@ -122,7 +143,7 @@ const CalendarScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    //marginTop: 10,
     backgroundColor: theme.colors.ui.primary,
   },
 
