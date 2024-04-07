@@ -33,6 +33,7 @@ export default function App() {
           regular: require("./assets/fonts/Roboto-Regular.ttf"),
           thin: require("./assets/fonts/Roboto-Thin.ttf"),
           thinItalic: require("./assets/fonts/Roboto-ThinItalic.ttf"),
+          greatVibesRegular: require("./assets/fonts/GreatVibes-Regular.ttf"),
         });
       } catch (error) {
         console.log.error();

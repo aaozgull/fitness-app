@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 import { AppNavigator } from "./app.navigator";
 import { AccountNavigator } from "./account.navigator";
-import AuthScreen from "../../features/account/screens/AuthScreen";
+//import AuthScreen from "../../features/account/screens/AuthScreen";
+import { AuthNavigator } from "./auth.navigator";
 import StartUpScreen from "../../features/account/screens/StartUpScreen";
-import GoalScreen from "../../features/account/screens/GoalScreen";
-import FitnessLevelScreen from "../../features/account/screens/FitnessLevelScreen";
-import EquipmentScreen from "../../features/account/screens/EquipmentScreen";
-
 export const Navigation = () => {
   const isAuth = useSelector(
     (state) => state.auth.token !== null && state.auth.token !== ""
@@ -23,8 +20,9 @@ export const Navigation = () => {
     <NavigationContainer>
       {isAuth && !isNewRegistration && <AppNavigator />}
       {isAuth && isNewRegistration && <AccountNavigator />}
-      {/*  {isAuth && <AppNavigator />}*/}
-      {!isAuth && didTryAutoLogin && <AuthScreen />}
+
+      {!isAuth && didTryAutoLogin && <AuthNavigator />}
+      {/*<AuthScreen />*/}
       {!isAuth && !didTryAutoLogin && <StartUpScreen />}
     </NavigationContainer>
   );

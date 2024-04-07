@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
-import { ActivityIndicator, Alert } from "react-native";
+import { ActivityIndicator, Alert, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
@@ -108,6 +108,35 @@ const SignUpForm = (props) => {
         onInputChanged={inputChangedHandler}
         errorText={formState.inputValidities["password"]}
       />
+      <View
+        style={{
+          borderBottomColor: colors.ui.gray500,
+          borderWidth: 1,
+          marginVertical: 20,
+        }}
+      ></View>
+      <Text style={{ fontFamily: "regular", color: colors.text.primary }}>
+        By countinuing, I acknowledge that I have read and understood
+        <Text
+          style={{
+            fontFamily: "regular",
+            color: colors.text.primary,
+            fontWeight: "bold",
+          }}
+        >
+          The App User Agreement{" "}
+        </Text>{" "}
+        and the{" "}
+        <Text
+          style={{
+            fontFamily: "regular",
+            color: colors.text.primary,
+            fontWeight: "bold",
+          }}
+        >
+          Privacy Policy
+        </Text>
+      </Text>
 
       {isLoading ? (
         <ActivityIndicator
@@ -116,12 +145,20 @@ const SignUpForm = (props) => {
           style={{ marginTop: 10 }}
         />
       ) : (
-        <SubmitButton
-          title="Sign up"
-          onPress={authHandler}
-          style={{ marginTop: 20 }}
-          disabled={!formState.formIsValid}
-        />
+        <>
+          <SubmitButton
+            title="Sign up"
+            onPress={authHandler}
+            style={{ marginTop: 20 }}
+            disabled={!formState.formIsValid}
+          />
+          <SubmitButton
+            title="SIGN UP WITH GOOGLE"
+            onPress={() => null}
+            style={{ marginTop: 20 }}
+            color={colors.ui.tertiary}
+          />
+        </>
       )}
     </>
   );

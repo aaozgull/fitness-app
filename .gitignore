@@ -34,4 +34,7 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-*/node_modules/**/*/
+*/node_modules/**/*
+firebase-debug.log
+ui-debug.log
+.runtimeconfig.json

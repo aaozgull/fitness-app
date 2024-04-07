@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { Ionicons } from "@expo/vector-icons";
 import PageContainer from "../../../components/utility/PageContainer";
 import SignInForm from "../components/SignInForm";
 import SignUpForm from "../components/SignUpForm";
@@ -19,12 +19,25 @@ import { colors } from "../../../infrastructure/theme/colors";
 
 import logo from "../../../../assets/images/logo.png";
 
-const AuthScreen = (props) => {
-  const [isSignUp, setIsSignUp] = useState(false);
-
+const AuthScreen = ({ navigation, route }) => {
+  const { isNewRegisteration } = route.params;
+  //console.log(`isNewRegisteration ${isNewRegisteration}`);
+  const [isSignUp, setIsSignUp] = useState(isNewRegisteration);
+  function backButtonHandler() {
+    navigation.goBack();
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <PageContainer style={styles.pageContainer}>
+        <View style={styles.backButtonContainer}>
+          <TouchableOpacity onPress={backButtonHandler}>
+            <Ionicons
+              name="arrow-back-circle-sharp"
+              size={40}
+              color={colors.ui.tertiary}
+            />
+          </TouchableOpacity>
+        </View>
         <ScrollView>
           <KeyboardAvoidingView
             style={styles.keyboardAvoidingView}
@@ -68,17 +81,24 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   imageContainer: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    height: 100,
+    //backgroundColor: "red",
   },
   image: {
-    //marginTop: 100,
-    //marginBottom: 50,
-    width: "50%",
+    //width: "50%",
+    height: "100%",
   },
   keyboardAvoidingView: {
     flex: 1,
     justifyContent: "center",
+  },
+  backButtonContainer: {
+    // backgroundColor: "red",
+    marginRight: 15,
+    marginTop: 30,
   },
 });
 

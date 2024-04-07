@@ -64,11 +64,13 @@ const SignInForm = (props) => {
 
   return (
     <View
-      style={{
-        // flex: 1,
-        //  backgroundColor: colors.ui.accent,
-        paddingHorizontal: 20,
-      }}
+      style={
+        {
+          // flex: 1,
+          //  backgroundColor: colors.ui.accent,
+          // paddingHorizontal: 20,
+        }
+      }
     >
       <Input
         id="email"
@@ -101,12 +103,20 @@ const SignInForm = (props) => {
           style={{ marginTop: 10 }}
         />
       ) : (
-        <SubmitButton
-          title="Sign in"
-          onPress={authHandler}
-          style={{ marginTop: 20 }}
-          disabled={!formState.formIsValid}
-        />
+        <>
+          <SubmitButton
+            title="Sign in"
+            onPress={authHandler}
+            style={{ marginTop: 20 }}
+            disabled={!formState.formIsValid}
+          />
+          <SubmitButton
+            title="SIGN IN WITH GOOGLE"
+            onPress={() => null}
+            style={{ marginTop: 20 }}
+            color={colors.ui.tertiary}
+          />
+        </>
       )}
     </View>
   );
