@@ -113,12 +113,14 @@ const SettingsScreen = (props) => {
       <PageTitle text="Settings" />
 
       <ScrollView contentContainerStyle={styles.formContainer}>
-        <ProfileImage
-          size={80}
-          userId={userData.userId}
-          uri={userData.profilePicture}
-          showEditButton={true}
-        />
+        <View style={styles.imageBorder}>
+          <ProfileImage
+            size={80}
+            userId={userData.userId}
+            uri={userData.profilePicture}
+            showEditButton={true}
+          />
+        </View>
         <Input
           id="firstName"
           label="First name"
@@ -230,6 +232,13 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     alignItems: "center",
+  },
+  imageBorder: {
+    padding: 10,
+    borderRadius: 50,
+    borderColor: colors.ui.accent2,
+    borderWidth: 2,
+    borderStyle: "dashed",
   },
 });
 

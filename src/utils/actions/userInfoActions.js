@@ -1,4 +1,4 @@
-import { child, get, getDatabase, ref } from "firebase/database";
+import { child, set, get, getDatabase, ref } from "firebase/database";
 import { getFirebaseApp } from "../firebaseHelper";
 
 export const getUserInfoData = async (userId) => {
@@ -20,7 +20,7 @@ export const updateSignedInUserInfoData = async (userId, newInfoData) => {
   await update(childRef, newInfoData);
 };
 
-const createUserInfo = async (userId, newUserInfoData) => {
+export const createUserInfo = async (userId, newUserInfoData) => {
   const dbRef = ref(getDatabase());
   const childRef = child(dbRef, `userInfo/${userId}`);
   await set(childRef, newUserInfoData);

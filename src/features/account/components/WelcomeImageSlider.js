@@ -10,12 +10,13 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { colors } from "../../../infrastructure/theme/colors";
+import { welcomeSliderImages } from "../../../constants";
 
-export default function WelcomeImageSlider({ sliderImages }) {
+export default function WelcomeImageSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paginationIndex, setPaginationIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(
-    Array(sliderImages.length).fill(false)
+    Array(welcomeSliderImages.length).fill(false)
   );
 
   let viewsAndTexts = [];
@@ -92,14 +93,14 @@ export default function WelcomeImageSlider({ sliderImages }) {
     <>
       <View style={{ marginTop: 50, width: wp(100), height: hp(25) }}>
         <Carousel
-          data={sliderImages}
+          data={welcomeSliderImages}
           loop={true}
           autoplay={true}
           renderItem={({ item, index }) => (
             <ItemCard
               item={item}
               index={index}
-              handleImageLoad={handleImageLoad}
+              /*  handleImageLoad={handleImageLoad} */
             />
           )}
           hasParallaxImages={true}
@@ -109,29 +110,29 @@ export default function WelcomeImageSlider({ sliderImages }) {
           itemWidth={wp(100)}
           slideStyle={{ alignItems: "flex-start" }}
           sliderHeight={hp(10)}
-          onSnapToItem={(index) => handleSnapToItem(index)}
+          //onSnapToItem={(index) => handleSnapToItem(index)}
         />
       </View>
-      {imageLoaded[activeIndex] && (
-        <View style={{ width: wp(100), height: hp(35) }}>
-          <Carousel
-            data={viewsAndTexts}
-            loop={true}
-            autoplay={true}
-            renderItem={ItemTextCard}
-            hasParallaxImages={true}
-            sliderWidth={wp(100)}
-            firstItem={1}
-            autoplayInterval={4000}
-            itemWidth={wp(100)}
-            slideStyle={{ alignItems: "flex-start" }}
-            sliderHeight={hp(10)}
-            onSnapToItem={(index) => handleSnapToItem(index)}
-          />
-        </View>
-      )}
+      {/*   {imageLoaded[activeIndex] && ( */}
+      <View style={{ width: wp(100), height: hp(35) }}>
+        <Carousel
+          data={viewsAndTexts}
+          loop={true}
+          autoplay={true}
+          renderItem={ItemTextCard}
+          hasParallaxImages={true}
+          sliderWidth={wp(100)}
+          firstItem={1}
+          autoplayInterval={4000}
+          itemWidth={wp(100)}
+          slideStyle={{ alignItems: "flex-start" }}
+          sliderHeight={hp(10)}
+          //  onSnapToItem={(index) => handleSnapToItem(index)}
+        />
+      </View>
+      {/*  )} */}
       <Pagination
-        dotsLength={sliderImages.length}
+        dotsLength={welcomeSliderImages.length}
         activeDotIndex={paginationIndex}
         containerStyle={{ paddingTop: 10 }}
         dotStyle={{
@@ -155,7 +156,7 @@ const ItemTextCard = ({ item, index }) => {
   return <View style={styles.container}>{item}</View>;
 };
 
-const ItemCard = ({ item, index, handleImageLoad }) => {
+const ItemCard = ({ item, index /* , handleImageLoad */ }) => {
   return (
     <View style={{ width: wp(100), height: hp(25) }}>
       <ParallaxImage
@@ -168,7 +169,7 @@ const ItemCard = ({ item, index, handleImageLoad }) => {
         }}
         style={{ resizeMode: "contain" }}
         parallaxFactor={0.1}
-        onLoad={() => handleImageLoad(index)}
+        // onLoad={() => handleImageLoad(index)}
       />
     </View>
   );

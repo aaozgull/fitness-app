@@ -17,7 +17,8 @@ import { setUserInfoData } from "../../../store/userInfoSlice"; //"../store/auth
 import { createUserInfo } from "../../../utils/actions/userInfoActions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { getFormattedDate } from "../../../utils/date";
-const AddProfileInfoScreen = (props) => {
+const AddProfileInfoScreen = ({ navigation, route }) => {
+  const { Goal, FitnessLevel, Equipment } = route.params;
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -52,27 +53,27 @@ const AddProfileInfoScreen = (props) => {
     const newUserInfoData = {
       userId: userData.userId,
       gender: gender,
-      age: date,
+      age: date.toISOString(),
       weight: weight,
       height: height,
-      goal: props.Goal,
-      fitnessLevel: props.FitnessLevel,
-      equipment: props.Equipment,
+      goal: Goal,
+      fitnessLevel: FitnessLevel,
+      equipment: Equipment,
     };
-
     try {
       setIsLoading(true);
       const userInfoData = await createUserInfo(
         userData.userId,
         newUserInfoData
       );
+
       dispatch(setUserInfoData({ userInfoData }));
       setShowSuccessMessage(true);
 
       setTimeout(() => {
         setShowSuccessMessage(false);
       }, 3000);
-      props.navigation.navigate("ProfilePicture");
+      navigation.navigate("ProfilePicture");
     } catch (error) {
       console.log(error);
     } finally {
@@ -90,7 +91,7 @@ const AddProfileInfoScreen = (props) => {
             backgroundColor: colors.ui.grey10,
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            width: "70%",
+            width: "90%",
           }}
         >
           <Button
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     marginTop: 50,
-    padding: 20,
+    paddingLeft: 20,
   },
   formContainer: {
     //alignItems: "center",
@@ -235,10 +236,11 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: colors.ui.secondary,
     color: colors.text.primary,
+    width: "90%",
   },
   pickerContainer: { flexDirection: "row", marginBottom: 10, marginTop: 10 },
   textInput: {
-    width: "70%",
+    width: "90%",
     padding: 10,
     fontSize: 16,
     fontFamily: "medium",

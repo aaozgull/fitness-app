@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
-import { ActivityIndicator, Alert, Text, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
@@ -115,25 +115,13 @@ const SignUpForm = (props) => {
           marginVertical: 20,
         }}
       ></View>
-      <Text style={{ fontFamily: "regular", color: colors.text.primary }}>
+      <Text style={styles.terms}>
         By countinuing, I acknowledge that I have read and understood
-        <Text
-          style={{
-            fontFamily: "regular",
-            color: colors.text.primary,
-            fontWeight: "bold",
-          }}
-        >
+        <Text style={{ ...styles.terms, fontWeight: "bold" }}>
           The App User Agreement{" "}
         </Text>{" "}
         and the{" "}
-        <Text
-          style={{
-            fontFamily: "regular",
-            color: colors.text.primary,
-            fontWeight: "bold",
-          }}
-        >
+        <Text style={{ ...styles.terms, fontWeight: "bold" }}>
           Privacy Policy
         </Text>
       </Text>
@@ -165,3 +153,6 @@ const SignUpForm = (props) => {
 };
 
 export default SignUpForm;
+const styles = StyleSheet.create({
+  terms: { fontFamily: "regular", color: colors.text.primary },
+});

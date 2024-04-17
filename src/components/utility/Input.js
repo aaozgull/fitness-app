@@ -13,6 +13,8 @@ const Input = (props) => {
     props.onInputChanged(props.id, text);
   };
 
+  //console.log(`error in input ${props.errorText}`);
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{props.label}</Text>
@@ -35,7 +37,7 @@ const Input = (props) => {
 
       {props.errorText && (
         <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{props.errorText[0]}</Text>
+          <Text style={styles.errorText}>{props.errorText}</Text>
         </View>
       )}
     </View>

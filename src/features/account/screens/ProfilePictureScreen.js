@@ -7,21 +7,23 @@ import PageTitle from "../../../components/utility/PageTitle";
 import ProfileImage from "../../../components/utility/ProfileImage";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { colors } from "../../../infrastructure/theme/colors";
-import ProfilePic from "../../../../assets/images/ProfilePic2.jpg";
+import ProfilePic from "../../../../assets/images/ProfilePic.jpg";
 
-const ProfilePictureScreen = (props) => {
+const ProfilePictureScreen = ({ navigation }) => {
   const userData = useSelector((state) => state.auth.userData);
 
   return (
     <PageContainer style={styles.container}>
-      <ProfileImage
-        size={250}
-        userId={userData.userId}
-        uri={ProfilePic}
-        showEditButton={true}
-        editIconContainerStyle={styles.editIconContainer}
-        editSize={25}
-      />
+      <View style={styles.imageBorder}>
+        <ProfileImage
+          size={280}
+          userId={userData.userId}
+          uri={ProfilePic}
+          showEditButton={true}
+          editIconContainerStyle={styles.editIconContainer}
+          editSize={30}
+        />
+      </View>
       <View style={styles.icon}>
         <Ionicons name="camera" size={54} color="white" />
       </View>
@@ -30,16 +32,16 @@ const ProfilePictureScreen = (props) => {
         Let's personalize your account with your with your own profile picture
         so your trainer can see you.
       </Text>
-      <View style={{ marginTop: 20 }}>
+      <View style={styles.buttonContainer}>
         <SubmitButton
           title="CONTINUE"
-          onPress={() => props.navigation.navigate("SetupCalendar")}
+          onPress={() => navigation.navigate("SetupCalendar")}
           style={{ marginTop: 20 }}
           color={colors.ui.accent}
         />
         <SubmitButton
           title="Skip This For Now"
-          onPress={() => props.navigation.navigate("SetupCalendar")}
+          onPress={() => navigation.navigate("SetupCalendar")}
           style={{ marginTop: 20 }}
           color={colors.bg.primary}
           textColor={colors.ui.accent2}
@@ -51,12 +53,12 @@ const ProfilePictureScreen = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     alignItems: "center",
     marginTop: 100,
   },
   editIconContainer: {
     backgroundColor: colors.ui.primary,
+    right: 50,
   },
   icon: {
     marginTop: 60,
@@ -70,6 +72,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 0.3,
     color: colors.text.primary,
+    paddingHorizontal: 20,
+  },
+  imageBorder: {
+    padding: 10,
+    borderRadius: 150,
+    borderColor: colors.ui.accent2,
+    borderWidth: 2,
+    borderStyle: "dashed",
+  },
+  buttonContainer: {
+    marginBottom: 20,
+    flex: 1,
+    width: "90%",
+    justifyContent: "flex-end",
   },
 });
 

@@ -9,6 +9,11 @@ export const sliderImages = [
   require("../../assets/exerciseImages/slide4.png"),
   require("../../assets/exerciseImages/slide5.png"),
 ];
+export const welcomeSliderImages = [
+  require("../../assets/welcomeImages/slider1.jpg"),
+  require("../../assets/welcomeImages/slider2.jpg"),
+  require("../../assets/welcomeImages/slider3.jpg"),
+];
 
 export const bodyParts = [
   {
@@ -58,7 +63,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/ZBdUybBsOJZxqq",
+    gifUrl: "https://v2.exercisedb.io/image/vMZploiZmQdztf",
     id: "3220",
     instructions: [
       "Stand with your feet shoulder-width apart.",
@@ -75,7 +80,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/cvknkoB1wdv77s",
+    gifUrl: "https://v2.exercisedb.io/image/QYQJWvOHlqVBlA",
     id: "3672",
     instructions: [
       "Stand with your feet shoulder-width apart.",
@@ -92,7 +97,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/Yzjs053WanECXK",
+    gifUrl: "https://v2.exercisedb.io/image/VDE0OI6WDQlT2L",
     id: "3360",
     instructions: [
       "Start on all fours with your hands directly under your shoulders and your knees directly under your hips.",
@@ -109,7 +114,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/VhYJMVKNSofs9D",
+    gifUrl: "https://v2.exercisedb.io/image/zmBvZiLWUJLqo-",
     id: "1160",
     instructions: [
       "Start in a standing position with your feet shoulder-width apart.",
@@ -133,7 +138,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "leverage machine",
-    gifUrl: "https://v2.exercisedb.io/image/pNgtBASgUkfB3b",
+    gifUrl: "https://v2.exercisedb.io/image/saom4eDmur4TzO",
     id: "2331",
     instructions: [
       "Adjust the seat height and position yourself on the cycle cross trainer.",
@@ -149,7 +154,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "dumbbell",
-    gifUrl: "https://v2.exercisedb.io/image/NvEGPiHWN-0dBO",
+    gifUrl: "https://v2.exercisedb.io/image/f1mSQBgEKEH2dz",
     id: "1201",
     instructions: [
       "Start in a standing position with your feet shoulder-width apart and a dumbbell in each hand.",
@@ -175,7 +180,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/m-cBLDwdpfL1LN",
+    gifUrl: "https://v2.exercisedb.io/image/5mI0QFPTnlprwu",
     id: "3221",
     instructions: [
       "Stand with your feet shoulder-width apart.",
@@ -191,7 +196,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/dXJUgwQDbb4DWp",
+    gifUrl: "https://v2.exercisedb.io/image/0vmnajoRrl2ZzN",
     id: "3636",
     instructions: [
       "Stand facing a wall with your feet hip-width apart.",
@@ -209,7 +214,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/94ePXp-xmeMB-J",
+    gifUrl: "https://v2.exercisedb.io/image/Qwsu2kwnhmeXF4",
     id: "0501",
     instructions: [
       "Start in a standing position with your feet shoulder-width apart.",
@@ -234,7 +239,7 @@ export const demoExercises = [
   {
     bodyPart: "cardio",
     equipment: "body weight",
-    gifUrl: "https://v2.exercisedb.io/image/tqoEMpfmp0WWvi",
+    gifUrl: "https://v2.exercisedb.io/image/GkaAT8hGV88FV0",
     id: "3224",
     instructions: [
       "Stand with your feet together and your arms by your sides.",

@@ -91,7 +91,11 @@ const ProfileImage = (props) => {
         <Image
           style={{
             ...(props.size === "60%" ? styles.fullImage : styles.image),
-            ...{ width: props.size, height: props.size },
+            ...(props.size > 150
+              ? { borderRadius: 150 }
+              : { borderRadius: 50 }),
+            width: props.size,
+            height: props.size,
           }}
           source={image}
         />
@@ -125,7 +129,7 @@ const ProfileImage = (props) => {
 
 const styles = StyleSheet.create({
   image: {
-    borderRadius: 50,
+    //borderRadius: 50,
     borderColor: colors.grey,
     borderWidth: 1,
   },
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
   editIconContainer: {
     position: "absolute",
     bottom: 0,
-    right: 0,
+
     //backgroundColor: colors.lightGrey,
     borderRadius: 20,
     padding: 8,

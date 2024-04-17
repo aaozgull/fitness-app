@@ -8,7 +8,8 @@ import { colors } from "../../../infrastructure/theme/colors";
 import RegistrationItem from "../components/RegistrationItem";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
-const EquipmentScreen = (props) => {
+const EquipmentScreen = ({ navigation, route }) => {
+  const { Goal, FitnessLevel } = route.params;
   const [selectedEquipment, setSelectedEquipment] = useState(null);
 
   const handlePress = (equipment) => {
@@ -29,17 +30,12 @@ const EquipmentScreen = (props) => {
   ];
 
   function continueHandler() {
-    console.log(
-      "continueHandler" +
-        props.Goal +
-        " " +
-        props.FitnessLevel +
-        " " +
-        selectedEquipment
-    );
-    props.navigation.navigate("AddUserInfo", {
-      Goal: props.Goal,
-      FitnessLevel: props.FitnessLevel,
+    /*  console.log(
+      "continueHandler" + Goal + " " + FitnessLevel + " " + selectedEquipment
+    ); */
+    navigation.navigate("AddUserInfo", {
+      Goal,
+      FitnessLevel,
       Equipment: selectedEquipment,
     });
   }

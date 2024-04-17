@@ -6,8 +6,8 @@ import { startOfMonth, eachDayOfInterval, addMonths } from "date-fns";
 //import { getFormattedDate } from "../date";
 import { setCalendarData } from "../../store/calendarSlice";
 
-export const createCalendar = async (loggedInUserId) => {
-  const dispatch = useDispatch();
+export const createCalendar = async (loggedInUserId, dispatch) => {
+  //const dispatch = useDispatch();
   const app = getFirebaseApp();
   const dbRef = ref(getDatabase(app));
 
@@ -61,7 +61,7 @@ const generateDatesForThreeMonths = () => {
   return dates;
 };
 
-const addActivitiesData = async (
+export const addActivitiesData = async (
   CalendarId,
   loggedInUserId,
   calendarItemData

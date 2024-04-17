@@ -8,7 +8,8 @@ import { colors } from "../../../infrastructure/theme/colors";
 import RegistrationItem from "../components/RegistrationItem";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
-const FitnessLevelScreen = ({ navigation, Goal }) => {
+const FitnessLevelScreen = ({ navigation, route }) => {
+  const { Goal } = route.params;
   const fitnessLevels = [
     { text: "Beginner", subText: "Just Started my Journey" },
     { text: "Intermediate", subText: "Comfortable with most Equipment" },
@@ -23,7 +24,7 @@ const FitnessLevelScreen = ({ navigation, Goal }) => {
   };
 
   function continueHandler() {
-    // console.log("continueHandler");
+    // console.log(` Goal ${Goal} continueHandler ${selectedFitnessLevel}`);
     navigation.navigate("Equipment", {
       Goal,
       FitnessLevel: selectedFitnessLevel,

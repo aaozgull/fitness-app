@@ -1,23 +1,14 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StatusBar,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
 import { FadeInDown } from "react-native-reanimated";
 import WelcomeImageSlider from "../components/WelcomeImageSlider";
-import { welcomeSliderImages } from "../../../constants";
+
 import { colors } from "../../../infrastructure/theme/colors";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
 export default function WelcomeScreen({ navigation }) {
-  //const navigation = useNavigation();
-
   return (
     <LinearGradient
       colors={["transparent", "transparent"]}
@@ -36,7 +27,7 @@ export default function WelcomeScreen({ navigation }) {
       >
         <Text style={styles.link}>Log in</Text>
       </TouchableOpacity>
-      <WelcomeImageSlider sliderImages={welcomeSliderImages} />
+      <WelcomeImageSlider />
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
         <Animated.View
           entering={FadeInDown.delay(100).springify()}

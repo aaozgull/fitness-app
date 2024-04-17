@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import PageContainer from "../../../components/utility/PageContainer";
@@ -18,8 +18,7 @@ const CalendarSetupScreen = (props) => {
     const setupCalendar = async () => {
       try {
         // Perform calendar setup
-        dispatch(createCalendar(userData.userId));
-        // Once the setup is complete, set isLoading to false
+        await createCalendar(userData.userId, dispatch);
         setIsLoading(false);
       } catch (error) {
         // Handle any errors that occur during setup
@@ -36,7 +35,7 @@ const CalendarSetupScreen = (props) => {
   if (isLoading) {
     return (
       <PageContainer style={styles.container}>
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator size="large" color={colors.ui.tertiary} />
         <Text style={styles.text}>Setting up calendar...</Text>
       </PageContainer>
     );
@@ -51,7 +50,7 @@ const CalendarSetupScreen = (props) => {
       </View>
       <PageTitle text="Let's make a Calendar" />
       <Text style={styles.text}>Calendar setup complete!</Text>
-      <View style={{ marginTop: 20 }}>
+      <View style={styles.buttonContainer}>
         <SubmitButton
           title="CONTINUE"
           onPress={continueHandler}
@@ -67,21 +66,27 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     alignItems: "center",
-    marginTop: 100,
+    marginTop: 150,
   },
 
   icon: {
-    marginTop: 60,
+    marginTop: 100,
     borderRadius: 50,
     borderColor: colors.ui.accent2,
     borderWidth: 15,
     backgroundColor: colors.ui.accent2,
   },
   text: {
-    fontFamily: "medium",
-    fontSize: 16,
-    letterSpacing: 0.3,
+    fontFamily: "bold",
+    fontSize: 22,
+    letterSpacing: 0.5,
     color: colors.text.primary,
+  },
+  buttonContainer: {
+    marginBottom: 20,
+    flex: 1,
+    width: "90%",
+    justifyContent: "flex-end",
   },
 });
 

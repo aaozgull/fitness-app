@@ -9,7 +9,7 @@ import CalendarSetupScreen from "../../features/account/screens/CalendarSetupScr
 const Stack = createNativeStackNavigator();
 
 export const AccountNavigator = () => (
-  <Stack.Navigator headerMode="none">
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Goal" component={GoalScreen} />
     <Stack.Screen name="FitnessLevel" component={FitnessLevelScreen} />
     <Stack.Screen name="Equipment" component={EquipmentScreen} />

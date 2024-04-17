@@ -24,7 +24,7 @@ const GoalScreen = ({ navigation }) => {
   };
 
   function continueHandler() {
-    //console.log("continueHandler");
+    // console.log(`continueHandler ${selectedGoal}`);
     navigation.navigate("FitnessLevel", {
       Goal: selectedGoal,
     });
