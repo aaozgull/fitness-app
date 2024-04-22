@@ -7,10 +7,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const CheckoutStack = createNativeStackNavigator();
 
-const checkoutNavigator = () => {
+const CheckoutNavigator = () => {
   return (
     <CheckoutStack.Navigator headerMode="none">
-      <CheckoutStack.Screen name="Checkout" component={CheckoutScreen} />
+      <CheckoutStack.Screen name="CheckoutScreen" component={CheckoutScreen} />
       <CheckoutStack.Screen
         name="CheckoutSuccess"
         component={CheckoutSuccessScreen}
@@ -23,4 +23,4 @@ const checkoutNavigator = () => {
   );
 };
 
-export default checkoutNavigator;
+export default CheckoutNavigator;

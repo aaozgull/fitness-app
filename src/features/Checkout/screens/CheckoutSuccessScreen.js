@@ -6,7 +6,7 @@ import { Avatar } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
 import PageContainer from "../../../components/utility/PageContainer";
 
-const CheckoutSuccessScreen = () => {
+const CheckoutSuccessScreen = ({ route }) => {
   const { error = "" } = route.params;
   return (
     <PageContainer style={{ paddingHorizontal: 20 }}>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     // paddingHorizontal: 20,
     flex: 1,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: colors.bg.primary,
   },
   cartIconContainer: {
     flex: 1,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   indicator: {
-    position: absolute,
+    position: "absolute",
     top: "50%",
     left: "35%",
     zIndex: 999,

@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { Avatar } from "react-native-paper";
 import PageContainer from "../../../components/utility/PageContainer";
 import { colors } from "../../../infrastructure/theme/colors";
 
-const CheckoutErrorScreen = () => {
+const CheckoutErrorScreen = ({ route }) => {
   const { error = "" } = route.params;
   return (
     <PageContainer style={{ paddingHorizontal: 20 }}>
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     // paddingHorizontal: 20,
     flex: 1,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: colors.bg.primary,
   },
   cartIconContainer: {
     flex: 1,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   indicator: {
-    position: absolute,
+    position: "absolute",
     top: "50%",
     left: "35%",
     zIndex: 999,

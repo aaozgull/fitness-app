@@ -11,7 +11,7 @@ import ChatNavigator from "./Chat.navigator";
 import CheckoutNavigator from "./Checkout.navigator";
 import CalendarNavigator from "./Calendar.navigator";
 
-import { theme } from "../theme";
+import { colors } from "../theme/colors";
 
 import ChatIcon from "../../features/Chat/screen/ChatIcon";
 
@@ -39,8 +39,8 @@ export const AppNavigator = () => (
   <>
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarActiveTintColor: theme.colors.ui.tertiary,
-        tabBarInactiveTintColor: theme.colors.ui.gray500,
+        tabBarActiveTintColor: colors.ui.tertiary,
+        tabBarInactiveTintColor: colors.ui.gray500,
         headerTitle: "",
         headerShadowVisible: false,
         tabBarHideOnKeyboard: true,
@@ -109,6 +109,6 @@ export const AppNavigator = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: colors.bg.primary,
   },
 });
