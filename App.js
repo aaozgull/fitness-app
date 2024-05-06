@@ -10,6 +10,8 @@ import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
 import { Provider } from "react-redux";
 import { store } from "./src/store/store";
+//import { ClerkProvider } from "@clerk/clerk-expo";
+//import Constants from "expo-constants";
 import { MenuProvider } from "react-native-popup-menu";
 
 SplashScreen.preventAutoHideAsync();

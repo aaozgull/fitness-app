@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
 import WorkoutNavigator from "./Workout.navigator";
+import RecipesNavigator from "./recipes.navigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const CalendarNavigator = () => {
           //headerTitle: "",
         }}
       />
+      <Stack.Screen name="Recipes" component={RecipesNavigator} />
     </Stack.Navigator>
   );
 };

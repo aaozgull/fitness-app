@@ -7,11 +7,16 @@ import {
 import { child, getDatabase, ref, set, update } from "firebase/database";
 import { authenticate, logout } from "../../store/authSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+//import * as WebBrowser from "expo-web-browser";
+//import { useOAuth, useUser } from "@clerk/clerk-expo";
+//import { useWarmUpBrowser } from "../../components/hooks/useWarmUpBrowser";
 import { getUserData } from "./userActions";
+import { Alert } from "react-native";
 
 let timer;
+//WebBrowser.maybeCompleteAuthSession();
 
-export const signUp = (firstName, lastName, email, password) => {
+export const signUp = (firstName, lastName, email, password, authType) => {
   return async (dispatch) => {
     const app = getFirebaseApp();
     const auth = getAuth(app);
@@ -29,7 +34,13 @@ export const signUp = (firstName, lastName, email, password) => {
       const timeNow = new Date();
       const millisecondsUntilExpiry = expiryDate - timeNow;
 
-      const userData = await createUser(firstName, lastName, email, uid);
+      const userData = await createUser(
+        firstName,
+        lastName,
+        email,
+        uid,
+        authType
+      );
 
       dispatch(
         authenticate({ token: accessToken, userData, newRegistration: true })
@@ -122,7 +133,7 @@ export const updateSignedInUserData = async (userId, newData) => {
   await update(childRef, newData);
 };
 
-const createUser = async (firstName, lastName, email, userId) => {
+const createUser = async (firstName, lastName, email, userId, authType) => {
   const firstLast = `${firstName} ${lastName}`.toLowerCase();
   const userData = {
     firstName,
@@ -130,6 +141,7 @@ const createUser = async (firstName, lastName, email, userId) => {
     firstLast,
     email,
     userId,
+    authType,
     signUpDate: new Date().toISOString(),
   };
 
@@ -149,3 +161,97 @@ const saveDataToStorage = (token, userId, expiryDate) => {
     })
   );
 };
+
+/* export const googleSignin = async () => {
+  useWarmUpBrowser();
+  const user = useUser();
+  const { startOAuthFlow } = useOAuth({
+    strategy: "oauth_google",
+  });
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    (async () => {
+      try {
+        const email = user.user?.primaryEmailAddress?.emailAddress;
+        await signIn(email, "");
+      } catch (err) {
+        console.error("Failed to store user data:", err);
+        return;
+      }
+    })();
+  }, [user]);
+  try {
+    const { createdSessionId, setActive } = await startOAuthFlow();
+
+    if (createdSessionId && setActive) {
+      setActive({ session: createdSessionId });
+    } else {
+      console.log("failed to sign in");
+    }
+  } catch (err) {
+    Alert.alert("Error occurred, try again");
+    console.log(err);
+  }
+}; */
+/* 
+export const googleSignin = async () => {
+  try {
+    const { startOAuthFlow, useUser, signIn } = yourImportsHere; // Import necessary functions
+
+    const user = useUser();
+    const { createdSessionId, setActive } = await startOAuthFlow({
+      strategy: "oauth_google",
+    });
+
+    if (createdSessionId && setActive) {
+      setActive({ session: createdSessionId });
+
+      // Assuming user is available after successful OAuth flow
+      if (user && user.user?.primaryEmailAddress?.emailAddress) {
+        const email = user.user.primaryEmailAddress.emailAddress;
+
+        // Now call your signIn function to sign in with Firebase
+        await signIn(email, "");
+
+        // Additional actions after successful sign-in can be placed here
+      } else {
+        console.log("User data not available for sign-in");
+      }
+    } else {
+      console.log("Failed to start OAuth flow");
+    }
+  } catch (err) {
+    Alert.alert("Error occurred, try again");
+    console.log(err);
+  }
+};
+
+export const googleSignup = async () => {
+  useWarmUpBrowser();
+  const { startOAuthFlow } = useOAuth({
+    strategy: "oauth_google",
+  });
+  try {
+    const { createdSessionId, setActive, signUp } = await startOAuthFlow();
+
+    if (createdSessionId && setActive && signUp) {
+      setActive({ session: createdSessionId });
+
+      await signUp(
+        signUp?.firstName,
+        signUp?.lastName,
+        signUp.emailAddress,
+        "",
+        "google"
+      );
+    } else {
+      console.log("failed to sign up");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}; */

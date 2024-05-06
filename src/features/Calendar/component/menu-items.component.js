@@ -1,17 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons"; // You can use a different icon library
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
 
 import { theme } from "../../../infrastructure/theme";
 import IconWithText from "../../../components/utility/IconWithText";
 
 const MenuItems = ({ onSelectedMenuItem }) => {
+  const navigation = useNavigation(); // Hook into navigation
   const menuItems = [
-    { icon: "dumbbell", text: "Workout" },
+    { icon: "dumbbell", text: "Workout", screen: "Workout" },
     { icon: "running", text: "Activity" },
-    { icon: "utensils", text: "Meal" },
+    { icon: "utensils", text: "Meal", screen: "Recipes" },
     { icon: "camera", text: "Photos" },
     { icon: "bed", text: "Sleep" },
+    /* <FontAwesome6 name="glass-water" size={24} color="black" />
+    <Fontisto name="photograph" size={24} color="black" />
+    <MaterialCommunityIcons name="shoe-sneaker" size={24} color="black" />
+     <FontAwesome6 name="weight-scale" size={24} color="black" /> 
+     <MaterialCommunityIcons name="power-sleep" size={24} color="black" />
+     <MaterialCommunityIcons name="sleep" size={24} color="black" />*/
     { icon: "user", text: "Body Stats" },
     { icon: "books", text: "read before sleep" },
   ];
@@ -22,7 +30,10 @@ const MenuItems = ({ onSelectedMenuItem }) => {
           text={item.text}
           icon={item.icon}
           key={index}
-          onPressed={() => onSelectedMenuItem(item)}
+          onPress={() => {
+            onSelectedMenuItem(item);
+            item.screen ? navigation.navigate(item.screen) : null; // Navigate to the specified screen
+          }}
           iconStyle={styles.menuItemIcon}
           textStyle={styles.menuItemText}
         />

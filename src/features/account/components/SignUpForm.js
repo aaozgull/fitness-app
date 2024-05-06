@@ -1,3 +1,4 @@
+import * as WebBrowser from "expo-web-browser";
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +10,8 @@ import { validateInput } from "../../../utils/actions/formActions";
 import { reducer } from "../../../utils/reducers/formReducer";
 import { signUp } from "../../../utils/actions/authActions";
 import { colors } from "../../../infrastructure/theme/colors";
+import { async } from "validate.js";
+//import { useWarmUpBrowser } from "../../../components/hooks/useWarmUpBrowser";
 
 const initialState = {
   inputValues: {
@@ -25,10 +28,10 @@ const initialState = {
   },
   formIsValid: false,
 };
-
+//WebBrowser.maybeCompleteAuthSession();
 const SignUpForm = (props) => {
   const dispatch = useDispatch();
-
+  // useWarmUpBrowser();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [formState, dispatchFormState] = useReducer(reducer, initialState);
@@ -47,6 +50,16 @@ const SignUpForm = (props) => {
     }
   }, [error]);
 
+  const googleSignupHandler = async () => {
+    try {
+      setIsLoading(true);
+      //  googleSignup();
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
+
   const authHandler = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -55,7 +68,8 @@ const SignUpForm = (props) => {
         formState.inputValues.firstName,
         formState.inputValues.lastName,
         formState.inputValues.email,
-        formState.inputValues.password
+        formState.inputValues.password,
+        "email"
       );
       setError(null);
       await dispatch(action);
@@ -142,7 +156,7 @@ const SignUpForm = (props) => {
           />
           <SubmitButton
             title="SIGN UP WITH GOOGLE"
-            onPress={() => null}
+            onPress={googleSignupHandler}
             style={{ marginTop: 20 }}
             color={colors.ui.tertiary}
           />

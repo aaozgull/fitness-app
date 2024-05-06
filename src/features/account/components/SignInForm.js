@@ -7,7 +7,7 @@ import { ActivityIndicator, Alert } from "react-native";
 
 import { validateInput } from "../../../utils/actions/formActions";
 import { reducer } from "../../../utils/reducers/formReducer";
-import { signIn } from "../../../utils/actions/authActions";
+import {  signIn } from "../../../utils/actions/authActions";
 import { useDispatch } from "react-redux";
 import { colors } from "../../../infrastructure/theme/colors";
 
@@ -45,6 +45,16 @@ const SignInForm = (props) => {
       Alert.alert("An error occured", error, [{ text: "Okay" }]);
     }
   }, [error]);
+
+  const googleSigninHandler = async () => {
+    try {
+      setIsLoading(true);
+      // googleSignin();
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
 
   const authHandler = useCallback(async () => {
     try {
@@ -112,7 +122,7 @@ const SignInForm = (props) => {
           />
           <SubmitButton
             title="SIGN IN WITH GOOGLE"
-            onPress={() => null}
+            onPress={googleSigninHandler}
             style={{ marginTop: 20 }}
             color={colors.ui.tertiary}
           />

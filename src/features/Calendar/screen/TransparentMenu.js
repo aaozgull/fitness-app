@@ -4,6 +4,9 @@ import Modal from "react-native-modal";
 import { format } from "date-fns";
 
 import MenuItems from "../component/menu-items.component";
+import SubMenuItems from "../component/sub-menu-items.component"; // New sub-menu component
+
+import { useNavigation } from "@react-navigation/native";
 import { theme } from "../../../infrastructure/theme";
 
 const TransparentMenu = ({
@@ -13,13 +16,32 @@ const TransparentMenu = ({
   onSelectedMenuItem,
 }) => {
   const formattedDate = selectedItem ? format(selectedItem, "MMM dd") : "";
+  const [selectedItemText, setSelectedItemText] = useState(null); // State to track the selected item text
+  const navigation = useNavigation();
+
+  const handleSelectMenuItem = (menuItem) => {
+    onClose(); // Close the menu
+    setSelectedItemText(menuItem.text); // Set the selected item text
+    onSelectedMenuItem(menuItem); // Pass the selected menu item to the parent component
+  };
 
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
       <View style={styles.modalContainer}>
         <PageTitle title={formattedDate} textStyle={styles.menuHeaderText} />
 
-        <MenuItems onSelectedMenuItem={onSelectedMenuItem} />
+        <MenuItems onSelectedMenuItem={handleSelectMenuItem} />
+        {/* Conditional rendering of sub-menu */}
+        {selectedItemText === "Activity" && (
+          <SubMenuItems
+            isVisible={isVisible}
+            onClose={onClose}
+            onSelectedMenuItem={(item) => {
+              onClose(); // Close the sub-menu after selecting an item
+              navigation.navigate(item.screen); // Navigate to the specified screen
+            }}
+          />
+        )}
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
           <Text style={styles.closeButtonText}>X</Text>
         </TouchableOpacity>
