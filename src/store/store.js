@@ -8,6 +8,7 @@ import userInfoSlice from "./userInfoSlice";
 import progressSlice from "./progressSlice";
 import calendarSlice from "./calendarSlice";
 import calendarActivitiesSlice from "./calendarActivitiesSlice";
+import recipeSlice from "./recipeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     progress: progressSlice,
     calendar: calendarSlice,
     activities: calendarActivitiesSlice,
+    recipes: recipeSlice,
   },
 });
