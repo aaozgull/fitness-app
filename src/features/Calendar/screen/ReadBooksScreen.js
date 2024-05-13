@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
 import SubmitButton from "../../../components/utility/SubmitButton";
@@ -14,14 +14,12 @@ const ReadBooksScreen = (props) => {
   }
   return (
     <PageContainer style={styles.container}>
-      <View>
-        First day of the streak. Well Done!
-        <Divider />
-      </View>
+      <Text>First day of the streak. Well Done!</Text>
+      <Divider />
       <View style={styles.icon}>
-        <FontAwesome5 name="books" size={54} color="white" />
+        <FontAwesome name="book" size={100} color={colors.ui.accent2} />
       </View>
-      <PageTitle text="Read Before Bed" />
+      <PageTitle title="Read Before Bed" />
 
       <Text style={styles.text}>Schedualed</Text>
       <View style={styles.buttonContainer}>
@@ -46,19 +44,19 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 100,
     borderRadius: 50,
-    borderColor: colors.ui.accent,
-    borderWidth: 15,
+    //borderColor: colors.ui.accent,
+    // borderWidth: 15,
     //backgroundColor: colors.ui.accent2,
 
     padding: 10,
-    borderWidth: 2,
-    borderStyle: "solid",
+    //borderWidth: 2,
+    //borderStyle: "solid",
   },
   text: {
-    fontFamily: "bold",
+    fontFamily: "medium",
     fontSize: 22,
     letterSpacing: 0.5,
-    color: colors.text.primary,
+    color: colors.text.gray500,
   },
   buttonContainer: {
     marginBottom: 20,

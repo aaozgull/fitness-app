@@ -5,7 +5,6 @@ import ProfileInfoScreen from "../../features/settings/screens/ProfileInfoScreen
 //import { CameraScreen } from "../../features/settings/screens/camera.screen";
 /* import ProfileScreen from "../../features/settings/screens/profile.screen"; */
 import BMICalculation from "../../features/settings/screens/CalculationScreen";
-import TimerScreen from "../../features/settings/screens/TimerScreen";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -24,7 +23,6 @@ export const SettingsNavigator = () => {
       <SettingsStack.Screen name="ProfileInfo" component={ProfileInfoScreen} />
       {/*   <SettingsStack.Screen name="Camera" component={CameraScreen} /> */}
       <SettingsStack.Screen name="BMICalculation" component={BMICalculation} />
-      <SettingsStack.Screen name="TimerScreen" component={TimerScreen} />
     </SettingsStack.Navigator>
   );
 };

@@ -6,7 +6,6 @@ import ExerciseCommentScreen from "../../features/Workout/screens/ExerciseCommen
 
 import WorkoutScreen from "../../features/Workout/screens/WorkoutScreen";
 import ExercisesScreen from "../../features/Workout/screens/ExercisesScreen";
-import RestScreen from "../../features/Workout/screens/RestScreen";
 
 //import TimerScreen from "../../../";
 
@@ -14,17 +13,22 @@ const WorkoutStack = createNativeStackNavigator();
 
 const WorkoutNavigator = () => {
   return (
-    <WorkoutStack.Navigator headerMode="none">
-      <WorkoutStack.Screen name="WorkoutScreen" component={WorkoutScreen} />
-      <WorkoutStack.Screen name="Exercises" component={ExercisesScreen} />
+    <WorkoutStack.Navigator /*  headerMode="none" */>
       <WorkoutStack.Screen
-        name="Rest"
-        component={RestScreen}
+        name="WorkoutScreen"
+        component={WorkoutScreen}
         options={{ headerShown: false }}
       />
       <WorkoutStack.Screen
+        name="Exercises"
+        component={ExercisesScreen}
+        options={{ headerShown: false }}
+      />
+
+      <WorkoutStack.Screen
         name="ExerciseDetail"
         component={ExerciseDetailScreen}
+        options={{ headerShown: false }}
       />
       <WorkoutStack.Screen name="NoExercise" component={NoExerciseScreen} />
       <WorkoutStack.Screen

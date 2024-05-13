@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
   },
   pageTitleColor: {
     color: theme.colors.text.fiftary,
+    fontSize: 28,
   },
   divider: {
     backgroundColor: theme.colors.ui.accent2,

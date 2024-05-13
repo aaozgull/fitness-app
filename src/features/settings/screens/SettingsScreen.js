@@ -207,12 +207,12 @@ const SettingsScreen = (props) => {
           hideImage={true}
           onPress={() => props.navigation.navigate("BMICalculation")}
         />
-        <DataItem
+        {/*    <DataItem
           type={"link"}
           title="Timer Screen"
           hideImage={true}
           onPress={() => props.navigation.navigate("TimerScreen")}
-        />
+        /> */}
 
         <SubmitButton
           title="Logout"

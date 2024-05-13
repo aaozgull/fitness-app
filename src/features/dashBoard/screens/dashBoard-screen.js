@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   },
   pageTitleColor: {
     color: theme.colors.text.fiftary,
+    fontSize: 28,
   },
   userNameText: {
     padding: theme.spaceInNumber[3],

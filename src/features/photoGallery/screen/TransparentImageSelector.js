@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   menuHeaderText: {
     fontFamily: "blackItalic",
     letterSpacing: 0.3,
+    fontSize: 28,
     //fontSize: theme.fontSizesInNumber.title, //18,
     // fontWeight: `${theme.fontWeights.bold}`,
     // color: theme.colors.text.fiftary, //"#333", // Adjust the color as needed

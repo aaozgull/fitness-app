@@ -7,8 +7,10 @@ import {
   StyleSheet,
 } from "react-native";
 import { colors } from "../../../infrastructure/theme/colors";
+import { useNavigation } from "@react-navigation/native"; // Import navigation hook
 
-const TimerScreen = () => {
+const TimerScreen = ({ navigation }) => {
+  // const navigation = useNavigation(); // Initialize navigation
   const [roundDuration, setRoundDuration] = useState(3);
   const [restDuration, setRestDuration] = useState(1);
   const [numberOfRounds, setNumberOfRounds] = useState(2);
@@ -26,16 +28,26 @@ const TimerScreen = () => {
   const startCountDown = () => {
     if (currentRound <= numberOfRounds) {
       setIsRunning(true);
+      console.log(`currentRound <= numberOfRounds)`);
       countDown.current = setInterval(() => {
         setTime((prevTime) => {
           if (prevTime === 0) {
+            console.log(`prevTime === 0`);
             clearInterval(countDown.current);
             if (currentRound < numberOfRounds) {
+              console.log(`currentRound < numberOfRounds`);
               if (isResting) {
+                console.log(
+                  `1 navigation.navigate("Rest", { time: restDuration });`
+                );
                 setCurrentRound(currentRound + 1);
                 setIsResting(false);
                 return roundDuration;
               } else {
+                console.log(
+                  `navigation.navigate("Rest", { time: restDuration });`
+                );
+                navigation.navigate("Rest", { time: restDuration });
                 setIsResting(true);
                 return restDuration;
               }
@@ -59,6 +71,7 @@ const TimerScreen = () => {
   };
 
   const resetCountDown = () => {
+    console.log(`resetCountDown`);
     setCurrentRound(1);
     setIsResting(false);
     setIsRunning(false);
@@ -68,6 +81,8 @@ const TimerScreen = () => {
 
   useEffect(() => {
     if (currentRound === numberOfRounds && time === 0) {
+      console.log(` currentRound === numberOfRounds && time === 0`);
+      setCurrentRound(1);
       clearInterval(countDown.current);
       setIsResting(false);
       setIsRunning(false);
@@ -78,14 +93,21 @@ const TimerScreen = () => {
     if (isRunning && time === 0) {
       if (currentRound < numberOfRounds) {
         if (isResting) {
+          console.log(
+            `${currentRound} Running && time === 0 isResting ${roundDuration}`
+          );
           setCurrentRound(currentRound + 1);
           setIsResting(false);
           setTime(roundDuration);
         } else {
+          console.log(
+            `${currentRound}  Running && time === 0 else isResting f ${restDuration} `
+          );
           setIsResting(true);
           setTime(restDuration);
         }
       } else {
+        console.log(` else isRunning && time === 0`);
         setIsRunning(false);
         setIsResting(false);
         setTime(0);

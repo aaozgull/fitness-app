@@ -20,7 +20,7 @@ export default function ImageSlider() {
       firstItem={1}
       autoplayInterval={4000}
       itemWidth={wp(100) - 70}
-      slideStyle={{ display: "flex", alignItems: "center" }}
+      slideStyle={{ display: "flex", alignItems: "center", marginBottom: 20 }}
       sliderHeight={hp(10) - 50}
       //viewPropTypes={ViewPropTypes}
     />

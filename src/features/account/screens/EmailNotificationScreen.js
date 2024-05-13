@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { colors } from "../../../infrastructure/theme/colors";
-import { createCalendar } from "../../../utils/actions/calendarActions";
-import { setIsNewRegistration } from "../../../store/authSlice";
 
 const EmailNotificationScreen = (props) => {
   function continueHandler() {}
   return (
     <PageContainer style={styles.container}>
-      <View style={styles.icon}>
-        <Ionicons name="mail-open" size={54} color="white" />
+      <View>
+        <Ionicons name="mail-open" size={150} color={colors.ui.accent2} />
       </View>
 
       {/* <MaterialCommunityIcons
@@ -45,7 +43,7 @@ const EmailNotificationScreen = (props) => {
           onPress={() => navigation.navigate("SetupCalendar")}
           style={{ marginTop: 20 }}
           color={colors.bg.primary}
-          textColor={colors.ui.accent2}
+          textColor={colors.ui.accent}
         />
       </View>
     </PageContainer>
@@ -67,8 +65,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ui.accent2,
   },
   text: {
-    fontFamily: "bold",
-    fontSize: 22,
+    fontFamily: "regular",
+    fontSize: 20,
     letterSpacing: 0.5,
     color: colors.text.primary,
   },

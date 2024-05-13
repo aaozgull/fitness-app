@@ -16,7 +16,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
+import PageTitle from "../../../components/utility/PageTitle";
 //import { ExerciseInfoCard } from "../components/ExerciseInfoCard";
 
 //import { Search } from "../components/search.component";
@@ -40,17 +40,17 @@ const ExercisesScreen = ({ navigation, route }) => {
   // const [isToggled, setIsToggled] = useState(false);
   //console.log(error);
 
-  /*  const getExercises = async (bodypart) => {
+  const getExercisesByBodyparts = async (bodypart) => {
     const data = await fetchExercisesByBodypart(bodypart);
     setExercises(data);
-    console.log(bodypart + " got data: ", data);
+    //console.log(bodypart + " got data: ", data);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    if (item) getExercises(item.name);
+    if (item) getExercisesByBodyparts(item.name);
     setIsLoading(false);
-  }, [item]); */
+  }, [item]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -77,14 +77,18 @@ const ExercisesScreen = ({ navigation, route }) => {
       )} */}
       <View>
         <Image source={item.image} style={{ width: wp(100), height: hp(45) }} />
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.leftButton}
+        >
           <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
         </TouchableOpacity>
-        <View style={{ marginHorizontal: 4, marginTop: 4, marginBottom: 16 }}>
-          <Text style={{ fontSize: hp(3), fontWeight: "600", color: "#333" }}>
-            {item.name} exercises
-          </Text>
-        </View>
+
+        <PageTitle
+          title={`${item.name} Exercises`}
+          style={styles.pageTitle}
+          textStyle={styles.pageTitleColor}
+        />
 
         <FlatList
           style={{ padding: 16 }}
@@ -149,8 +153,8 @@ const ExerciseInfoCard = ({ exercise }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    shadowColor: "#000",
+    backgroundColor: colors.bg.primary,
+    shadowColor: colors.ui.gray700,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -170,11 +174,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   text: {
-    fontSize: hp(1.7),
-    color: "#333", // Set your desired text color
-    fontWeight: "600",
-    marginLeft: 1,
-    marginTop: 4,
+    fontSize: hp(2),
+    color: colors.text.primary, // Set your desired text color
+    // fontWeight: "600",
+    fontFamily: "medium",
+    // marginLeft: 5,
+    // marginVertical: 5,
+    margin: 10,
     letterSpacing: 0.5,
   },
 
@@ -186,7 +192,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     //marginTop: StatusBar.currentHeight,
-    backgroundColor: colors.bg.primary,
+    backgroundColor: colors.ui.secondary,
   },
 
   gif: {
@@ -208,10 +214,28 @@ const styles = StyleSheet.create({
   infoCardContainer: {
     flex: 1,
     paddingVertical: 7,
-    borderBottomColor: colors.ui.grey10,
+    borderBottomColor: colors.ui.grey300,
     borderBottomWidth: 1,
     alignItems: "center",
-    backgroundColor: "blue",
+    backgroundColor: "red",
     //minHeight: 50,
+  },
+  leftButton: {
+    position: "absolute",
+    borderRadius: hp(2),
+    top: hp(4),
+    left: wp(4),
+    backgroundColor: colors.ui.accent,
+  },
+  pageTitle: {
+    backgroundColor: colors.ui.quaternary,
+    // marginTop: 10,
+    paddingTop: 20,
+    paddingLeft: 20,
+  },
+  pageTitleColor: {
+    color: colors.text.fiftary,
+    fontSize: 28,
+    textTransform: "capitalize",
   },
 });

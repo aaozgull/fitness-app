@@ -44,7 +44,7 @@ const ProfilePictureScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("SetupCalendar")}
           style={{ marginTop: 20 }}
           color={colors.bg.primary}
-          textColor={colors.ui.accent2}
+          textColor={colors.ui.accent}
         />
       </View>
     </PageContainer>

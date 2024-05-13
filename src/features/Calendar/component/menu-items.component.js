@@ -9,9 +9,23 @@ import IconWithText from "../../../components/utility/IconWithText";
 const MenuItems = ({ onSelectedMenuItem }) => {
   const navigation = useNavigation(); // Hook into navigation
   const menuItems = [
-    { icon: "dumbbell", text: "Workout", screen: "Workout" },
-    { icon: "running", text: "Activity" },
-    { icon: "utensils", text: "Meal", screen: "Recipes" },
+    {
+      icon: "dumbbell",
+      text: "Workout",
+      screen: "Workout",
+      subTitle: "Complete your scheduled workout",
+    },
+    {
+      icon: "running",
+      text: "Activity",
+      subTitle: "Complete your scheduled activities",
+    },
+    {
+      icon: "utensils",
+      text: "Meal",
+      screen: "Recipes",
+      subTitle: "Hit your daily nutrition goal",
+    },
     { icon: "camera", text: "Photos" },
     { icon: "bed", text: "Sleep" },
     /* <FontAwesome6 name="glass-water" size={24} color="black" />

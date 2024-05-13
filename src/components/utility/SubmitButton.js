@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
   },
   text: {
     // color: "white",
-    fontFamily: "bold",
+    fontFamily: "medium",
     fontSize: 24,
-    letterSpacing: 0.3,
+    letterSpacing: 0.5,
   },
 });
 

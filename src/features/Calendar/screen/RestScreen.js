@@ -5,9 +5,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import restImage from "../../../../assets/images/rest.jpg";
 import { colors } from "../../../infrastructure/theme/colors";
 
-const RestScreen = ({ navigation }) => {
+const RestScreen = ({ navigation, time }) => {
   let timer = 0;
-  const [timeLeft, setTimeLeft] = useState(2);
+  const [timeLeft, setTimeLeft] = useState(time);
   const startTime = () => {
     setTimeout(() => {
       if (timeLeft <= 0) {

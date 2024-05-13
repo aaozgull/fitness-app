@@ -74,7 +74,7 @@ const CalculationScreen = () => {
       <PageTitle
         title="BMI Calculator"
         style={{ backgroundColor: colors.ui.quaternary }}
-        textStyle={{ color: colors.text.tertiary }}
+        textStyle={{ color: colors.text.tertiary, fontSize: 28 }}
       />
       <View
         style={{

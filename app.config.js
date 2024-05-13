@@ -3,6 +3,7 @@ module.exports = {
   version: "1.0.0",
   extra: {
     clerkPublishableKey: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    rapidApiId: process.env.RAPID_API_ID,
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
     projectId: process.env.PROJECT_ID,

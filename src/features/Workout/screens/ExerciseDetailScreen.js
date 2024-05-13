@@ -17,19 +17,20 @@ import {
 } from "react-native-responsive-screen";
 import { useSelector } from "react-redux";
 import { Audio } from "expo-av";
-import Anticons from "react-native-vector-icons/AntDesign";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { colors } from "../../../infrastructure/theme/colors";
 //import { ExerciseInfoCard } from "../components/ExerciseInfoCard";
 import SubmitButton from "../../../components/utility/SubmitButton";
 import { addToCart, selectCart } from "../../../store/cartSlice";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
-import { style } from "deprecated-react-native-prop-types/DeprecatedViewPropTypes";
+import UsedMusclesModal from "./UsedMusclesModal";
 const countDownAudio = require("../../../../assets/audio/countdownaudio.mp3");
 
 const ExerciseDetailScreen = ({ navigation, route }) => {
   const { exercise } = route.params;
+  const [isMuscleModalVisible, setMuscleModalVisible] = useState(false);
+  const [usedMuscles, setUsedMuscles] = useState([]);
+
   const [instructionExpanded, setInstructionExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
     fetchGifUrl();
   }, []); */
 
+  const handleCloseMuscleModal = () => {
+    setMuscleModalVisible(false);
+  };
   const handleDecreaseTime = () => {
     if (!isRunning && time > minTime) {
       setTime((prevTime) => prevTime - 10);
@@ -151,8 +155,8 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
     }
   };
   ///////add rest screen/////
-  useEffect(() => {
-    navigation.setOptions({
+  /*useEffect(() => {
+     navigation.setOptions({
       headerRight: () => {
         return (
           <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
@@ -168,7 +172,7 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
         );
       },
     });
-  }, []);
+  }, []); */
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -182,12 +186,18 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
         </View>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={styles.closeButton}
+          style={styles.leftButton}
         >
-          <Anticons
-            name="closecircle"
+          <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.addCalendarButton}
+        >
+          <FontAwesome5
+            name="calendar-plus"
             size={hp(4.5)}
-            color={colors.ui.accent}
+            color={colors.ui.accent2}
           />
         </TouchableOpacity>
       </View>
@@ -201,17 +211,25 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
           Equipment <Text style={styles.subTitle}>{exercise?.equipment}</Text>
         </Text>
         <Text style={styles.title}>
-          Secondary Muscles{" "}
+          Muscles Used{" "}
           <Text style={styles.subTitle}>
-            {" "}
-            {exercise?.secondaryMuscles?.join(", ")}
+            "Click here to view which muscles will be used during this workout."
+            {/* {exercise?.secondaryMuscles?.join(", ")} */}
+            <TouchableOpacity
+              onPress={() => {
+                setUsedMuscles(exercise?.secondaryMuscles);
+                setMuscleModalVisible(true);
+              }}
+            >
+              <Text style={styles.viewText}>View</Text>
+            </TouchableOpacity>
           </Text>
         </Text>
         <Text style={styles.title}>
           Target <Text style={styles.subTitle}>{exercise?.target}</Text>
         </Text>
 
-        <Text style={styles.title}>Instructions</Text>
+        <Text style={[styles.title, { marginBottom: 4 }]}>Instructions</Text>
 
         <List.Accordion
           title={exercise.instructions}
@@ -227,7 +245,7 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
                 title={instruction}
                 titleNumberOfLines={10} // Set the number of lines you want to display
                 titleStyle={[
-                  { ...styles.title },
+                  { ...styles.subTitle },
                   { fontSize: 16, lineHeight: 24 },
                 ]} // Customize the style as needed
               />
@@ -307,6 +325,11 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
+      <UsedMusclesModal
+        isVisible={isMuscleModalVisible}
+        onClose={handleCloseMuscleModal}
+        muscles={usedMuscles}
+      />
     </SafeAreaView>
   );
 };
@@ -315,15 +338,15 @@ export default ExerciseDetailScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.ui.primary,
-    shadowColor: "#000",
+    shadowColor: colors.ui.gray700,
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    // borderBottomLeftRadius: 40,
+    // borderBottomRightRadius: 40,
     elevation: 5,
   },
   imageContainer: {
@@ -332,28 +355,42 @@ const styles = StyleSheet.create({
   image: {
     width: wp(100),
     height: wp(60),
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    // borderBottomLeftRadius: 40,
+    //borderBottomRightRadius: 40,
   },
-  closeButton: {
+  addCalendarButton: {
     position: "absolute",
     borderRadius: hp(2),
-    top: hp(2),
-    right: wp(2),
+    top: hp(23),
+    right: wp(5),
+  },
+  leftButton: {
+    position: "absolute",
+    borderRadius: hp(2),
+    top: hp(4),
+    left: wp(2),
+    backgroundColor: colors.ui.accent,
   },
   title: {
     color: colors.text.primary,
     fontFamily: "bold",
-    fontSize: 16,
-    letterSpacing: 0.3,
+    fontSize: 18,
+    letterSpacing: 0.5,
     paddingTop: 10,
     textTransform: "capitalize",
   },
   subTitle: {
-    fontFamily: "medium",
-    color: colors.ui.gray500,
-    letterSpacing: 0.3,
+    fontFamily: "light",
+    color: colors.ui.gray700,
+    letterSpacing: 0.5,
     paddingTop: 10,
+  },
+  viewText: {
+    color: colors.ui.tertiary,
+    fontFamily: "medium",
+    fontSize: 18,
+    letterSpacing: 0.5,
+    // paddingTop: 10,
   },
   nameTitle: {
     fontSize: hp(3.5),

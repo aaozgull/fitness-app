@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { FontAwesome5 } from "@expo/vector-icons";
+//import { useSelector, useDispatch } from "react-redux";
+import { FontAwesome } from "@expo/vector-icons";
 import PageContainer from "../../../components/utility/PageContainer";
 import PageTitle from "../../../components/utility/PageTitle";
-import SubmitButton from "../../../components/utility/SubmitButton";
+//import SubmitButton from "../../../components/utility/SubmitButton";
 import { colors } from "../../../infrastructure/theme/colors";
-import { Divider } from "react-native-paper";
+//import { Divider } from "react-native-paper";
 import LottieView from "lottie-react-native";
 import { HeaderButtons } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
@@ -44,23 +44,23 @@ const ThumbUpScreen = (props) => {
           source={require("../../../../assets/thumbUp.json")}
         />
       </View>
-      <View>
-        <FontAwesome5 name="books" size={54} color={colors.ui.accent2} />
-      </View>
+      {/* <View>
+        <FontAwesome name="book" size={54} color={colors.ui.accent2} />
+      </View> */}
       <PageTitle text="You've kicked off a new streak!" />
 
       <Text style={styles.text}>
         "Your longest streak lasted for 2 days. Aim to set a new record by
         completing your habit before noon tomorrow."
       </Text>
-      <View style={styles.buttonContainer}>
+      {/*  <View style={styles.buttonContainer}>
         <SubmitButton
           title="COMPLETE"
           onPress={continueHandler}
           style={{ marginTop: 20 }}
           color={colors.ui.accent}
         />
-      </View>
+      </View> */}
     </PageContainer>
   );
 };
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     alignItems: "center",
-    marginTop: 150,
+    marginTop: 100,
   },
 
   icon: {
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     //position: "absolute",
     //top: 30,
     padding: 8,
+    marginBottom: 30,
   },
 });
 
