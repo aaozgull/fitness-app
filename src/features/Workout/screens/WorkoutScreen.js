@@ -82,13 +82,11 @@ const WorkoutScreen = ({ navigation }) => {
 
   return (
     <PageContainer style={styles.container}>
-      {/*  <View style={styles.calendarContainer}>*/}
       <PageTitle
         title="Workouts"
         style={styles.pageTitle}
         textStyle={styles.pageTitleColor}
       />
-      {/*  <View style={styles.divider}></View> */}
       <View style={styles.ImageContainer}>
         <ImageSlider />
       </View>
@@ -121,70 +119,23 @@ const WorkoutScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //marginTop: 10,
     backgroundColor: theme.colors.ui.primary,
   },
-
   bodyPartsContainer: {
     flex: 1,
     marginHorizontal: 20,
-    // backgroundColor: "green",
-    //marginTop: 20,
   },
   ImageContainer: {
-    //flex: 1,
-    // marginHorizontal: 20,
     backgroundColor: colors.ui.quaternary,
-    //marginTop: 20,
   },
   pageTitle: {
     backgroundColor: theme.colors.ui.quaternary,
-    // marginTop: 10,
     paddingTop: 40,
     paddingLeft: 40,
   },
   pageTitleColor: {
     color: theme.colors.text.fiftary,
     fontSize: 28,
-  },
-  divider: {
-    backgroundColor: theme.colors.ui.accent2,
-    padding: 8,
-    borderBottomEndRadius: 8,
-    borderBottomStartRadius: 8,
-    elevation: 3,
-    shadowColor: theme.colors.ui.quaternary, // "#39324a", // GlobalStyles.colors.gray500,
-    shadowRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
-  },
-  exerciseContainer: {
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 10,
-    gap: 5,
-    marginHorizontal: 2,
-
-    // shadow
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-  },
-  exerciseName: {
-    fontSize: 20,
-    fontWeight: "500",
-  },
-  exerciseSubtitle: {
-    color: "dimgray",
-  },
-  subValue: {
-    textTransform: "capitalize",
   },
 });
 

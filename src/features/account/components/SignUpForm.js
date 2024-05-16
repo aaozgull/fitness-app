@@ -12,6 +12,11 @@ import { signUp } from "../../../utils/actions/authActions";
 import { colors } from "../../../infrastructure/theme/colors";
 import { async } from "validate.js";
 //import { useWarmUpBrowser } from "../../../components/hooks/useWarmUpBrowser";
+import {
+  PRIVACY_POLICY_LINK,
+  TERMS_CONDITIONS_LINK,
+} from "../../../constants/links";
+import Checkbox from "../../../components/utility/Checkbox";
 
 const initialState = {
   inputValues: {
@@ -33,8 +38,17 @@ const SignUpForm = (props) => {
   const dispatch = useDispatch();
   // useWarmUpBrowser();
   const [error, setError] = useState();
+  const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formState, dispatchFormState] = useReducer(reducer, initialState);
+
+  const onCheckboxPress = () => {
+    setAgreed((value) => !value);
+  };
+
+  const onLinkPress = (url) => {
+    Linking.openURL(url);
+  };
 
   const inputChangedHandler = useCallback(
     (inputId, inputValue) => {
@@ -122,7 +136,30 @@ const SignUpForm = (props) => {
         onInputChanged={inputChangedHandler}
         errorText={formState.inputValidities["password"]}
       />
-      <View
+      <View style={styles.row}>
+        <Checkbox checked={agreed} onPress={onCheckboxPress} />
+
+        <Text style={styles.agreeText}>
+          I agree to
+          <Text
+            style={styles.link}
+            onPress={() => onLinkPress(TERMS_CONDITIONS_LINK)}
+          >
+            {" "}
+            Terms and Conditions
+          </Text>{" "}
+          and
+          <Text
+            style={styles.link}
+            onPress={() => onLinkPress(PRIVACY_POLICY_LINK)}
+          >
+            {" "}
+            Privacy Policy
+          </Text>
+        </Text>
+      </View>
+
+      {/* <View
         style={{
           borderBottomColor: colors.ui.gray500,
           borderWidth: 1,
@@ -138,7 +175,7 @@ const SignUpForm = (props) => {
         <Text style={{ ...styles.terms, fontWeight: "bold" }}>
           Privacy Policy
         </Text>
-      </Text>
+      </Text> */}
 
       {isLoading ? (
         <ActivityIndicator
@@ -169,4 +206,18 @@ const SignUpForm = (props) => {
 export default SignUpForm;
 const styles = StyleSheet.create({
   terms: { fontFamily: "regular", color: colors.text.primary },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 16,
+  },
+  agreeText: {
+    fontFamily: "regular",
+    color: colors.text.primary,
+    fontSize: 12,
+    marginLeft: 8,
+  },
+  link: {
+    textDecorationLine: "underline",
+  },
 });

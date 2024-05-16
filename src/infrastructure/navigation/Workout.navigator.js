@@ -6,6 +6,7 @@ import ExerciseCommentScreen from "../../features/Workout/screens/ExerciseCommen
 
 import WorkoutScreen from "../../features/Workout/screens/WorkoutScreen";
 import ExercisesScreen from "../../features/Workout/screens/ExercisesScreen";
+import AddTask from "../../features/Workout/screens/AddTask";
 
 //import TimerScreen from "../../../";
 
@@ -35,6 +36,7 @@ const WorkoutNavigator = () => {
         name="ExerciseComment"
         component={ExerciseCommentScreen}
       />
+      <WorkoutStack.Screen name="Addtask" component={AddTask} />
     </WorkoutStack.Navigator>
   );
 };

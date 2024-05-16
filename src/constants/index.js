@@ -1,7 +1,10 @@
 // register on rapid api, subscirbe exercise db api and use your api key here
 // https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb
+import Constants from "expo-constants";
 
-export const rapidApiKey = "23bc73e268msh9593a23f3ecfb61p1f68f3jsnc4d0";
+const keys = Constants.expoConfig?.extra;
+
+export const rapidApiKey = keys?.rapidApiKey;
 export const sliderImages = [
   require("../../assets/exerciseImages/slide1.png"),
   require("../../assets/exerciseImages/slide3.png"),

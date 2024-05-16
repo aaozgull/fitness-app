@@ -191,7 +191,7 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
           <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate("AddTask")}
           style={styles.addCalendarButton}
         >
           <FontAwesome5
@@ -210,10 +210,11 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
         <Text style={styles.title}>
           Equipment <Text style={styles.subTitle}>{exercise?.equipment}</Text>
         </Text>
+
         <Text style={styles.title}>
           Muscles Used{" "}
           <Text style={styles.subTitle}>
-            "Click here to view which muscles will be used during this workout."
+            "Click here to view which muscles will be used during this workout."{" "}
             {/* {exercise?.secondaryMuscles?.join(", ")} */}
             <TouchableOpacity
               onPress={() => {
@@ -345,8 +346,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    // borderBottomLeftRadius: 40,
-    // borderBottomRightRadius: 40,
     elevation: 5,
   },
   imageContainer: {
@@ -414,6 +413,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 8,
+  },
+  musclesContainer: {
+    flexDirection: "row",
+    //alignItems:''
+    justifyContent: "space-between",
   },
 
   setButtons: {
