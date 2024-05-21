@@ -27,7 +27,7 @@ const ProfilePictureScreen = ({ navigation }) => {
       <View style={styles.icon}>
         <Ionicons name="camera" size={54} color="white" />
       </View>
-      <PageTitle text="Let's take a profile picture" />
+      <PageTitle title="Let's take a profile picture" />
       <Text style={styles.text}>
         Let's personalize your account with your with your own profile picture
         so your trainer can see you.

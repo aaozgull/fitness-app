@@ -5,7 +5,7 @@ import colors from "../../features/recipes/constants/colors";
 
 const StatusCard = ({ label, count, type }) => {
   const navigation = useNavigation();
-  const styles = getStyles(type);
+  //const styles = getStyles(type);
 
   const onPress = () => {
     navigation.navigate("Tasks");
@@ -22,7 +22,8 @@ const StatusCard = ({ label, count, type }) => {
 export default React.memo(StatusCard);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: type === "error" ? colors.lightRed : colors.lightGrey,
+    backgroundColor:
+      /* type === "error" ? colors.lightRed :  */ colors.lightGrey,
     borderRadius: 15,
     padding: 12,
     marginRight: 8,
@@ -31,12 +32,12 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: 13,
     fontSize: 10,
-    color: type === "error" ? colors.red : colors.blue,
+    color: /* type === "error" ? colors.red :  */ colors.blue,
   },
   count: {
     fontSize: 28,
     fontWeight: "500",
-    color: type === "error" ? colors.red : colors.blue,
+    color: /* type === "error" ? colors.red :  */ colors.blue,
     marginBottom: 8,
   },
 });

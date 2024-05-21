@@ -9,11 +9,8 @@ const messagesSlice = createSlice({
   reducers: {
     setChatMessages: (state, action) => {
       const existingMessages = state.messagesData;
-
       const { chatId, messagesData } = action.payload;
-
       existingMessages[chatId] = messagesData;
-
       state.messagesData = existingMessages;
     },
     addStarredMessage: (state, action) => {

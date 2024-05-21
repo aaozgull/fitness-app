@@ -41,7 +41,8 @@ export const AppNavigator = () => (
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: colors.ui.tertiary,
         tabBarInactiveTintColor: colors.ui.gray500,
-        headerTitle: "",
+        // headerTitle: "",
+        headerShown: false,
         headerShadowVisible: false,
         tabBarHideOnKeyboard: true,
         tabBarLabelStyle: {
@@ -68,22 +69,8 @@ export const AppNavigator = () => (
         },
       })}
     >
-      <Tab.Screen
-        name="DashBoard"
-        component={DashBoardNavigator}
-        options={{
-          headerShown: false,
-          //headerTitle: "",
-        }}
-      />
-      <Tab.Screen
-        name="Calendar"
-        component={CalendarNavigator}
-        options={{
-          // tabBarLabel: "Chats",
-          headerShown: false,
-        }}
-      />
+      <Tab.Screen name="DashBoard" component={DashBoardNavigator} />
+      <Tab.Screen name="Calendar" component={CalendarNavigator} />
       {/* <Tab.Screen
         name="Workout"
         component={WorkoutNavigator}
@@ -93,14 +80,7 @@ export const AppNavigator = () => (
         }}
       /> */}
       <Tab.Screen name="Checkout" component={CheckoutNavigator} />
-      <Tab.Screen
-        name="Chat"
-        component={ChatNavigator}
-        options={{
-          // tabBarLabel: "Chats",
-          headerShown: false,
-        }}
-      />
+      <Tab.Screen name="Chat" component={ChatNavigator} />
     </Tab.Navigator>
     {/*  <ChatIcon /> */}
   </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import Modal from "react-native-modal";
 import { format } from "date-fns";
@@ -22,6 +22,7 @@ const TransparentMenu = ({
   const handleSelectMenuItem = (menuItem) => {
     onClose(); // Close the menu
     setSelectedItemText(menuItem.text); // Set the selected item text
+    console.log(`handleSelecMenu ${menuItem.text} ${selectedItemText}`);
     onSelectedMenuItem(menuItem); // Pass the selected menu item to the parent component
   };
 
@@ -32,14 +33,20 @@ const TransparentMenu = ({
 
         <MenuItems onSelectedMenuItem={handleSelectMenuItem} />
         {/* Conditional rendering of sub-menu */}
+        {console.log(
+          `isVisible ${isVisible} selectedItemText ${selectedItemText}`
+        )}
+
         {selectedItemText === "Activity" && (
           <SubMenuItems
             isVisible={isVisible}
             onClose={onClose}
-            onSelectedMenuItem={(item) => {
+            onSelectedMenuItem={handleSelectMenuItem}
+            /*  onSelectedMenuItem={(item) => {
               onClose(); // Close the sub-menu after selecting an item
-              navigation.navigate(item.screen); // Navigate to the specified screen
+              // navigation.navigate(item.screen); // Navigate to the specified screen
             }}
+ */
           />
         )}
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>

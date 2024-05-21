@@ -16,7 +16,7 @@ const BodyStatsStartScreen = (props) => {
       <View style={styles.icon}>
         <FontAwesome6 name="weight-scale" size={54} color="white" />
       </View>
-      <PageTitle text="Body Stats" />
+      <PageTitle title="Body Stats" />
       <Text style={styles.text}>Schedualed</Text>
       <View style={styles.buttonContainer}>
         <SubmitButton

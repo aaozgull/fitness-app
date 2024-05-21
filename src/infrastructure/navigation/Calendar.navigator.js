@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CalendarScreen from "../../features/Calendar/screen/Calendar-screen";
@@ -16,7 +16,7 @@ const CalendarNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Workout"
         component={WorkoutNavigator}
         options={{
@@ -33,7 +33,7 @@ const CalendarNavigator = () => {
         name="Rest"
         component={RestScreen}
         options={{ headerShown: false }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

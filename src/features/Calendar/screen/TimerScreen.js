@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 18,
+    fontFamily: "light",
     color: colors.text.tertiary,
     marginBottom: 4,
   },

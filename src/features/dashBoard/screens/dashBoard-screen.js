@@ -7,9 +7,11 @@ import {
   Text,
   View,
   Pressable,
+  ScrollView,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 //import styled from "styled-components/native";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import { theme } from "../../../infrastructure/theme/index";
 import ToDoSummary from "../component/toDoList/dashBoard-toDo-summary";
@@ -19,6 +21,7 @@ import PageTitle from "../../../components/utility/PageTitle";
 import PageContainer from "../../../components/utility/PageContainer";
 import CustomHeaderButton from "../../../components/utility/CustomHeaderButton";
 import HeaderLogo from "../../../components/utility/HeaderLogo";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const DashBoardScreen = ({ navigation }) => {
   useEffect(() => {
@@ -29,6 +32,7 @@ export const DashBoardScreen = ({ navigation }) => {
             <Item
               iconName="user-edit"
               iconType={FontAwesome5}
+              color={colors.ui.tertiary}
               onPress={() => props.navigation.navigate("Settings")}
             />
           </HeaderButtons>
@@ -59,7 +63,6 @@ export const DashBoardScreen = ({ navigation }) => {
           textStyle={styles.pageTitleColor}
         />
         <View style={styles.divider}></View>
-
         <View style={styles.progressContainer}>
           <View style={styles.graph}>
             <Pressable
@@ -88,7 +91,7 @@ export const DashBoardScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    marginTop: StatusBar.currentHeight,
+    //marginTop: StatusBar.currentHeight,
     backgroundColor: theme.colors.bg.secondary, //"#2d0689",
   },
   pageTitle: {

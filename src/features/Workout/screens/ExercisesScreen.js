@@ -52,6 +52,10 @@ const ExercisesScreen = ({ navigation, route }) => {
     setIsLoading(false);
   }, [item]);
 
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {isLoading && (
@@ -77,12 +81,16 @@ const ExercisesScreen = ({ navigation, route }) => {
       )} */}
       <View>
         <Image source={item.image} style={{ width: wp(100), height: hp(45) }} />
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.leftButton}
+        <Pressable
+          style={styles.backContainer}
+          hitSlop={8}
+          onPress={handleBack}
         >
-          <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
-        </TouchableOpacity>
+          <Image
+            style={styles.backIcon}
+            source={require("../../../../assets/back.png")}
+          />
+        </Pressable>
 
         <PageTitle
           title={`${item.name} Exercises`}
@@ -237,5 +245,13 @@ const styles = StyleSheet.create({
     color: colors.text.fiftary,
     fontSize: 28,
     textTransform: "capitalize",
+  },
+  backContainer: {
+    paddingVertical: 20,
+    // backgroundColor: colors.green,
+  },
+  backIcon: {
+    width: 32,
+    height: 32,
   },
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, Text, View, StyleSheet } from "react-native";
-import firestore from "@react-native-firebase/firestore";
+//import firestore from "@react-native-firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../../components/utility/Checkbox";
 //import Header from "../../../components/utility/Header";
@@ -27,7 +27,7 @@ const Tasks = () => {
   }, [category, tasks]);
 
   const onTaskUpdate = (item) => {
-    firestore()
+    /* firestore()
       .collection("Tasks")
       .doc(item?.uid)
       .update({
@@ -35,7 +35,7 @@ const Tasks = () => {
       })
       .then(() => {
         dispatch(setToUpdate());
-      });
+      }); */
   };
 
   const renderTask = ({ item }) => {

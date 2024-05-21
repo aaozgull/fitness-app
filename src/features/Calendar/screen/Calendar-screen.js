@@ -23,18 +23,31 @@ import { getFormattedDate } from "../../../utils/date";
 import TransparentMenu from "./TransparentMenu";
 import PageContainer from "../../../components/utility/PageContainer";
 import HeaderLogo from "../../../components/utility/HeaderLogo";
-import { createCalendar } from "../../../utils/actions/calendarActions";
+import {
+  createCalendar,
+  updateActivitiesData,
+  addActivitiesData,
+} from "../../../utils/actions/calendarActions";
+import {
+  addCalendarActivity,
+  updateCalendarActivity,
+} from "../../../store/calendarActivitiesSlice";
 
 const CalendarScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState({});
   const [selectedMenuItems, setSelectedMenuItems] = useState([]);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
   const calendarData = useSelector((state) => state.calendar.calendarData);
-  // console.log(`--------------- create Calendar`);
-  //createCalendar(userData.userId);
-  // console.log(`-------------end-- create Calendar`);
+
+  const calendarActivitiesData = useSelector(
+    (state) => state.activities.calendarActivitiesData
+  );
+
+  //console.log(`--------------- create Calendar`);
+  // createCalendar(userData.userId,dispatch );
+  //console.log(`-------------end-- create Calendar`);
 
   const handleItemPress = (item) => {
     setSelectedItem(item);
@@ -44,46 +57,76 @@ const CalendarScreen = ({ navigation }) => {
   const handleCloseMenu = () => {
     setMenuVisible(false);
   };
-
   // Display calendarData values
   // console.log("CalendarData:", calendarData);
 
   /* Object.entries(calendarData).map(([key, value]) =>
     console.log(`CalendarData ${key}:  ${value.date}`)
   ); */
-  const currentDate = new Date();
-  const dates = [];
-  let indexFound = 0;
+
+  // const dates = [];
+
   let startIndex = 0;
-  Object.entries(calendarData).map(([key, value]) => {
-    const day = new Date(value.date);
-    if (day instanceof Date && !isNaN(day)) {
-      //console.log(` day ${day}`);
-      dates.push(day);
-      const formattedDate = getFormattedDate(day);
-      const formattedCurrentDate = getFormattedDate(currentDate);
-      //  console.log(`${formattedCurrentDate1} ee  date  ${formattedDate1}`);
-      if (formattedDate === formattedCurrentDate) {
-        console.log(`startIndex${startIndex} indexFound  ${indexFound}`);
-        indexFound = 1;
-      } else if (indexFound === 0) {
-        startIndex++;
+  const currentDate = new Date();
+  /* console.log(
+    `CalendarData  ${currentDate.toISOString()} ${getFormattedDate(currentDate)}`
+  ); */
+  useEffect(() => {
+    let indexFound = 0;
+    const currentDate = new Date();
+    const formattedCurrentDate = getFormattedDate(currentDate);
+    Object.entries(calendarData).map(([key, value]) => {
+      // console.log(`CalendarData ${key}:  ${value}`);
+      const day = new Date(value.date);
+      if (day instanceof Date && !isNaN(day)) {
+        const formattedDate = getFormattedDate(day);
+        if (formattedDate === formattedCurrentDate) {
+          indexFound = 1;
+        } else if (indexFound === 0) {
+          startIndex++;
+        }
       }
-    }
-  });
-
-  //console.log(`CalendarData ${Object.values(calendarData)}`);
-  /*  useEffect(() => {
-    calendarData.forEach((date, index) => {
-      console.log(`Calendar Data index ${index} Pressed ${date}`);
     });
-  }, [calendarData, selectedItem]); */
+  }, [calendarData]);
 
-  const handleSelectMenuItem = (menuItem) => {
+  const handleSelectMenuItem = async (menuItem) => {
     console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
     setMenuVisible(false);
     //setSelectedMenuItems(menuItem);
-    setSelectedMenuItems((prevItems) => [...prevItems, menuItem]);
+    //setSelectedMenuItems((prevItems) => [...prevItems, menuItem]);
+    /*  if (calendarActivitiesData[selectedItem.calendarId]) {
+      try {
+        await updateActivitiesData(
+          selectedItem.calendarId,
+          userData.userId,
+          menuItem
+        );
+        dispatch(
+          updateCalendarActivity({
+            calendarId: selectedItem.calendarId,
+            activity: menuItem,
+          })
+        );
+      } catch (error) {
+        console.error("Error updating activity:", error);
+      }
+    } else { */
+    try {
+      await addActivitiesData(
+        selectedItem.calendarId,
+        userData.userId,
+        menuItem
+      );
+      dispatch(
+        addCalendarActivity({
+          calendarId: selectedItem.calendarId,
+          activity: menuItem,
+        })
+      );
+    } catch (error) {
+      console.error("Error adding activity:", error);
+    }
+    //}
   };
 
   useEffect(() => {
@@ -109,19 +152,24 @@ const CalendarScreen = ({ navigation }) => {
       />
       <View style={styles.divider}></View>
       <FlatList
-        data={dates}
+        data={Object.entries(calendarData).map(
+          ([calendarId, calendarData]) => ({
+            calendarId,
+            date: new Date(calendarData.date),
+          })
+        )}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => handleItemPress(item)}>
               <CalendarItem
-                date={item}
-                selectedMenuItems={selectedMenuItems}
+                date={item.date}
                 selectedDate={selectedItem}
+                calendarId={item.calendarId} // Pass the calendar ID here
               />
             </TouchableOpacity>
           );
         }}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.calendarId}
         initialScrollIndex={startIndex > 10 ? startIndex - 10 : startIndex}
         getItemLayout={(data, index) => ({
           length: theme.spaceInNumber[3] + theme.spaceInNumber[1] + 50, // Adjust this based on your item height
@@ -133,7 +181,7 @@ const CalendarScreen = ({ navigation }) => {
       <TransparentMenu
         isVisible={isMenuVisible}
         onClose={handleCloseMenu}
-        selectedItem={selectedItem}
+        selectedItem={selectedItem.date}
         onSelectedMenuItem={handleSelectMenuItem}
       />
     </PageContainer>

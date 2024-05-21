@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
 import { List, Divider } from "react-native-paper";
 import {
@@ -173,6 +174,9 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
       },
     });
   }, []); */
+  const handleBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -184,14 +188,20 @@ const ExerciseDetailScreen = ({ navigation, route }) => {
             style={styles.image}
           />
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.leftButton}
+        <Pressable
+          style={styles.backContainer}
+          hitSlop={8}
+          onPress={handleBack}
         >
-          <Ionicons name="caret-back-outline" size={hp(4)} color="white" />
-        </TouchableOpacity>
+          <Image
+            style={styles.backIcon}
+            source={require("../../../../assets/back.png")}
+          />
+        </Pressable>
         <TouchableOpacity
-          onPress={() => navigation.navigate("AddTask")}
+          onPress={() =>
+            navigation.navigate("AddTask", { excerciseName: exercise.name })
+          }
           style={styles.addCalendarButton}
         >
           <FontAwesome5
@@ -360,7 +370,7 @@ const styles = StyleSheet.create({
   addCalendarButton: {
     position: "absolute",
     borderRadius: hp(2),
-    top: hp(23),
+    top: hp(28), /// 23 in other simulator
     right: wp(5),
   },
   leftButton: {
@@ -440,4 +450,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   signs: { color: "white", fontSize: 24 },
+  backContainer: {
+    paddingVertical: 20,
+    // backgroundColor: colors.green,
+  },
+  backIcon: {
+    width: 32,
+    height: 32,
+  },
 });

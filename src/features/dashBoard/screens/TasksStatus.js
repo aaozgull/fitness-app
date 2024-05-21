@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import firestore from "@react-native-firebase/firestore";
+//import firestore from "@react-native-firebase/firestore";
 import {
   SafeAreaView,
   ScrollView,
@@ -24,7 +24,7 @@ const TasksStatus = ({ navigation }) => {
   const [counts, setCounts] = useState({});
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  /* useEffect(() => {
     firestore()
       .collection("Tasks")
       .where("userId", "==", user?.uid)
@@ -41,7 +41,7 @@ const TasksStatus = ({ navigation }) => {
 
         dispatch(setTasks(tasksList));
       });
-  }, [user, toUpdate, dispatch]);
+  }, [user, toUpdate, dispatch]); */
 
   useEffect(() => {
     if (tasks?.length) {
@@ -75,8 +75,8 @@ const TasksStatus = ({ navigation }) => {
           <StatusCard label="High Priority" count={counts?.highPriority} />
           <StatusCard
             label="Due Deadline"
-            type="error"
             count={counts?.dueDeadline}
+            type="error"
           />
           <StatusCard label="Quick Win" count={counts?.quickWin} />
         </View>

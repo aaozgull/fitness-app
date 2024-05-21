@@ -20,7 +20,7 @@ const BackButton = (props) => {
     </Pressable>
   );
 };
-export const RecipesNavigator = () => {
+const RecipesNavigator = () => {
   const dispatch = useDispatch();
   //////get recipes/////
   /*  useEffect(() => {
@@ -77,3 +77,5 @@ const styles = StyleSheet.create({
     margin: 16,
   },
 });
+
+export default RecipesNavigator;

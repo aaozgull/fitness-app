@@ -48,7 +48,7 @@ const CalendarSetupScreen = (props) => {
       <View style={styles.icon}>
         <Ionicons name="calendar-outline" size={54} color="white" />
       </View>
-      <PageTitle text="Let's make a Calendar" />
+      <PageTitle title="Let's make a Calendar" />
       <Text style={styles.text}>Calendar setup complete!</Text>
       <View style={styles.buttonContainer}>
         <SubmitButton

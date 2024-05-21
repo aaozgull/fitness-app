@@ -9,8 +9,8 @@ const CustomHeaderButton = (props) => {
   const { iconType } = props;
 
   // Determine the appropriate icon component based on the specified icon type
+  let IconComponent = FontAwesome6;
   if (iconType) {
-    let IconComponent = FontAwesome6;
     if (iconType === FontAwesome5) {
       IconComponent = FontAwesome5;
     }
@@ -18,7 +18,7 @@ const CustomHeaderButton = (props) => {
     IconComponent = Ionicons;
   }
 
-  console.log(`CustomHeaderButton iconType  ${iconType} ${IconComponent}`);
+  //console.log(`CustomHeaderButton iconType  ${iconType} ${IconComponent}`);
   return (
     <HeaderButton
       {...props}

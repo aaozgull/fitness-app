@@ -18,7 +18,7 @@ const DateInput = ({ value, onChange, ...props }) => {
         <Image
           resizeMode="contain"
           style={styles.icon}
-          source={require("../../assets/calendar.png")}
+          source={require("../../../assets/calendar.png")}
         />
         <Text style={styles.text}>
           {moment(value).format("L") || "Select Date..."}

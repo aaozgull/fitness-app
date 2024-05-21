@@ -14,6 +14,7 @@ export const createCalendar = async (loggedInUserId, dispatch) => {
   const daysInMonth = generateDatesForThreeMonths();
   for (const day of daysInMonth) {
     //const newday = getFormattedDate(day);
+    console.log(`day ${day}`);
     const newCalendarData = {
       date: day.toISOString(),
       createdBy: loggedInUserId,
@@ -69,7 +70,7 @@ export const addActivitiesData = async (
   const app = getFirebaseApp();
   const dbRef = ref(getDatabase());
   const activitiesRef = child(dbRef, `activities/${CalendarId}`);
-
+  //console.log(` activitiesRef ${CalendarId}`);
   const CalendarItemData = {
     setBy: loggedInUserId,
     setAt: new Date().toISOString(),
@@ -81,16 +82,17 @@ export const addActivitiesData = async (
 
 export const updateActivitiesData = async (
   calendarItemId,
-  userId,
-  calendarItemData
+  activityId,
+  checked
 ) => {
   const app = getFirebaseApp();
   const dbRef = ref(getDatabase(app));
-  const calendarItemRef = child(dbRef, `activities/${calendarItemId}`);
+  const calendarItemRef = child(
+    dbRef,
+    `activities/${calendarItemId}/${activityId}`
+  );
 
   await update(calendarItemRef, {
-    ...calendarItemData,
-    updatedAt: new Date().toISOString(),
-    updatedBy: userId,
+    checked: checked,
   });
 };

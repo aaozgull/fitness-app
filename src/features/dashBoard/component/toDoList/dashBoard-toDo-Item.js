@@ -1,32 +1,46 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Checkbox from "expo-checkbox";
 
 import { theme } from "../../../../infrastructure/theme/index";
-//import { GlobalStyles } from "../../constants/styles";
-import { getFormattedDate } from "../../../../utils/date";
 import IconWithText from "../../../../components/utility/IconWithText";
+import { updateActivitiesData } from "../../../../utils/actions/calendarActions";
+import { updateCalendarActivity } from "../../../../store/calendarActivitiesSlice";
+import { useDispatch } from "react-redux";
 
-function ToDoItem({ description, amount, date, icon, style }) {
-  const [isChecked, setChecked] = useState(false);
-  //console.log(`description  ${description}   date  ${date} icon ${icon}`);
-  function setCheckBox() {
+function ToDoItem({
+  activityId,
+  calendarId,
+  description,
+  checked,
+  icon,
+  style,
+}) {
+  const [isChecked, setChecked] = useState(checked);
+  const dispatch = useDispatch();
+  const setCheckBox = async () => {
     setChecked(!isChecked);
-  }
+    try {
+      await updateActivitiesData(calendarId, activityId, isChecked);
+      dispatch(
+        updateCalendarActivity({
+          calendarId,
+          activityId,
+          isChecked,
+        })
+      );
+    } catch (error) {
+      console.error("Error adding activity:", error);
+    }
+  };
   return (
     <View style={style}>
-      {/* <View>
-          <Text style={[styles.textBase, styles.description]}>
-            {description}
-          </Text> */}
       <IconWithText
         text={description}
         icon={icon}
         iconStyle={styles.menuItemIcon}
         textStyle={styles.menuItemText}
       />
-      {/* </View> */}
-      {/*  <Pressable> */}
       <View style={styles.amountContainer}>
         <Checkbox
           style={styles.checkbox}
@@ -35,7 +49,6 @@ function ToDoItem({ description, amount, date, icon, style }) {
           onValueChange={setCheckBox}
         />
       </View>
-      {/* </Pressable> */}
     </View>
   );
 }

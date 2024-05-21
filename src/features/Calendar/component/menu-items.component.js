@@ -14,28 +14,41 @@ const MenuItems = ({ onSelectedMenuItem }) => {
       text: "Workout",
       screen: "Workout",
       subTitle: "Complete your scheduled workout",
+      isChecked: false,
     },
     {
       icon: "running",
       text: "Activity",
       subTitle: "Complete your scheduled activities",
+      isChecked: false,
     },
     {
       icon: "utensils",
       text: "Meal",
       screen: "Recipes",
       subTitle: "Hit your daily nutrition goal",
+      isChecked: false,
     },
-    { icon: "camera", text: "Photos" },
-    { icon: "bed", text: "Sleep" },
+    {
+      icon: "camera",
+      text: "Photos",
+      screen: "LogProgressScreen",
+      isChecked: false,
+    },
+    { icon: "bed", text: "Sleep", isChecked: false },
     /* <FontAwesome6 name="glass-water" size={24} color="black" />
     <Fontisto name="photograph" size={24} color="black" />
     <MaterialCommunityIcons name="shoe-sneaker" size={24} color="black" />
      <FontAwesome6 name="weight-scale" size={24} color="black" /> 
      <MaterialCommunityIcons name="power-sleep" size={24} color="black" />
      <MaterialCommunityIcons name="sleep" size={24} color="black" />*/
-    { icon: "user", text: "Body Stats" },
-    { icon: "books", text: "read before sleep" },
+    { icon: "user", text: "Body Stats", isChecked: false },
+    {
+      icon: "book",
+      text: "read before sleep",
+      screen: "ReadBooks",
+      isChecked: false,
+    },
   ];
   return (
     <View style={styles.menuContent}>
@@ -44,10 +57,11 @@ const MenuItems = ({ onSelectedMenuItem }) => {
           text={item.text}
           icon={item.icon}
           key={index}
-          onPress={() => {
+          /*  onPress={() => {
             onSelectedMenuItem(item);
-            item.screen ? navigation.navigate(item.screen) : null; // Navigate to the specified screen
-          }}
+            // item.screen ? navigation.navigate(item.screen) : null; // Navigate to the specified screen
+          }} */
+          onPressed={() => onSelectedMenuItem(item)}
           iconStyle={styles.menuItemIcon}
           textStyle={styles.menuItemText}
         />

@@ -36,7 +36,11 @@ const WorkoutNavigator = () => {
         name="ExerciseComment"
         component={ExerciseCommentScreen}
       />
-      <WorkoutStack.Screen name="Addtask" component={AddTask} />
+      <WorkoutStack.Screen
+        name="AddTask"
+        component={AddTask}
+        options={{ headerShown: false }}
+      />
     </WorkoutStack.Navigator>
   );
 };

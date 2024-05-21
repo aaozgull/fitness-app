@@ -26,7 +26,7 @@ const EmailNotificationScreen = (props) => {
       <View style={styles.icon}>
         <MaterialCommunityIcons name="lightbulb-on" size={54} color="white" />
       </View>
-      <PageTitle text="Turn off email notifications" />
+      <PageTitle title="Turn off email notifications" />
       <Text style={styles.text}>
         This app will gently remind you of daily things to do and check-in at
         the end of the day to see if you've completed any habit.{" "}

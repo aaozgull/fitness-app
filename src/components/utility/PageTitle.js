@@ -5,7 +5,7 @@ export default PageTitle = (props) => {
   return (
     <View style={{ ...styles.container, ...props.style }}>
       <Text style={{ ...styles.text, ...props.textStyle }}>{props.title}</Text>
-      <Text style={styles.subText}>{props.subTitle}</Text>
+      {props.subTitle && <Text style={styles.subText}>{props.subTitle}</Text>}
     </View>
   );
 };

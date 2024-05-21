@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 import { format } from "date-fns";
 
 import { theme } from "../../../infrastructure/theme/index";
@@ -10,10 +11,11 @@ import {
 } from "../../../utils/date";
 import ToDoItem from "../../dashBoard/component/toDoList/dashBoard-toDo-Item";
 
-export const CalendarItem = ({ date, selectedMenuItems, selectedDate }) => {
+export const CalendarItem = ({ date, selectedDate, calendarId }) => {
   let displayDate = format(date, "MMM dd");
   const formattedDate = getFormattedDate(date);
-  const formattedSelectedDate = selectedDate && getFormattedDate(selectedDate);
+  /* const formattedSelectedDate =
+    selectedDate.date && getFormattedDate(selectedDate.date); */
   const currentDate = new Date();
   const formattedCurrentDate = getFormattedDate(currentDate);
   const formattedCurrentDatePrevious = getFormattedDate(
@@ -22,18 +24,7 @@ export const CalendarItem = ({ date, selectedMenuItems, selectedDate }) => {
   const formattedCurrentDateTomorrow = getFormattedDate(
     getDatePlusDays(currentDate, 1)
   );
-  if (formattedDate === formattedSelectedDate) {
-    console.log(
-      `formattedSelectedDate  ${formattedDate} ${formattedSelectedDate}`
-    );
-    if (selectedMenuItems) {
-      selectedMenuItems.map((menuItem, index) =>
-        console.log(`menuItem ${menuItem} index ${index}`)
-      );
-    }
-  }
 
-  // console.log(`${formattedCurrentDate} ee  date  ${formattedDate}`);
   if (formattedDate === formattedCurrentDate) {
     displayDate = "Today";
   }
@@ -48,21 +39,35 @@ export const CalendarItem = ({ date, selectedMenuItems, selectedDate }) => {
     date.toString().includes("Mon") || displayDate.includes("Tom")
       ? styles.boldText
       : styles.dateText;
-
   selectedStyle = displayDate === "Today" ? styles.todayText : selectedStyle;
+  const calendarActivitiesData = useSelector(
+    (state) => state.activities.calendarActivitiesData
+  );
+  const calendarActivities = calendarActivitiesData[calendarId] || [];
+  const calendarActivityList = [];
+  for (const key in calendarActivities) {
+    const activity = calendarActivities[key];
+    //console.log(`${activity.text}  formattedDate  ${formattedDate}`);
+    calendarActivityList.push({
+      key,
+      ...activity,
+    });
+  }
   return (
     <View style={styles.container}>
       <View style={styles.dateContainer}>
         <Text style={selectedStyle}>{format(date, "EEEE")}</Text>
-
         <Text style={selectedStyle}>{displayDate}</Text>
       </View>
-      {selectedMenuItems &&
-        formattedDate === formattedSelectedDate &&
-        selectedMenuItems.map((menuItem, index) => (
+      {calendarActivityList.length > 0 &&
+        //formattedDate === formattedSelectedDate &&
+        calendarActivityList.map((menuItem) => (
           <ToDoItem
-            key={index}
+            key={menuItem.key} // Use the key property as the unique identifier
+            activityId={menuItem.key} // Use the key as the activityId
+            calendarId={calendarId}
             description={menuItem.text}
+            checked={menuItem.isChecked}
             icon={menuItem.icon}
             style={styles.toDoItem}
           />
