@@ -1,70 +1,107 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons"; // You can use a different icon library
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faWeightScale, faUtensils } from "@fortawesome/free-solid-svg-icons"; // Corrected the icon import
 
 import { theme } from "../../../infrastructure/theme";
-import IconWithText from "../../../components/utility/IconWithText";
+import { colors } from "../../../infrastructure/theme/colors";
+
+const IconButton = ({ icon: Icon, name, backgroundColor }) => {
+  return (
+    <View style={[styles.iconButtonContainer, { backgroundColor }]}>
+      {name !== "weight-scale" && name !== "utensils" && (
+        <Icon name={name} size={34} style={styles.menuItemIcon} />
+      )}
+      {(name === "weight-scale" || name === "utensils") && (
+        <FontAwesomeIcon icon={Icon} size={34} style={styles.menuItemIcon} />
+      )}
+    </View>
+  );
+};
 
 const MenuItems = ({ onSelectedMenuItem }) => {
-  const navigation = useNavigation(); // Hook into navigation
   const menuItems = [
     {
-      icon: "dumbbell",
+      name: "weight",
       text: "Workout",
-      screen: "Workout",
-      subTitle: "Complete your scheduled workout",
-      isChecked: false,
+      backgroundColor: colors.ui.tertiary,
+      icon: FontAwesome5,
     },
     {
-      icon: "running",
+      name: "shoe-sneaker",
       text: "Activity",
-      subTitle: "Complete your scheduled activities",
-      isChecked: false,
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
     },
     {
-      icon: "utensils",
+      name: "utensils",
       text: "Meal",
-      screen: "Recipes",
-      subTitle: "Hit your daily nutrition goal",
-      isChecked: false,
+      backgroundColor: colors.ui.accent,
+      icon: faUtensils,
     },
     {
-      icon: "camera",
+      name: "camera",
       text: "Photos",
-      screen: "LogProgressScreen",
-      isChecked: false,
+      backgroundColor: colors.ui.yellow,
+      icon: Ionicons,
     },
-    { icon: "bed", text: "Sleep", isChecked: false },
-    /* <FontAwesome6 name="glass-water" size={24} color="black" />
+    {
+      name: "weight-scale",
+      text: "Body Stats",
+      backgroundColor: colors.ui.fiftary,
+      icon: faWeightScale,
+    },
+    {
+      name: "book",
+      text: "read before sleep",
+      backgroundColor: colors.ui.error500,
+      icon: Ionicons,
+    },
+    {
+      name: "sleep",
+      text: "sleep",
+      backgroundColor: colors.ui.green,
+      icon: MaterialCommunityIcons,
+    },
+  ];
+
+  /* { name: "bed", text: "Sleep", isChecked: false }, */
+  /* <FontAwesome6 name="glass-water" size={24} color="black" />
     <Fontisto name="photograph" size={24} color="black" />
     <MaterialCommunityIcons name="shoe-sneaker" size={24} color="black" />
      <FontAwesome6 name="weight-scale" size={24} color="black" /> 
      <MaterialCommunityIcons name="power-sleep" size={24} color="black" />
      <MaterialCommunityIcons name="sleep" size={24} color="black" />*/
-    { icon: "user", text: "Body Stats", isChecked: false },
-    {
-      icon: "book",
-      text: "read before sleep",
-      screen: "ReadBooks",
-      isChecked: false,
-    },
-  ];
+
   return (
     <View style={styles.menuContent}>
       {menuItems.map((item, index) => (
-        <IconWithText
-          text={item.text}
-          icon={item.icon}
+        <TouchableOpacity
           key={index}
-          /*  onPress={() => {
-            onSelectedMenuItem(item);
-            // item.screen ? navigation.navigate(item.screen) : null; // Navigate to the specified screen
-          }} */
-          onPressed={() => onSelectedMenuItem(item)}
-          iconStyle={styles.menuItemIcon}
-          textStyle={styles.menuItemText}
-        />
+          style={styles.menuItem}
+          onPress={() => onSelectedMenuItem(item)}
+        >
+          <View
+            style={{
+              flex: 1,
+              alignItems: "flex-end",
+              marginRight: 22,
+              marginTop: 12,
+            }}
+          >
+            <Text style={styles.menuItemText}>{item.text}</Text>
+          </View>
+          <IconButton
+            icon={item.icon}
+            name={item.name}
+            backgroundColor={item.backgroundColor}
+          />
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -72,26 +109,44 @@ const MenuItems = ({ onSelectedMenuItem }) => {
 
 const styles = StyleSheet.create({
   menuContent: {
-    marginBottom: theme.sizesInNumber[3], //20,
+    marginBottom: 20,
+    alignItems: "flex-end",
+    alignContent: "flex-end",
   },
   menuItem: {
-    /* flexDirection: "row",
-    //alignContent: "space-between",
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between", // Add this to space out the text and icon
     marginVertical: theme.sizesInNumber[2], // 10,
-    padding: 5, */
-  },
-  menuItemIcon: {
-    width: 24,
-    height: 24,
-    marginRight: theme.sizesInNumber[4], // 10,
-    color: theme.colors.ui.quaternary,
+    // padding: 5,
+    width: "100%", // Ensure it takes full width
   },
   menuItemText: {
-    fontFamily: "mediumItalic",
-    letterSpacing: 0.3,
-    fontSize: theme.fontSizesInNumber.title, //16,
-    color: theme.colors.text.primary, //"#555", // Adjust the color as needed
+    fontFamily: "light",
+    letterSpacing: 0.5,
+    fontSize: 22, // theme.fontSizesInNumber.title, //16,
+    color: colors.text.inverse, // Adjust the color as needed
+    flex: 1, // Take up remaining space
+  },
+  iconButtonContainer: {
+    alignItems: "center",
+    justifyContent: "center", // Center the icon
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+  },
+  menuItemIcon: {
+    width: 35,
+    height: 35,
+    color: colors.ui.grey10,
+  },
+  menuItemIconText: {
+    fontFamily: "thin",
+    marginLeft: 16,
+    fontSize: 4,
+    height: "100%",
+    backgroundColor: colors.ui.grey10,
+    color: colors.text.grey10,
   },
 });
 

@@ -16,7 +16,8 @@ export const colors = {
     error50: "#fcc4e4",
     error500: "#9b095c",
     success: "#138000",
-
+    green: "#129575",
+    yellow: "#e69b00",
     grey10: "#F4F8F7",
     grey100: "#ededed",
     grey300: "#bdc3c7",

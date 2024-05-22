@@ -24,17 +24,20 @@ import TransparentMenu from "./TransparentMenu";
 import PageContainer from "../../../components/utility/PageContainer";
 import HeaderLogo from "../../../components/utility/HeaderLogo";
 import {
-  createCalendar,
-  updateActivitiesData,
+  // createCalendar,
+  // updateActivitiesData,
   addActivitiesData,
 } from "../../../utils/actions/calendarActions";
 import {
   addCalendarActivity,
-  updateCalendarActivity,
+  // updateCalendarActivity,
 } from "../../../store/calendarActivitiesSlice";
+import SubMenuItems from "../component/sub-menu-items.component";
 
 const CalendarScreen = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isSubmenuVisible, setSubmenuVisible] = useState(false); // New state for submenu visibility
+
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedMenuItems, setSelectedMenuItems] = useState([]);
   const dispatch = useDispatch();
@@ -56,6 +59,11 @@ const CalendarScreen = ({ navigation }) => {
 
   const handleCloseMenu = () => {
     setMenuVisible(false);
+  };
+
+  // Handle closing submenu modal
+  const handleCloseSubmenu = () => {
+    setSubmenuVisible(false);
   };
   // Display calendarData values
   // console.log("CalendarData:", calendarData);
@@ -89,44 +97,36 @@ const CalendarScreen = ({ navigation }) => {
     });
   }, [calendarData]);
 
+  const handleSelectSubmenuItem = async (subMenuItem) => {
+    //console.log(`Pressed ${subMenuItem.text}`); // Access the text property of the selected item
+    setSubmenuVisible(false);
+    handleSelectMenuItem(subMenuItem);
+  };
+
   const handleSelectMenuItem = async (menuItem) => {
-    console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
+    ///console.log(`Pressed ${menuItem.text}`); // Access the text property of the selected item
+
     setMenuVisible(false);
-    //setSelectedMenuItems(menuItem);
-    //setSelectedMenuItems((prevItems) => [...prevItems, menuItem]);
-    /*  if (calendarActivitiesData[selectedItem.calendarId]) {
+    if (menuItem.text === "Activity") {
+      setSubmenuVisible(true); // Open submenu modal
+    }
+    if (menuItem.text !== "Activity") {
       try {
-        await updateActivitiesData(
+        await addActivitiesData(
           selectedItem.calendarId,
           userData.userId,
           menuItem
         );
         dispatch(
-          updateCalendarActivity({
+          addCalendarActivity({
             calendarId: selectedItem.calendarId,
             activity: menuItem,
           })
         );
       } catch (error) {
-        console.error("Error updating activity:", error);
+        console.error("Error adding activity:", error);
       }
-    } else { */
-    try {
-      await addActivitiesData(
-        selectedItem.calendarId,
-        userData.userId,
-        menuItem
-      );
-      dispatch(
-        addCalendarActivity({
-          calendarId: selectedItem.calendarId,
-          activity: menuItem,
-        })
-      );
-    } catch (error) {
-      console.error("Error adding activity:", error);
     }
-    //}
   };
 
   useEffect(() => {
@@ -183,6 +183,12 @@ const CalendarScreen = ({ navigation }) => {
         onClose={handleCloseMenu}
         selectedItem={selectedItem.date}
         onSelectedMenuItem={handleSelectMenuItem}
+      />
+      <SubMenuItems
+        isVisible={isSubmenuVisible}
+        selectedDate={selectedItem}
+        onClose={handleCloseSubmenu}
+        onSelectedMenuItem={handleSelectSubmenuItem}
       />
     </PageContainer>
   );

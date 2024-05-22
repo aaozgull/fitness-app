@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+} from "react-native";
 //import { FontAwesome5 } from "@expo/vector-icons"; // You can use a different icon library
 import {
   FontAwesome5,
@@ -7,19 +15,85 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
   FontAwesome,
-  FontAwesome6,
 } from "@expo/vector-icons"; // Import the required icon components
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faSwimmer, faBaseballBall } from "@fortawesome/free-solid-svg-icons"; // Corrected the icon import
 
 import { theme } from "../../../infrastructure/theme";
 import Modal from "react-native-modal";
+import { colors } from "../../../infrastructure/theme/colors";
+import { format } from "date-fns";
+const DateDisplay = ({ date }) => {
+  return (
+    <View style={styles.dateDisplayContainer}>
+      <Ionicons
+        name="calendar-outline"
+        size={24}
+        style={[styles.menuItemIcon, { marginTop: 6 }]}
+      />
+      <Text style={[styles.menuItemText, { marginRight: 6 }]}>
+        {format(date, "MMM dd")}
+      </Text>
+    </View>
+  );
+};
 
-const SubMenuItems = ({ isVisible, onClose, onSelectedMenuItem }) => {
+const IconButton = ({ icon: Icon, name }) => {
+  return (
+    <View style={styles.iconButtonContainer}>
+      {name !== "person-swimming" && name !== "baseball-bat-ball" && (
+        <Icon name={name} size={34} style={styles.menuItemIcon} />
+      )}
+      {(name === "person-swimming" || name === "baseball-bat-ball") && (
+        <FontAwesomeIcon icon={Icon} size={34} style={styles.menuItemIcon} />
+      )}
+      <Text style={styles.menuItemIconText}>|</Text>
+      <Ionicons
+        name="ellipsis-vertical-sharp"
+        size={34}
+        style={styles.menuItemIcon}
+      />
+    </View>
+  );
+};
+
+const SubMenuItems = ({
+  isVisible,
+  selectedDate,
+  onClose,
+  onSelectedMenuItem,
+}) => {
   const subMenuItemsValue = [
-    { name: "running", text: "Running", icon: Ionicons },
-    { name: "walk", text: "Walking", icon: Ionicons },
-    { name: "bicycle", text: "Cycing", icon: Ionicons },
-    { name: "rowing", text: "Rowing", icon: MaterialIcons },
-    { name: "camera", text: "Elliptical", icon: Ionicons },
+    {
+      name: "running",
+      text: "Running",
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome5,
+    },
+    {
+      name: "walk",
+      text: "Walking",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "bicycle",
+      text: "Cycing",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "rowing",
+      text: "Rowing",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "camera",
+      text: "Elliptical",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
     {
       name: "stairs-up",
       text: "Stair climbing",
@@ -31,99 +105,251 @@ const SubMenuItems = ({ isVisible, onClose, onSelectedMenuItem }) => {
       icon: Ionicons,
     },
     /* <MaterialCommunityIcons name="football-australian" size={24} color="black" /> */
-    /*  { name: "football", text: "Australian football", icon: Ionicons },
-    { name: "badminton", text: "Badminton", icon: MaterialCommunityIcons },
-    { name: "baseball-bat-ball", text: "Baseball", icon: FontAwesome6 },
-    { name: "basketball-outline", text: "Basketball", icon: Ionicons },
-    { name: "sports-cricket", text: "Cricket", icon: MaterialIcons },
-    { name: "dance-pole", text: "CrossFit", icon: MaterialCommunityIcons },
-    { name: "dance-ballroom", text: "Dancing", icon: MaterialCommunityIcons },
-    { name: "people-group", text: "Fitness Class", icon: FontAwesome6 },
-    { name: "hiking", text: "Hiking", icon: "MaterialIcons " },
-    { name: "weight-lifter", text: "HIIT", icon: MaterialCommunityIcons },
-    { name: "sports-hockey", text: "Hockey", icon: MaterialIcons },
-    { name: "jump-rope", text: "Jump rope", icon: MaterialCommunityIcons },
-    { name: "utensils", text: "Paddling", icon: Ionicons },
-    { name: "barbell", text: "Pilates", icon: Ionicons },
-    { name: "rugby", text: "Rugby", icon: MaterialCommunityIcons },
-    { name: "skiing", text: "Skiing", icon: FontAwesome5 },
-    { name: "skiing-nordic", text: "Snowboarding", icon: FontAwesome5 },
- */
+    {
+      name: "football",
+      text: "Australian football",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "badminton",
+      text: "Badminton",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "baseball-bat-ball",
+      text: "Baseball",
+      icon: faBaseballBall,
+    },
+    {
+      name: "basketball-outline",
+      text: "Basketball",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "sports-cricket",
+      text: "Cricket",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "dance-pole",
+      text: "CrossFit",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "dance-ballroom",
+      text: "Dancing",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "group",
+      text: "Fitness Class",
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome,
+    },
+    {
+      name: "hiking",
+      text: "Hiking",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "weight-lifter",
+      text: "HIIT",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "sports-hockey",
+      text: "Hockey",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "jump-rope",
+      text: "Jump rope",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "rowing",
+      text: "Paddling",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "barbell",
+      text: "Pilates",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "rugby",
+      text: "Rugby",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialCommunityIcons,
+    },
+    {
+      name: "skiing",
+      text: "Skiing",
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome5,
+    },
+    {
+      name: "skiing-nordic",
+      text: "Snowboarding",
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome5,
+    },
+
     /*<MaterialCommunityIcons name="ski-water" size={24} color="black" />
      <MaterialCommunityIcons name="handball" size={24} color="black" /> */
-    /*   { name: "sports-tennis", text: "Squash", icon: MaterialIcons },
-    { name: "baseball-outline", text: "Softball", icon: Ionicons },
-    { name: "soccer-ball-o", text: "Soccer", icon: FontAwesome },
-    { name: "person-swimming", text: "Swimming", icon: FontAwesome6 },
-    { name: "sports-tennis", text: "Tennis", icon: MaterialIcons },
     {
-      name: "table-tennis-paddle-ball",
+      name: "sports-tennis",
+      text: "Squash",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "baseball-outline",
+      text: "Softball",
+      backgroundColor: colors.ui.accent2,
+      icon: Ionicons,
+    },
+    {
+      name: "soccer-ball-o",
+      text: "Soccer",
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome,
+    },
+    {
+      name: "person-swimming",
+      text: "Swimming",
+      backgroundColor: colors.ui.accent2,
+      icon: faSwimmer,
+    },
+    {
+      name: "sports-tennis",
+      text: "Tennis",
+      backgroundColor: colors.ui.accent2,
+      icon: MaterialIcons,
+    },
+    {
+      name: "table-tennis",
       text: "Table Tennis",
-      icon: FontAwesome6,
-    }, */
+      backgroundColor: colors.ui.accent2,
+      icon: FontAwesome5,
+    },
   ];
+  const handleBack = () => {
+    onClose();
+  };
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
-      <View style={styles.modalContainer}>
-        {subMenuItemsValue.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.menuItem}
-            onPress={() => onSelectedMenuItem(item)}
-          >
-            <item.icon name={item.name} size={24} style={styles.menuItemIcon} />
-            <Text style={styles.menuItemText}>{item.text}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </Modal>
-    /* <View style={styles.menuContent}>
-      {sabMenuItems.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.menuItem}
-          onPress={() => onSelectedMenuItem(item)}
+      <View style={styles.headerContainer}>
+        <Pressable
+          style={styles.backContainer}
+          hitSlop={8}
+          onPress={handleBack}
         >
-          <item.icon
-            name={item.name}
-            size={24}
-            //color="black"
-            style={styles.menuItemIcon}
-          />
-          <Text style={styles.menuItemText}>{item.text}</Text>
-        </TouchableOpacity>
-      ))}
-    </View> */
+          <Ionicons name="chevron-back" size={34} style={styles.menuItemIcon} />
+        </Pressable>
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <DateDisplay date={selectedDate.date} />
+        </View>
+      </View>
+      <ScrollView>
+        <View style={styles.modalContainer}>
+          {subMenuItemsValue.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.menuItem}
+              onPress={() => onSelectedMenuItem(item)}
+            >
+              <IconButton icon={item.icon} name={item.name} />
+              <Text style={styles.menuItemText}>{item.text}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: theme.colors.ui.accent2,
-    borderRadius: 10,
-    padding: theme.lineHeightsInNumber.copy,
-    alignItems: "flex-start",
-    justifyContent: "center",
+    // borderRadius: 10,
+    //backgroundColor: "red",
+    //padding: theme.lineHeightsInNumber.copy,
+    //alignItems: "flex-start",
+    //justifyContent: "center",
   },
 
   menuItem: {
     flexDirection: "row",
-    //alignContent: "space-between",
     alignItems: "center",
     marginVertical: theme.sizesInNumber[2], // 10,
     padding: 5,
   },
   menuItemIcon: {
-    width: 24,
-    height: 24,
-    marginRight: theme.sizesInNumber[3], // 10,
-    color: theme.colors.ui.quaternary,
+    width: 35,
+    height: 35,
+    marginLeft: 12,
+    color: theme.colors.ui.grey10,
+    // backgroundColor: "red",
+  },
+  menuItemIconText: {
+    fontFamily: "thin",
+    marginLeft: 16,
+    fontSize: 4,
+    height: "100%",
+    backgroundColor: theme.colors.ui.grey10,
+    color: theme.colors.text.grey10,
   },
   menuItemText: {
-    fontFamily: "mediumItalic",
-    letterSpacing: 0.3,
-    fontSize: theme.fontSizesInNumber.title, //16,
-    color: theme.colors.text.primary, //"#555", // Adjust the color as needed
+    fontFamily: "light",
+    letterSpacing: 0.5,
+    fontSize: 22,
+    color: colors.text.inverse, //"#555", // Adjust the color as needed
+  },
+
+  iconButtonContainer: {
+    borderColor: colors.ui.accent2,
+    borderWidth: 6,
+    borderStyle: "solid",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 25,
+    marginRight: 12,
+    width: 130,
+    height: 55,
+    backgroundColor: colors.ui.accent2,
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  dateDisplayContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: colors.ui.grey10,
+    borderWidth: 2,
+    borderStyle: "solid",
+    padding: 5,
+    borderRadius: 25,
+  },
+  backContainer: {
+    paddingVertical: 20,
+  },
+  backIcon: {
+    width: 32,
+    height: 32,
   },
 });
 
