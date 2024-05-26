@@ -16,7 +16,7 @@ const CalendarNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Workout"
         component={WorkoutNavigator}
         options={{
@@ -24,6 +24,7 @@ const CalendarNavigator = () => {
           //headerTitle: "",
         }}
       />
+
       <Stack.Screen name="Recipes" component={RecipesNavigator} />
       <Stack.Screen name="TimerScreen" component={TimerScreen} />
       <Stack.Screen name="ReadBooks" component={ReadBooksScreen} />
@@ -33,7 +34,7 @@ const CalendarNavigator = () => {
         name="Rest"
         component={RestScreen}
         options={{ headerShown: false }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };

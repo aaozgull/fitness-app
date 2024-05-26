@@ -13,6 +13,7 @@ function ToDoItem({
   calendarId,
   description,
   checked,
+  color,
   icon,
   style,
 }) {
@@ -45,7 +46,7 @@ function ToDoItem({
         <Checkbox
           style={styles.checkbox}
           value={isChecked}
-          color={theme.colors.text.primary}
+          color={color}
           onValueChange={setCheckBox}
         />
       </View>

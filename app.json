@@ -3,6 +3,7 @@
     "name": "fitness-app",
     "slug": "fitness-app",
     "version": "1.0.0",
+    "scheme":"fitness-app",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +22,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package":"com.aaozgull.fitness",
+      "versionCode":1
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a6c54d2f-8de3-48c6-a6a8-9d2c7d70c5a2"
+      }
     }
   }
 }

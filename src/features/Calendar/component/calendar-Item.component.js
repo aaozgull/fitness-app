@@ -68,6 +68,7 @@ export const CalendarItem = ({ date, selectedDate, calendarId }) => {
             calendarId={calendarId}
             description={menuItem.text}
             checked={menuItem.isChecked}
+            color={menuItem.backgroundColor}
             icon={menuItem.icon}
             style={styles.toDoItem}
           />

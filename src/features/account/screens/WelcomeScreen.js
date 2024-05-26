@@ -3,12 +3,22 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated from "react-native-reanimated";
 import { FadeInDown } from "react-native-reanimated";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
 import WelcomeImageSlider from "../components/WelcomeImageSlider";
 
 import { colors } from "../../../infrastructure/theme/colors";
 import SubmitButton from "../../../components/utility/SubmitButton";
 
 export default function WelcomeScreen({ navigation }) {
+  WebBrowser.maybeCompleteAuthSession();
+  const [request, result, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "1077687897681-r5u5aftl6q62bb37k3jt279ppsfmvro4.apps.googleusercontent.com",
+
+    expoClientId:
+      "1077687897681-6bvo5m4tvpttlohvnb5dc4el5c1qgl5b.apps.googleusercontent.com",
+  });
   return (
     <LinearGradient
       colors={["transparent", "transparent"]}
@@ -29,8 +39,16 @@ export default function WelcomeScreen({ navigation }) {
       </TouchableOpacity>
       <WelcomeImageSlider />
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
+        <Animated.View entering={FadeInDown.delay(100).springify()}>
+          <SubmitButton
+            title="SIGN UP WITH GOOGLE"
+            onPress={() => promptAsync()}
+            style={{ marginHorizontal: 15, marginVertical: 15 }}
+            color={colors.ui.tertiary}
+          />
+        </Animated.View>
         <Animated.View
-          entering={FadeInDown.delay(100).springify()}
+          entering={FadeInDown.delay(200).springify()}
           //  style={{ alignItems: "center" }}
         >
           <SubmitButton
@@ -43,14 +61,6 @@ export default function WelcomeScreen({ navigation }) {
           />
         </Animated.View>
 
-        <Animated.View entering={FadeInDown.delay(200).springify()}>
-          <SubmitButton
-            title="SIGN UP WITH GOOGLE"
-            onPress={() => null}
-            style={{ marginHorizontal: 15, marginVertical: 15 }}
-            color={colors.ui.tertiary}
-          />
-        </Animated.View>
         <Animated.View entering={FadeInDown.delay(300).springify()}>
           <Text style={styles.termText}>
             By Signing up you agree for ours{" "}

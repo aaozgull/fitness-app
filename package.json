@@ -34,7 +34,7 @@
     "deprecated-react-native-prop-types": "^5.0.0",
     "eslint": "^8.56.0",
     "expo": "~49.0.15",
-    "expo-auth-session": "^5.4.0",
+    "expo-auth-session": "~5.0.2",
     "expo-av": "~13.4.1",
     "expo-checkbox": "~2.4.0",
     "expo-clipboard": "~4.3.1",
@@ -76,7 +76,9 @@
     "react-redux": "^9.1.0",
     "stripe-client": "^1.1.5",
     "styled-components": "^6.1.6",
-    "validate.js": "^0.13.1"
+    "validate.js": "^0.13.1",
+    "expo-crypto": "~12.4.1",
+    "expo-application": "~5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
